@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        font-family: 'Times New Roman', serif;
+        background-color: #f3f4f6;
+        padding: 20px;
+      }
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        padding: 20px;
+        border: 2px solid #fbbf24;
+        border-radius: 8px;
+      }
+      h1 {
+        color: #fbbf24;
+        font-size: 24px;
+      }
+      h2, h3 {
+        color: #374151;
+        font-size: 20px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th, td {
+        padding: 10px;
+        border-bottom: 1px solid #e5e7eb;
+        text-align: left;
+      }
+      .header-section {
+        border-bottom: 2px solid #fbbf24;
+        padding-bottom: 15px;
+        margin-bottom: 20px;
+      }
+      .info {
+        text-align: right;
+        color: #6b7280;
+        font-size: 12px;
+      }
+      .info p {
+        margin: 5px 0;
+      }
+      .highlight {
+        background-color: #fbbf24;
+        padding: 8px;
+        border-radius: 4px;
+        font-size: 16px;
+        color: #1f2937;
+      }
+      .total {
+        text-align: right;
+        font-weight: bold;
+        font-size: 18px;
+        margin-top: 10px;
+      }
+      footer {
+        text-align: center;
+        color: #9ca3af;
+        font-size: 12px;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header Section -->
+      <div class="header-section">
+        <h1>Order Received</h1>
+        <div class="info">
+          <p>Auspicious Numerology</p>
+          <p>Sumiit Madhukar Messhram</p>
+          <p>Email: <a href="mailto:sumiit@auspiciousnumerology.com">sumiit@auspiciousnumerology.com</a></p>
+          <p>Phone: +918390005111</p>
+        </div>
+      </div>
+
+      <!-- Thank You Message -->
+      <div>
+        <h2>Thank you! Your order has been received.</h2>
+      </div>
+
+      <!-- Order Details -->
+      <div>
+        <h3 class="highlight">Order Details</h3>
+        <table>
+          <tr>
+            <th>Order Number</th>
+            <td>{{invoiceId}}</td>
+          </tr>
+          <tr>
+            <th>Date</th>
+            <td>{{date}}</td>
+          </tr>
+          <tr>
+            <th>Total</th>
+            <td>{{price}}</td>
+          </tr>
+          <tr>
+            <th>Payment Method</th>
+            <td>Direct Bank Transfer</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- Billing Address -->
+      <div>
+        <h3 class="highlight">Billing Address</h3>
+        <table>
+          <tr>
+            <th>First Name</th>
+            <td>{{firstName}}</td>
+          </tr>
+          <tr>
+            <th>Last Name</th>
+            <td>{{lastName}}</td>
+          </tr>
+          <tr>
+            <th>Phone</th>
+            <td>{{phone}}</td>
+          </tr>
+          <tr>
+            <th>Address</th>
+            <td>{{address}}</td>
+          </tr>
+          <tr>
+            <th>City</th>
+            <td>{{city}}</td>
+          </tr>
+          <tr>
+            <th>State</th>
+            <td>{{state}}</td>
+          </tr>
+          <tr>
+            <th>Country</th>
+            <td>{{country}}</td>
+          </tr>
+          <tr>
+            <th>Pincode</th>
+            <td>{{pincode}}</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- Bank Information -->
+      <div>
+        <h3 class="highlight">Our Bank Details</h3>
+        <table>
+          <tr>
+            <th>Account Name</th>
+            <td>Sumiit Madhukar Messhram</td>
+          </tr>
+          <tr>
+            <th>Bank</th>
+            <td>AXIS BANK, WARDHA BRANCH</td>
+          </tr>
+          <tr>
+            <th>Account Number</th>
+            <td>915010033347967</td>
+          </tr>
+          <tr>
+            <th>IFSC</th>
+            <td>UTIB0000808</td>
+          </tr>
+          <tr>
+            <th>BIC</th>
+            <td>AXISINBB048</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- Product Information -->
+      <div>
+        <h3 class="highlight">Order Summary</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{productName}}</td>
+              <td>{{price}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Total -->
+      <div class="total">
+        <p>Subtotal: {{price}}.00</p>
+        <p>Total: {{price}}.00</p>
+      </div>
+
+      <!-- Footer -->
+      <footer>
+        <p>If you have any questions, please contact us at <a href="mailto:sumiit@auspiciousnumerology.com">sumiit@auspiciousnumerology.com</a>.</p>
+        <p>Thank you for your business!</p>
+      </footer>
+    </div>
+  </body>
+</html>
