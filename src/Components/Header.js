@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { IoChevronDown } from "react-icons/io5";
 import { FiShoppingCart } from "react-icons/fi"; // Cart icon
-import logo from '../Image/ANLogo.png';
+import logo from '../Image/mooropan logo.png';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -32,21 +32,31 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-gradient-to-r from-blue-800 to-purple-950 text-white p-3 sticky top-0 z-50 shadow-2xl">
-      <div className="container mx-auto flex justify-between items-center">
+    <header className="bg-gradient-to-r from-yellow-500 to-green-600 text-white p-3 sticky top-0 z-50 shadow-2xl">
+      <div className="container mx-1 my-6 flex justify-between items-center whitespace-nowrap">
         {/* Logo */}
-        <div className="text-xl font-bold">
-          <Link to="/">
+        <div className="flex items-center whitespace-nowrap">
+    <Link to="/" className="flex items-center px-7 whitespace-nowrap">
+    <img
+              src={logo}
+              alt="Logo"
+              className="w-10 h-16 sm:w-48 md:w-20 lg:w-20"
+            />      
+    </Link>
+  </div>
+        {/* <div className="text-xl font-bold flex-item-center">
+          <Link to="/" className="flex-item-center">      <span className="text-2xl font-semibold ml-">MooRopan</span>
+
             <img
               src={logo}
               alt="Logo"
-              className="w-40 h-auto sm:w-48 md:w-40 lg:w-64"
+              className="w-10 h-16 sm:w-48 md:w-20 lg:w-20"
             />
           </Link>
-        </div>
+        </div> */}
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex space-x-5 lg:space-x-7 text-base lg:text-lg font-serif">
+        <nav className="hidden md:flex space-x-5 lg:space-x-7 text-base lg:text-lg decoration-from-font">
           <Link to="/" className="hover:text-customLightOrange">
             Home
           </Link>

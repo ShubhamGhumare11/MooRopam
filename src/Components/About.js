@@ -1,5 +1,5 @@
 import React from "react";
-import herosection from "../Image/herosection.jpg";
+import mainpagephoto from "../Image/mainpagephoto.png";
 import { Link } from "react-router-dom";
 import Chatbot from "./Chatbot";
 
@@ -11,17 +11,15 @@ const About = () => {
       <div className="relative w-full h-[420px] flex items-center">
         <Chatbot />
         <img
-          src={herosection}
+          src={mainpagephoto}
           className="absolute inset-0 w-full h-full object-cover"
           alt="Background"
           loading="lazy"
         />
         <div className="relative z-10 flex flex-col items-start justify-start md:justify-center h-full text-left text-white px-8 md:px-16 lg:px-24 pt-8 md:pb-20 font-serif">
           <h1 className="text-3xl md:text-2xl lg:text-5xl font-bold mb-4 md:mb-6 leading-snug">
-            <span className="block text-yellow-500 mb-2">
-              Get To Know Us
-            </span>
-           </h1>
+            <span className="block text-yellow-500 mb-2">Get To Know Us</span>
+          </h1>
           {/* <div className="mt-1 mr-1">
             <Link to="/services" className="px-8 py-4 border text-sm md:text-base font-semibold rounded-full hover:bg-amber-400 hover:text-black transition duration-300">
               Explore Services &rarr;
@@ -33,65 +31,47 @@ const About = () => {
       <div className="flex flex-col md:flex-row items-center mt-4 md:mt-8 px-4 md:px-8 lg:px-12  ">
         <div className="flex-1 p-4 sm:p-6 md:p-10 lg:p-12 mb-10 font-serif">
           <h2 className="text-md md:text-xl lg:text-3xl font-bold text-yellow-600">
-            My Story
+            Cattel HealthCare Consultation
           </h2>
           <p className="md:text-md lg:text-lg leading-relaxed max-w-4xl mx-auto p-2">
-            Dr. Sumiit Messhram, a distinguished sports physiotherapist, has carved a unique niche as a renowned numerologist.
-
-            His passion for numbers and astrology began in childhood, where he displayed an extraordinary gift for making accurate predictions.
-
-            Over time, Dr. Messhram has honed his skills to provide insights in areas such as marriage, business, politics, and life events, offering precise forecasts based on scientific calculations rather than mysticism.
-
-            With his medical background, Dr. Messhram brings a distinctive, analytical approach to numerology. His method involves a meticulous study of birth charts and numerical patterns to decipher past influences and predict future outcomes.
+            MooRopan India Pvt. Ltd. was established with the motive of
+            "Gau-swasthayam Rakshatu" in May 2023. We provide cattle healthcare
+            aid/ devices, services and consultations pan India.
           </p>
         </div>
         <div className="flex-1 mb-4 md:mb-0">
-          <div className="relative w-full max-w-xl mx-auto border-4 border-yellow-600 rounded-lg shadow-xl overflow-hidden">
-            <a
-              href="https://www.youtube.com/watch?v=BIjhjGjDc14"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block w-full h-full"
-            >
-              <div className="relative w-full h-60 md:h-72 lg:h-80 bg-gray-200 rounded-lg overflow-hidden">
-                <iframe
-                  className="w-full h-full object-cover"
-                  src="https://www.youtube.com/embed/BIjhjGjDc14"
-                  title="YouTube video player"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
-              </div>
-            </a>
-          </div>
-        </div>
+  <div className="relative w-full max-w-xl mx-auto border-4 border-yellow-600 rounded-lg shadow-xl overflow-hidden">
+    <a
+      href="https://youtu.be/4QqkWmI_kX0?si=sr8dN2R8xWMuIe6g"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="block w-full h-full"
+    >
+      <div className="relative w-full h-60 md:h-72 lg:h-80 bg-gray-200 rounded-lg overflow-hidden">
+        <iframe
+          className="w-full h-full"
+          src="https://www.youtube.com/embed/4QqkWmI_kX0"
+          title="YouTube video player"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        ></iframe>
+      </div>
+    </a>
+  </div>
+</div>
+
       </div>
 
       {/* Scientific Numerology Section */}
       <div className="relative w-full h-full flex items-center">
         <div className="relative z-10 flex flex-col items-start justify-center h-full text-left  px-6 md:px-16 lg:px-24 pb-10 sm:pb-2 md:pd-4 font-serif">
           <h1 className="text-md md:text-xl lg:text-3xl font-bold ml-2 leading-snug">
-            <span className="block  mb-2 text-yellow-600">
-              Scientific Numerology
-            </span>
+            <span className="block  mb-2 text-yellow-600">Our Products </span>
           </h1>
           <p className="md:text-md lg:text-lg leading-relaxed  p-2">
-            Dr. Messhram's approach to numerology stands in stark contrast to
-            traditional methods often associated with mysticism. Instead of
-            relying on esoteric rituals or intuitive guesses, Dr. Messhram
-            applies a rigorous scientific methodology to numerology. He begins
-            by meticulously analyzing the numerical components of an
-            individual's birth chart, focusing on the precise calculations of
-            numbers that are believed to influence various aspects of their
-            life. By systematically examining these numerical patterns, he seeks
-            to reveal insights into a person's past, present, and future. This
-            methodical process ensures that his predictions are grounded in
-            logical analysis rather than subjective interpretation. Dr.
-            Messhram’s scientific approach not only enhances the accuracy of his
-            forecasts but also provides a rational framework that allows
-            individuals to understand and apply the insights in a practical
-            manner.
+            Our products facilitate better management of herd. Our affordable
+            products reduce cow morbidity, enhance milk quantity and quality.
           </p>
           <p className="text-md sm:text-sm md:text-base tracking-wide mb-4">
             {/* Content goes here */}
@@ -104,17 +84,15 @@ const About = () => {
         {/* Content Section */}
         <div className="relative z-10 flex flex-col items-start justify-center h-full text-left px-6 md:px-16 lg:px-24 pb-10 sm:pb-2 md:pb-4 font-serif w-full md:w-2/3 lg:w-3/4">
           <h1 className="text-md md:text-xl lg:text-3xl font-bold ml-2 leading-snug">
-            <span className="block mb-2 text-yellow-600">
-              Expert Predictions
-            </span>
+            <span className="block mb-2 text-yellow-600">MastiSense Cure </span>
           </h1>
           <p className="md:text-md lg:text-lg leading-relaxed max-w-4xl p-2">
             <p className="md:text-md lg:text-lg leading-relaxed max-w-4xl p-2">
-              Dr. Messhram’s predictions have garnered media attention, with some of his most striking forecasts making headlines. His accurate predictions for the 2011 Cricket World Cup and 2012 T-20 World Cup, published in Marathi newspapers, cemented his reputation as a trusted voice in the feild.
+              Mastitis is udder inflammation caused by bacterial infection.{" "}
               <span className="block mb-2">
-                Additionally, his forecasts for the 2014 T-20 World Cup, where 19 of his 23 predictions were accurate, were widely praised in the press.
-
-                Renowned numerologist Dr. Messhram has consistently demonstrated exceptional predictive accuracy, forecasting pivotal global events with uncanny precision. Notably, he predicted 2020 would be a challenging year worldwide, accurately anticipating the far-reaching impact of the pandemic. His impressive track record also includes accurate political forecasts and other noteworthy predictions that have made headlines.
+                Such infection results in breaching of blood milk barrier and
+                changes the composition of milk which can be analyzed using
+                sensors.
               </span>
             </p>
             <span className="block mb-2">
@@ -136,7 +114,11 @@ const About = () => {
             </span>
           </p>
           <p className="md:text-md lg:text-lg leading-relaxed max-w-4xl p-2">
-            • Dr. Messhram shares his annual predictions on his YouTube channel, offering insightful and thought-provoking analyses. To witness his remarkable predictive abilities, viewers can access his previous predictions on his YouTube videos, showcasing his expertise in numerology."
+            • Dr. Messhram shares his annual predictions on his YouTube channel,
+            offering insightful and thought-provoking analyses. To witness his
+            remarkable predictive abilities, viewers can access his previous
+            predictions on his YouTube videos, showcasing his expertise in
+            numerology."
           </p>
         </div>
       </div>
@@ -150,18 +132,25 @@ const About = () => {
             </span>
           </h1>
           <p className="md:text-md lg:text-lg leading-relaxed p-2">
-            Dr. Messhram has an impressive clientele, which includes notable figures from the sports, entertainment industry and political arenas.
+            Dr. Messhram has an impressive clientele, which includes notable
+            figures from the sports, entertainment industry and political
+            arenas.
           </p>
           <p className="md:text-md lg:text-lg leading-relaxed p-2">
-            IPL and Indian Cricketers like Ramandeep Singh, Karn Sharma , Nehal Wadhera , Naman Dhir and Umesh Yadav, who changed their jersey number after consulting Dr. Messhram,
-            Other many domestic athletes along with Gujarat Giants Pro Kabbaddi League players are among those who have benefitted from his guidance.
+            IPL and Indian Cricketers like Ramandeep Singh, Karn Sharma , Nehal
+            Wadhera , Naman Dhir and Umesh Yadav, who changed their jersey
+            number after consulting Dr. Messhram, Other many domestic athletes
+            along with Gujarat Giants Pro Kabbaddi League players are among
+            those who have benefitted from his guidance.
             <span className="block mb-2">
-              Renowned figures in Indian politics, such as Mrs. Surekhatai Thakre, Santosh Mahatme and Suresh Deshmukh, have also sought his counsel, alongside many other politicians.
+              Renowned figures in Indian politics, such as Mrs. Surekhatai
+              Thakre, Santosh Mahatme and Suresh Deshmukh, have also sought his
+              counsel, alongside many other politicians.
             </span>
             <span className="block mb-2">
-              Bollywood actors including Nishigandha Wadh, Bhuushan Kulkarni and other TV actors are also taking guidance from Dr Sumiit.
+              Bollywood actors including Nishigandha Wadh, Bhuushan Kulkarni and
+              other TV actors are also taking guidance from Dr Sumiit.
             </span>
-
           </p>
         </div>
       </div>
@@ -225,7 +214,10 @@ const About = () => {
             fostering education and personal development.
           </p>
           <p className="md:text-md lg:text-lg leading-relaxed max-w-4xl p-2">
-            Dr. Messhram's talents extend far beyond numerology. A poet, skilled sportsperson, and experienced sports physio, he has worked with elite teams in high-profile events, including the Legends League Cricket, ICC World Cricket League, BCCI domestic, and IPL.
+            Dr. Messhram's talents extend far beyond numerology. A poet, skilled
+            sportsperson, and experienced sports physio, he has worked with
+            elite teams in high-profile events, including the Legends League
+            Cricket, ICC World Cricket League, BCCI domestic, and IPL.
           </p>
         </div>
       </div>
@@ -246,10 +238,12 @@ const About = () => {
               2013.
             </span>
             <span className="block mb-2">
-              • Radio Wardha 90.8 and few podcasts providing listeners with unique insights.
+              • Radio Wardha 90.8 and few podcasts providing listeners with
+              unique insights.
             </span>
             <span className="block mb-2">
-              • A seasoned cricketer, Dr. Messhram has proudly represented his college, district, and zone.
+              • A seasoned cricketer, Dr. Messhram has proudly represented his
+              college, district, and zone.
             </span>
           </p>
         </div>
@@ -283,6 +277,5 @@ const About = () => {
     </div>
   );
 };
-
 
 export default About;
