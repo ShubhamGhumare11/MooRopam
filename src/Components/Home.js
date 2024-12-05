@@ -110,14 +110,14 @@ const Home = () => {
     <div className=" ">
       <Chatbot />
 
-      <div className="relative w-full">
+      <div className="relative w-full bg-orange-200">
         <div
           id="default-carousel"
-          className="relative w-full"
+          className="relative w-full bg-orange-200"
           data-carousel="slide"
         >
           {/* Carousel Wrapper */}
-          <div className="relative h-[500px] overflow-hidden rounded-lg md:h-[600px]">
+          <div className="relative h-[450px] overflow-hidden rounded-lg md:h-[500px]  ">
             {slides.map((slide, index) => (
               <div
                 key={index}
