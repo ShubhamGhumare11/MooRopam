@@ -250,7 +250,7 @@ const About = () => {
       </div>
 
       {/*Consultation Section*/}
-      <div className="relative w-full h-full flex items-center bg-gradient-to-r p-5 from-amber-950 to-red-600">
+      {/* <div className="relative w-full h-full flex items-center bg-gradient-to-r p-5 from-amber-950 to-red-600">
         <div className="relative z-10 flex flex-col items-start justify-center h-full text-left px-6 md:px-16 lg:px-24 pb-10 sm:pb-4 md:pb-6 font-serif">
           <h1 className="text-md md:text-xl lg:text-4xl font-bold text-white leading-tight mb-4">
             <span className="block mb-2 text-yellow-300">
@@ -272,8 +272,8 @@ const About = () => {
               Get Your Consultation
             </Link>
           </div>
-        </div>
-      </div>
+        </div> */}
+      {/* </div> */}
     </div>
   );
 };

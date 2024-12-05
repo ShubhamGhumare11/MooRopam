@@ -63,9 +63,9 @@ const Header = () => {
           <Link to="/about" className="hover:text-customLightOrange">
             About
           </Link>
-          <Link to="/numerology" className="hover:text-customLightOrange">
+          {/* <Link to="/numerology" className="hover:text-customLightOrange">
             Numerology
-          </Link>
+          </Link> */}
 
           {/* Dropdown for Our Services */}
           <div className="relative">
@@ -123,9 +123,9 @@ const Header = () => {
             )}
           </div>
 
-          <Link to="/prediction" className="hover:text-customLightOrange">
+          {/* <Link to="/prediction" className="hover:text-customLightOrange">
             Predictions
-          </Link>
+          </Link> */}
           <Link to="/videos" className="hover:text-customLightOrange">
             Videos
           </Link>
@@ -176,9 +176,9 @@ const Header = () => {
           <Link to="/about" className="hover:text-customLightOrange" onClick={closeMenu}>
             About
           </Link>
-          <Link to="/numerology" className="hover:text-customLightOrange" onClick={closeMenu}>
+          {/* <Link to="/numerology" className="hover:text-customLightOrange" onClick={closeMenu}>
             Numerology
-          </Link>
+          </Link> */}
 
           {/* Mobile Dropdown */}
           <div className="relative">
@@ -234,9 +234,9 @@ const Header = () => {
             )}
           </div>
 
-          <Link to="/prediction" className="hover:text-customLightOrange" onClick={closeMenu}>
+          {/* <Link to="/prediction" className="hover:text-customLightOrange" onClick={closeMenu}>
             Predictions
-          </Link>
+          </Link> */}
           <Link to="/videos" className="hover:text-customLightOrange" onClick={closeMenu}>
             Videos
           </Link>

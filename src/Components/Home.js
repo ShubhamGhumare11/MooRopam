@@ -130,6 +130,7 @@ const Home = () => {
                   src={slide}
                   className="absolute block w-full h-full object-cover top-0 left-0"
                   alt={`Slide ${index + 1}`}
+                  
                 />
               </div>
             ))}

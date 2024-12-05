@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import herosection from "../Image/herosection.jpg";
+import mainpagephoto from "../Image/mainpagephoto.png";
 import android from "../Image/android.png";
 import ios from "../Image/ios.jpg";
 import { IoCallOutline } from "react-icons/io5";
 import { TfiEmail } from "react-icons/tfi";
+
 import {
   FaFacebookSquare,
   FaTwitter,
@@ -39,7 +40,7 @@ const Contact = () => {
       <Chatbot />
       <div className="relative w-full h-[420px] flex items-center">
         <img
-          src={herosection}
+          src={mainpagephoto}
           className="absolute inset-0 w-full h-full object-cover"
           alt="Background"
           loading="lazy"
