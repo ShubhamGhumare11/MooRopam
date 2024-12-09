@@ -38,6 +38,7 @@ import numerlogy1 from "../Image/numerlogy1.jpg"
 import numerlogy2 from "../Image/numerlogy2.png"
 import numerlogy3 from "../Image/number23.png"
 // import bollywood from "../Image/bollywood.jpg"
+// shivam
 
 export const predictionData = [
     {
