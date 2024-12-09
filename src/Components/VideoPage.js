@@ -1,5 +1,7 @@
-import React, { useRef, useState, useEffect } from "react";
-import cattlevideo from "../Image/mooropanvideo.mp4";
+
+
+  import React, { useRef, useState, useEffect } from "react";
+import cattlevideo from "../Image/mooropanvideo.mp4";   
 
 const VideoPage = () => {
   const videoRef = useRef(null);
