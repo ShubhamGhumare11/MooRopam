@@ -39,7 +39,7 @@ import numerlogy2 from "../Image/numerlogy2.png"
 import numerlogy3 from "../Image/number23.png"
 import siloropan from "../Image/siloropanproduct.png"
 // import bollywood from "../Image/bollywood.jpg"
-// shivam
+//my new changes moe
 
 export const predictionData = [
     {
