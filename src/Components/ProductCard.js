@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { CartContext } from "../Components/CartContext";
+import {CartContext} from "react"
 import ProductImage1 from "../Image/product1.jpg"; // Replace with actual images
 import ProductImage2 from "../Image/product1.jpg"; // Replace with actual images
 import { FaShippingFast, FaExchangeAlt, FaLock, FaCashRegister, FaTags } from "react-icons/fa";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import Slider from "react";
+// import "slick-carousel/slick/slick.css";
+// import "slick-carousel/slick/slick-theme.css";
 
 const ProductCard = () => {
   const { cart, dispatch } = useContext(CartContext);
