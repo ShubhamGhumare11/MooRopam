@@ -423,6 +423,28 @@ export const servicesData = [
     //     duration: "25-30 Days",
     //     buttonText: "Add To Cart",
     // },
+    // {
+    //     id: 14,
+    //     image: service14,
+    //     title: "Movie related tips",
+    //     subTitle: "",
+    //     price: "INR 25,000/-",
+    //     usd: "USD 300",
+    //     rating: "4.5",
+    //     duration: "25-30 Days",
+    //     buttonText: "Add To Cart",
+    // },
+    // {
+    //     id: 15,
+    //     image: service15,
+    //     title: "Building / Real estate Projects suggestions",
+    //     subTitle: "",
+    //     price: "INR 25,000/-",
+    //     usd: "USD 300",
+    //     rating: "4.5",
+    //     duration: "25-30 Days",
+    //     buttonText: "Add To Cart",
+    // },
 ];
 
 

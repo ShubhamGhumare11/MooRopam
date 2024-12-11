@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { servicesData } from './data';
-import Chatbot from './Chatbot';
+import zoo from "../Image/zoo.jpg";
+import aim from "../Image/aim.jpg";
+import livelihood from "../Image/livelyhood.jpg";
+import goals from "../Image/goals.jpg";
 import ProductCard from './ProductCard';
+
 
 const Services = () => {
   const navigate = useNavigate();
@@ -11,10 +15,7 @@ const Services = () => {
 
   const handleCardClick = (id) => {
     navigate(`/subcard/${id}`);
-  };
 
-  const addToCart = (product) => {
-    setCart((prevCart) => [...prevCart, product]);
   };
 
   const sortServices = (criteria) => {
@@ -68,7 +69,94 @@ const Services = () => {
 
   return (
     <div>
-      
+      {/* Hero Section */}
+      <div className="flex flex-col sm:flex-row justify-between space-x-0 sm:space-x-6 sm:space-y-0 space-y-6 mx-11 my-7">
+        <Chatbot />
+       
+
+          {/* Card Section */}
+            {/* Card 1 */}
+            <div 
+  className="relative group w-full sm:w-1/4 h-96 bg-cover bg-center rounded-lg overflow-hidden shadow-lg transform transition-all duration-300 hover:w-3/4 group-hover:w-1/4"
+  style={{ backgroundImage: `url(${aim})` }}
+>
+              <div className="absolute inset-0 flex justify-center items-end opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <h4 className="text-red-400 text-xl font-bold text-center">
+                  Pioneers in Protein-Led Nutraceuticals
+                </h4>
+              </div>
+            </div>
+
+            {/* Card 2 */}
+            <div
+              className="relative group w-full sm:w-1/4 h-96 bg-cover bg-center rounded-lg overflow-hidden shadow-lg transform transition-all duration-300 hover:w-3/4 group-hover:w-1/4"
+              style={{ backgroundImage: `url(${livelihood})` }}
+            >
+              <div className="absolute inset-0 flex justify-center items-end opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <h4 className="text-red-400 text-xl font-bold text-center">
+                  High Quality
+                </h4>
+              </div>
+            </div>
+
+            {/* Card 3 */}
+            <div
+              className="relative group w-full sm:w-1/4 h-96 bg-cover bg-center rounded-lg overflow-hidden shadow-lg transform transition-all duration-300 hover:w-3/4 group-hover:w-1/4"
+              style={{ backgroundImage:` url(${goals})` }}
+            >
+              <div className="absolute inset-0 flex justify-center items-end opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <h4 className="text-red-400 text-xl font-bold text-center">
+                  Customizable & Scalable
+                </h4>
+              </div>
+            </div>
+
+            {/* Card 4 */}
+            <div
+              className="relative group w-full sm:w-1/4 h-96 bg-cover bg-center rounded-lg overflow-hidden shadow-lg transform transition-all duration-300 hover:w-3/4 group-hover:w-1/4"
+              style={{ backgroundImage:` url(${zoo}) `}}
+            >
+              <div className="absolute inset-0 flex justify-center items-end opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <h4 className="text-red-400 text-xl font-bold text-center">
+                  Innovative Solutions
+                </h4>
+              </div>
+            </div>
+            
+        {/* <img
+          src={herosection}
+          className="absolute inset-0 w-full h-full object-cover"
+          alt="Background"
+          loading="lazy"
+        />
+        <div className="relative z-10 flex flex-col items-start justify-start md:justify-center h-full text-left text-white px-8 md:px-16 lg:px-24 pt-8 md:pb-20 font-serif">
+          <h1 className="text-2xl md:text-2xl lg:text-4xl font-bold mb-4 md:mb-6 leading-snug">
+            <span className="block text-yellow-500 ">
+            Dive Into Numerology
+            </span>
+            <span className="block text-white">Our Services</span>
+          </h1> */}
+          {/* <div className="mt-1 mr-1">
+            <Link to="/services" className="px-8 py-4 border text-sm md:text-base font-semibold rounded-full hover:bg-amber-400 hover:text-black transition duration-300">
+              Explore Services &rarr;
+            </Link>
+          </div> */}
+        {/* </div> */}
+      </div>
+
+      {/* Dropdown for Sorting */}
+      <div className="relative inline-block text-right px-2 sm:px-8 lg:px-16 font-serif">
+        <select
+          onChange={(e) => sortServices(e.target.value)}
+          className="border rounded p-2 bg-white"
+        >
+          <option value="popularity">Sort by Popularity</option>
+          <option value="latest">Sort by Latest</option>
+          <option value="priceLowToHigh">Sort by Price: Low to High</option>
+          <option value="priceHighToLow">Sort by Price: High to Low</option>
+        </select>
+      </div>
+
 
       {/* Services Grid */}
       <div className="px-4 md:px-8 lg:px-16 py-8 font-serif">
@@ -95,21 +183,40 @@ const Services = () => {
                   <span className="text-xs text-slate-900">(Duration: {item.duration})</span>
                 </div>
 
-                {/* Button Section */}
-                <button
-                  onClick={() => addToCart(item)} // Add to Cart on click
-                  className="flex items-center justify-center w-full rounded-lg bg-golden focus:ring-4 focus:outline-none font-medium text-sm px-5 py-2.5 text-center text-white mt-5"
-                >
-                  Add to Cart
-                </button>
+                  {/* Button Section */}
+                  <a
+                    href="#"
+                    className="flex items-center justify-center w-full rounded-lg bg-golden  focus:ring-4 focus:outline-none  font-medium text-sm px-5 py-2.5 text-center text-white mt-5 "
+                  >
+                    {/* <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="mr-1 h-4 w-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                    />
+                  </svg> */}
+                    Check Service
+                  </a>
+
+
+                </div>
+                
               </div>
-            </div>
+              <div>
+                  
+                </div>
+            </a>
           ))}
         </div>
       </div>
-
-      {/* Cart Component */}
-      <ProductCard cart={cart} setCart={setCart} />
+<ProductCard></ProductCard>
     </div>
   );
 };

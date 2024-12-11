@@ -1,86 +1,190 @@
-import React from 'react';
-import { useCart } from './CartContext';
-import { Link } from 'react-router-dom';
-
-import ProductImage1 from '../Image/product1.jpg';
-import ProductImage2 from '../Image/product2.png';
+import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { CartContext } from "../Components/CartContext";
+import ProductImage1 from "../Image/product1.jpg"; // Replace with actual images
+import ProductImage2 from "../Image/product1.jpg"; // Replace with actual images
+import { FaShippingFast, FaExchangeAlt, FaLock, FaCashRegister, FaTags } from "react-icons/fa";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const ProductCard = () => {
-  const { cart, setCart } = useCart();
+  const { cart, dispatch } = useContext(CartContext);
+  const navigate = useNavigate();
 
   const handleAddToCart = (product) => {
     const existingProduct = cart.find((item) => item.id === product.id);
-
     if (existingProduct) {
-      const updatedCart = cart.map((item) =>
-        item.id === product.id
-          ? { ...item, quantity: item.quantity + 1 }
-          : item
-      );
-      setCart(updatedCart);
+      dispatch({
+        type: "UPDATE_QUANTITY",
+        payload: { id: product.id, quantity: existingProduct.quantity + 1 },
+      });
     } else {
-      setCart([...cart, { ...product, quantity: 1 }]);
+      dispatch({
+        type: "ADD_TO_CART",
+        payload: { ...product, quantity: 1 },
+      });
     }
+    navigate("/cart");
+  };
+
+  const handleBuyNow = (product) => {
+    navigate("/checkout", { state: { product } });
   };
 
   const products = [
     {
       id: 1,
-      name: 'MooRoopan The Cattel Health Product SILOROPAN',
-      description: 'Our Product Facilate better management of Herd .Our affordable products reduce cow morbidility,enhance milk quantity and quality',
-      details: 'Soft foam cushioning and lightweight design for runners.',
-      price: 12800,
+      name: "MooRopan",
+      price: "\u20b912,800",
+      oldPrice: "\u20b915,000",
+      discount: "15%",
+      description:
+        "Featuring soft foam cushioning and lightweight, woven fabric in the upper, the Jordan Proto-Lyte is perfect for runners. Make your cattle's healthcare effortless with MooRopan!",
       image: ProductImage1,
-      bgColor: 'green-400',
+      brand: "BrandX",
+      ratings: "4.5",
+      reviews: 30,
     },
     {
       id: 2,
-      name: 'MooRoopan The Cattel Health Product SILOROPAN',
-      description: 'Our Product Facilate better management of Herd .Our affordable products reduce cow morbidility,enhance milk quantity and quality',
-      details: 'Finest agricultural products for productive farming.',
-      price: 15500,
+      name: "MooRopan Advanced",
+      price: "\u20b915,000",
+      oldPrice: "\u20b918,000",
+      discount: "16%",
+      description:
+        "For improved cattle health with extra protection. Perfect for your livestock's daily care.",
       image: ProductImage2,
-      bgColor: 'green-800',
+      brand: "BrandX",
+      ratings: "4.7",
+      reviews: 45,
     },
   ];
 
-  return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-4 space-y-8">
-      {products.map((product) => (
-        <div
-          key={product.id}
-          className={`bg-${product.bgColor} text-light-green-100 rounded-lg shadow-xl p-8 w-full max-w-7xl flex`}
-        >
-          <div className="w-1/2 flex justify-center items-center">
-            <img
-              src={product.image}
-              alt={product.name}
-              className="w-64 md:w-72 rounded-lg transition-transform duration-500 transform hover:scale-110"
-            />
+  const offers = [
+    "Upto \u20b92,000.00 discount on select Credit Cards, select Debit Cards",
+    "No Cost EMI on Amazon Pay ICICI Bank Credit Cards",
+    "Get GST invoice and save up to 28% on business purchases",
+  ];
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+  };
+
+  const generateProductCard = (product) => {
+    return (
+      <div
+        key={product.id}
+        className="bg-white  my-5 border rounded-lg shadow-lg p-6 max-w-4xl mx-auto flex flex-col md:flex-row mb-6 transition-transform duration-300 transform hover:scale-105"
+      >
+        {/* Product Image */}
+        <div className="md:w-1/3 flex justify-center items-center mb-4 md:mb-0">
+          <img
+            src={product.image}
+            alt={product.name}
+            className="rounded-lg w-full h-auto transition-transform duration-300 transform hover:scale-105"
+          />
+        </div>
+
+        {/* Product Details */}
+        <div className="md:w-2/3 md:pl-6 flex flex-col justify-between">
+          <div>
+            <h2 className="text-2xl font-bold text-gray-800 mb-2">{product.name}</h2>
+            <p className="text-sm text-gray-600 mb-1">Brand: {product.brand}</p>
+            <p className="text-sm text-yellow-500 mb-4">
+              ⭐ {product.ratings} ({product.reviews} reviews)
+            </p>
+            <p className="text-gray-700 text-sm mb-4">{product.description}</p>
+
+            <div className="mb-4 flex items-center space-x-2">
+              <span className="bg-red-500 text-white px-2 py-1 rounded">Limited time deal</span>
+              <span className="text-red-600 font-bold">-{product.discount}</span>
+            </div>
+
+            <div className="mb-4">
+              <h3 className="text-xl font-semibold text-gray-800">
+                {product.price}{" "}
+                <span className="line-through text-gray-500">{product.oldPrice}</span>
+              </h3>
+            </div>
+
+            {/* Offers Section */}
+            <div className="mb-4">
+              <h4 className="text-lg font-semibold text-gray-800 mb-2 flex items-center">
+                <FaTags className="text-orange-500 mr-2" /> Offers
+              </h4>
+              <Slider {...settings} className="mb-4">
+                {offers.map((offer, index) => (
+                  <div
+                    key={index}
+                    className="bg-gray-100 p-3 rounded shadow-md text-sm text-gray-700 flex items-center"
+                  >
+                    <FaTags className="text-orange-500 mr-2" /> {offer}
+                  </div>
+                ))}
+              </Slider>
+            </div>
           </div>
 
-          <div className="w-1/2 p-4">
-            <h2 className="text-4xl md:text-5xl font-bold text-green-800 mb-4 animate-pulse">
-              {product.name}
-            </h2>
-            <p className="text-lg md:text-xl font-medium text-green-400 mb-4 animate-fadeIn">
-              {product.description}
-            </p>
-            <p className="text-green-900 text-sm md:text-base mb-6">{product.details}</p>
-            <h3 className="text-2xl md:text-3xl font-semibold text-green-300 mb-6 animate-zoom">
-              Rs. {product.price}
-            </h3>
-            <div className="space-x-4">
-            <Link to="/cart"> <button
-                className="px-6 py-2 bg-green-700 text-green-200 rounded-full shadow-lg hover:bg-green-600 hover:scale-105 transition-all duration-300"
-                onClick={() => handleAddToCart(product)}
-              >
-                Add to Cart
-              </button></Link> 
+          {/* Action Buttons */}
+          <div className="flex flex-wrap gap-4 mt-4">
+            <button
+              className="flex-1 min-w-[120px] px-6 py-2 bg-orange-500 text-white rounded-md shadow-md hover:bg-orange-400 transition-all"
+              onClick={() =>
+                handleAddToCart({
+                  id: product.id,
+                  name: product.name,
+                  price: product.price,
+                  image: product.image,
+                })
+              }
+            >
+              Add to Cart
+            </button>
+
+            <button
+              className="flex-1 min-w-[120px] px-6 py-2 bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-400 transition-all"
+              onClick={() =>
+                handleBuyNow({
+                  id: product.id,
+                  name: product.name,
+                  price: product.price,
+                  image: product.image,
+                })
+              }
+            >
+              Buy Now
+            </button>
+          </div>
+
+          {/* Additional Features */}
+          <div className="mt-6 flex items-center justify-between text-gray-600 space-x-4">
+            <div className="flex items-center space-x-2 text-gray-700">
+              <FaExchangeAlt className="text-red-500 text-xl" /> <span>10 days Returnable</span>
+            </div>
+            <div className="flex items-center space-x-2 text-gray-700">
+              <FaCashRegister className="text-green-500 text-xl" /> <span>Pay on Delivery</span>
+            </div>
+            <div className="flex items-center space-x-2 text-gray-700">
+              <FaShippingFast className="text-yellow-500 text-xl" /> <span>Free Delivery</span>
+            </div>
+            <div className="flex items-center space-x-2 text-gray-700">
+              <FaLock className="text-blue-500 text-xl" /> <span>Secure Transaction</span>
             </div>
           </div>
         </div>
-      ))}
+      </div>
+    );
+  };
+
+  return (
+    <div className="p-4 bg-gray-100 min-h-screen space-y-6">
+      {products.map((product) => generateProductCard(product))}
     </div>
   );
 };
