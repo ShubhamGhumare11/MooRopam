@@ -3,6 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import herosection from "../Image/herosection.jpg";
 import Chatbot from './Chatbot';
 import { servicesData } from './data';
+import zoo from "../Image/zoo.jpg";
+import aim from "../Image/aim.jpg";
+import livelihood from "../Image/livelyhood.jpg";
+import goals from "../Image/goals.jpg";
+import ProductCard from './ProductCard';
 
 
 const Services = () => {
@@ -11,6 +16,7 @@ const Services = () => {
 
   const handleCardClick = (id) => {
     navigate(`/subcard/${id}`);
+
   };
 
   const sortServices = (criteria) => {
@@ -65,9 +71,60 @@ const Services = () => {
   return (
     <div>
       {/* Hero Section */}
-      <div className="relative w-full h-[420px] flex items-center">
+      <div className="flex flex-col sm:flex-row justify-between space-x-0 sm:space-x-6 sm:space-y-0 space-y-6 mx-11 my-7">
         <Chatbot />
-        <img
+       
+
+          {/* Card Section */}
+            {/* Card 1 */}
+            <div 
+  className="relative group w-full sm:w-1/4 h-96 bg-cover bg-center rounded-lg overflow-hidden shadow-lg transform transition-all duration-300 hover:w-3/4 group-hover:w-1/4"
+  style={{ backgroundImage: `url(${aim})` }}
+>
+              <div className="absolute inset-0 flex justify-center items-end opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <h4 className="text-red-400 text-xl font-bold text-center">
+                  Pioneers in Protein-Led Nutraceuticals
+                </h4>
+              </div>
+            </div>
+
+            {/* Card 2 */}
+            <div
+              className="relative group w-full sm:w-1/4 h-96 bg-cover bg-center rounded-lg overflow-hidden shadow-lg transform transition-all duration-300 hover:w-3/4 group-hover:w-1/4"
+              style={{ backgroundImage: `url(${livelihood})` }}
+            >
+              <div className="absolute inset-0 flex justify-center items-end opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <h4 className="text-red-400 text-xl font-bold text-center">
+                  High Quality
+                </h4>
+              </div>
+            </div>
+
+            {/* Card 3 */}
+            <div
+              className="relative group w-full sm:w-1/4 h-96 bg-cover bg-center rounded-lg overflow-hidden shadow-lg transform transition-all duration-300 hover:w-3/4 group-hover:w-1/4"
+              style={{ backgroundImage:` url(${goals})` }}
+            >
+              <div className="absolute inset-0 flex justify-center items-end opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <h4 className="text-red-400 text-xl font-bold text-center">
+                  Customizable & Scalable
+                </h4>
+              </div>
+            </div>
+
+            {/* Card 4 */}
+            <div
+              className="relative group w-full sm:w-1/4 h-96 bg-cover bg-center rounded-lg overflow-hidden shadow-lg transform transition-all duration-300 hover:w-3/4 group-hover:w-1/4"
+              style={{ backgroundImage:` url(${zoo}) `}}
+            >
+              <div className="absolute inset-0 flex justify-center items-end opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <h4 className="text-red-400 text-xl font-bold text-center">
+                  Innovative Solutions
+                </h4>
+              </div>
+            </div>
+            
+        {/* <img
           src={herosection}
           className="absolute inset-0 w-full h-full object-cover"
           alt="Background"
@@ -79,13 +136,13 @@ const Services = () => {
             Dive Into Numerology
             </span>
             <span className="block text-white">Our Services</span>
-          </h1>
+          </h1> */}
           {/* <div className="mt-1 mr-1">
             <Link to="/services" className="px-8 py-4 border text-sm md:text-base font-semibold rounded-full hover:bg-amber-400 hover:text-black transition duration-300">
               Explore Services &rarr;
             </Link>
           </div> */}
-        </div>
+        {/* </div> */}
       </div>
 
       {/* Dropdown for Sorting */}
@@ -188,12 +245,16 @@ const Services = () => {
 
 
                 </div>
+                
               </div>
+              <div>
+                  
+                </div>
             </a>
           ))}
         </div>
       </div>
-
+<ProductCard></ProductCard>
     </div>
   );
 };
