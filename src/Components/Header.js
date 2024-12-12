@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FiShoppingCart } from 'react-icons/fi';  // Cart icon
-import { useCart } from '../Components/CartContext';  // Correct import
+import { FiShoppingCart } from 'react-icons/fi';
+import { useCart } from '../Components/CartContext'; // Correct import for useCart
 import logo from '../Image/mooropan logo.png';
 
 const Header = () => {
-  const { cart } = useCart();  // Access cart from context
-  const [isMenuOpen, setIsMenuOpen] = useState(false);  // Manage mobile menu state
+  const { cart } = useCart(); // Use the useCart hook
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -17,7 +17,7 @@ const Header = () => {
   };
 
   const getTotalItems = () => {
-    return cart.reduce((total, item) => total + item.quantity, 0);  // Sum of quantities
+    return cart.reduce((total, item) => total + item.quantity, 0); // Calculate total items
   };
 
   return (
@@ -37,10 +37,9 @@ const Header = () => {
           <Link to="/" className="hover:text-customLightOrange">Home</Link>
           <Link to="/about" className="hover:text-customLightOrange">About</Link>
           <Link to="/services" className="hover:text-customLightOrange">Services</Link>
-          <Link to="/videos" className="hover:text-customLightOrange">Videos</Link>
+          {/* <Link to="/videos" className="hover:text-customLightOrange">Videos</Link> */}
           <Link to="/blogs" className="hover:text-customLightOrange">Blogs</Link>
           <Link to="/contact" className="hover:text-customLightOrange">Contact Us</Link>
-
           <Link to="/cart" className="flex items-center space-x-1 hover:text-customLightOrange">
             <FiShoppingCart className="w-6 h-6" />
             <span>{getTotalItems()}</span>
@@ -70,7 +69,6 @@ const Header = () => {
           <Link to="/videos" className="hover:text-customLightOrange" onClick={closeMenu}>Videos</Link>
           <Link to="/blogs" className="hover:text-customLightOrange" onClick={closeMenu}>Blogs</Link>
           <Link to="/contact" className="hover:text-customLightOrange" onClick={closeMenu}>Contact Us</Link>
-
           <Link to="/cart" className="flex items-center space-x-1 hover:text-customLightOrange">
             <FiShoppingCart className="w-6 h-6" />
             <span>{getTotalItems()}</span>

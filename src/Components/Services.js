@@ -10,7 +10,8 @@ import goals from "../Image/goals.jpg";
 import ProductCard from './ProductCard';
 
 
-const Services = () => {
+
+  const Services = () => {
   const navigate = useNavigate();
   const [sortedServices, setSortedServices] = useState(servicesData);
 

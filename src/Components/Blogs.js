@@ -1,6 +1,6 @@
 import React from 'react';
 import Chatbot from './Chatbot';
-import herosection from "../Image/herosection.jpg";
+import cowart from "../Image/cowart.png";
 import { blogsData } from './data';
 import dhoni from "../Image/Dhoni.png"
 import zodiac from "../Image/zodiac.jpg"
@@ -12,7 +12,7 @@ const Blogs = () => {
       <div className="relative w-full h-[420px] flex items-center">
         <Chatbot />
         <img
-          src={herosection}
+          src={cowart}
           className="absolute inset-0 w-full h-full object-cover"
           alt="Background"
           loading="lazy"
@@ -22,7 +22,7 @@ const Blogs = () => {
             <span className="block text-yellow-500 ">
             Explore Insights Through
             </span>
-            <span className="block mt-3 text-white"> Our Blogs </span>
+            <span className="block mt-3 text-orange-600"> Our Blogs </span>
           </h1>
           {/* <div className="mt-1 mr-1">
             <Link to="/services" className="px-8 py-4 border text-sm md:text-base font-semibold rounded-full hover:bg-amber-400 hover:text-black transition duration-300">

@@ -1,6 +1,6 @@
 import React, { createContext, useReducer, useContext, useEffect } from "react";
 
-// Create the context
+// Create the CartContext
 const CartContext = createContext();
 
 // Define initial state
@@ -30,6 +30,11 @@ const cartReducer = (state, action) => {
             : item
         ),
       };
+    case "CLEAR_CART": // New action to clear the cart
+      return {
+        ...state,
+        cart: [],
+      };
     default:
       return state;
   }
@@ -44,15 +49,20 @@ export const CartProvider = ({ children }) => {
     localStorage.setItem("cart", JSON.stringify(state.cart));
   }, [state.cart]);
 
+  const value = { cart: state.cart, dispatch };
+
   return (
-    <CartContext.Provider value={{ cart: state.cart, dispatch }}>
+    <CartContext.Provider value={value}>
       {children}
     </CartContext.Provider>
   );
 };
 
-// Create a custom hook to access the cart context easily
-export const useCart = () => useContext(CartContext);
-
-// Export CartContext to be used in other components if necessary
-export { CartContext };
+// Custom hook to use CartContext
+export const useCart = () => {
+  const context = useContext(CartContext);
+  if (!context) {
+    throw new Error("useCart must be used within a CartProvider");
+  }
+  return context;
+};

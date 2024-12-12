@@ -37,7 +37,9 @@ import magic10 from "../Image/number10.png"
 import numerlogy1 from "../Image/numerlogy1.jpg"
 import numerlogy2 from "../Image/numerlogy2.png"
 import numerlogy3 from "../Image/number23.png"
+import siloropan from "../Image/siloropanproduct.png"
 // import bollywood from "../Image/bollywood.jpg"
+//my new changes moe
 
 export const predictionData = [
     {
@@ -258,8 +260,8 @@ export const blogsData = [
 export const servicesData = [
     // {
     //     id: 1,
-    //     image: service1 ,
-    //     title: "Vehicle Number Selection",
+    //     image: siloropan ,
+    //     title: "SiloRopan",
     //     subTitle: "",
     //     price: "INR 1900/-",
     //     usd: "USD 10",
@@ -269,8 +271,8 @@ export const servicesData = [
     // },
     // {
     //     id: 2,
-    //     image: service2,
-    //     title: "Lucky Number pendant suggestion or Gem stone suggestion",
+    //     image: siloropan,
+    //     title: "MestiSense",
     //     subTitle: "",
     //     price: "INR 1900/-",
     //     usd: "USD 10",
@@ -399,6 +401,28 @@ export const servicesData = [
         duration: "25-30 Days",
         buttonText: "Add To Cart",
     }, */
+    // {
+    //     id: 14,
+    //     image: service14,
+    //     title: "Movie related tips",
+    //     subTitle: "",
+    //     price: "INR 25,000/-",
+    //     usd: "USD 300",
+    //     rating: "4.5",
+    //     duration: "25-30 Days",
+    //     buttonText: "Add To Cart",
+    // },
+    // {
+    //     id: 15,
+    //     image: service15,
+    //     title: "Building / Real estate Projects suggestions",
+    //     subTitle: "",
+    //     price: "INR 25,000/-",
+    //     usd: "USD 300",
+    //     rating: "4.5",
+    //     duration: "25-30 Days",
+    //     buttonText: "Add To Cart",
+    // },
     // {
     //     id: 14,
     //     image: service14,
