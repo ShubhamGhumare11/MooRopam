@@ -159,13 +159,35 @@ const Cart = () => {
 
             {/* Other Sidebar Content */}
             <div className="bg-white rounded-lg shadow p-4 mt-6">
-              <h2 className="text-xl font-semibold mb-4">Customers also bought</h2>
-              <ul className="list-disc list-inside text-gray-600">
-                <li><a href="#" className="text-blue-500 hover:underline">Hero PLEASURE+ VX</a></li>
-                <li><a href="#" className="text-blue-500 hover:underline">Honda Activa 6G</a></li>
-                <li><a href="#" className="text-blue-500 hover:underline">Yamaha Fascino 125</a></li>
-              </ul>
-            </div>
+  <h2 className="text-xl font-semibold mb-4">Customers also bought</h2>
+  <ul className="list-disc list-inside text-gray-600">
+    <li>
+      <button
+        className="text-blue-500 hover:underline focus:outline-none"
+        onClick={() => alert('Navigating to Hero PLEASURE+ VX')}
+      >
+        Hero PLEASURE+ VX
+      </button>
+    </li>
+    <li>
+      <button
+        className="text-blue-500 hover:underline focus:outline-none"
+        onClick={() => alert('Navigating to Honda Activa 6G')}
+      >
+        Honda Activa 6G
+      </button>
+    </li>
+    <li>
+      <button
+        className="text-blue-500 hover:underline focus:outline-none"
+        onClick={() => alert('Navigating to Yamaha Fascino 125')}
+      >
+        Yamaha Fascino 125
+      </button>
+    </li>
+  </ul>
+</div>
+
           </div>
         </div>
       </div>
