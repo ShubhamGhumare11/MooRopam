@@ -1,108 +1,174 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useCart } from './CartContext';
 import { Link } from 'react-router-dom';
-import { useCart } from './CartContext'; // Updated import
 
 const Cart = () => {
-  const { cart, dispatch } = useCart(); // Access cart and dispatch from CartContext
+  const { cart, dispatch } = useCart();
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [selectedEMI, setSelectedEMI] = useState(null);
 
-  const updateQuantity = (id, increment) => {
-    const item = cart.find((item) => item.id === id);
-    const newQuantity = increment ? item.quantity + 1 : Math.max(1, item.quantity - 1);
-    dispatch({ type: 'UPDATE_QUANTITY', payload: { id, quantity: newQuantity } });
+  const toggleDropdown = () => setDropdownOpen(!isDropdownOpen);
+
+  const handleEMISelection = (option) => {
+    setSelectedEMI(option);
+    setDropdownOpen(false); // Close the dropdown after selection
   };
 
-  const removeItem = (id) => {
+  const handleIncreaseQuantity = (id) => {
+    const item = cart.find((product) => product.id === id);
+    if (item) {
+      dispatch({
+        type: 'UPDATE_QUANTITY',
+        payload: { id, quantity: item.quantity + 1 },
+      });
+    }
+  };
+
+  const handleDecreaseQuantity = (id) => {
+    const item = cart.find((product) => product.id === id);
+    if (item && item.quantity > 1) {
+      dispatch({
+        type: 'UPDATE_QUANTITY',
+        payload: { id, quantity: item.quantity - 1 },
+      });
+    }
+  };
+
+  const handleRemoveFromCart = (id) => {
     dispatch({ type: 'REMOVE_FROM_CART', payload: id });
   };
 
-  const calculateTotal = () => {
-    return cart
-      .reduce(
-        (total, item) => total + item.quantity * parseFloat(item.price.replace(/[^\d.-]/g, '')),
-        0
-      )
-      .toFixed(2);
-  };
+  const totalPrice = cart.reduce(
+    (total, product) => total + product.price * product.quantity,
+    0
+  );
 
   return (
-    <div className="p-4 md:p-8 lg:p-16">
-      <h2 className="text-2xl font-bold mb-6">Shopping Cart</h2>
+    <div className="min-h-screen p-6 bg-gray-100">
+      <div className="container mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* Main Cart Section */}
+          <div className="md:col-span-2">
+            <h1 className="text-3xl font-semibold mb-6">Shopping Cart</h1>
+            {cart.length === 0 ? (
+              <p className="text-center text-lg text-gray-600">Your cart is empty!</p>
+            ) : (
+              cart.map((product) => (
+                <div
+                  key={product.id}
+                  className="flex flex-col md:flex-row bg-white rounded-lg shadow p-4 mb-4 items-center"
+                >
+                  {/* Product Image */}
+                  <div className="w-full md:w-1/4">
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="object-cover w-full h-48 rounded-lg"
+                    />
+                  </div>
 
-      {cart.length === 0 ? (
-        <div className="text-center">
-          <p>Your cart is empty.</p>
-        </div>
-      ) : (
-        <>
-          <div className="overflow-x-auto">
-            <table className="min-w-full border-collapse border">
-              <thead>
-                <tr>
-                  <th className="border px-4 py-2 text-left">Item</th>
-                  <th className="border px-4 py-2">Price</th>
-                  <th className="border px-4 py-2">Quantity</th>
-                  <th className="border px-4 py-2">Subtotal</th>
-                  <th className="border px-4 py-2">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {cart.map((item) => (
-                  <tr key={item.id}>
-                    <td className="border px-4 py-2 flex items-center space-x-2">
-                      <img src={item.image} alt={item.name} className="w-16 h-16 object-cover rounded" />
-                      <span>{item.name}</span>
-                    </td>
-                    <td className="border px-4 py-2 text-center">Rs. {item.price}</td>
-                    <td className="border px-4 py-2 text-center">
-                      <div className="flex items-center justify-center space-x-2">
-                        <button
-                          onClick={() => updateQuantity(item.id, false)}
-                          className="px-2 py-1 bg-gray-300 rounded hover:bg-gray-400 focus:outline-none"
-                          aria-label="Decrease quantity"
-                        >
-                          -
-                        </button>
-                        <span>{item.quantity}</span>
-                        <button
-                          onClick={() => updateQuantity(item.id, true)}
-                          className="px-2 py-1 bg-gray-300 rounded hover:bg-gray-400 focus:outline-none"
-                          aria-label="Increase quantity"
-                        >
-                          +
-                        </button>
-                      </div>
-                    </td>
-                    <td className="border px-4 py-2 text-center">
-                      Rs. {(parseFloat(item.price.replace(/[^\d.-]/g, '')) * item.quantity).toFixed(2)}
-                    </td>
-                    <td className="border px-4 py-2 text-center">
+                  {/* Product Details */}
+                  <div className="flex-1 px-4">
+                    <h2 className="text-xl font-semibold text-gray-800">{product.name}</h2>
+                    <p className="text-gray-600 mt-2">{product.description}</p>
+                    <p className="text-gray-800 font-semibold mt-2">Price: ₹{product.price}</p>
+                  </div>
+
+                  {/* Quantity and Subtotal */}
+                  <div className="w-full md:w-1/4 text-right">
+                    <div className="flex items-center justify-end space-x-2 mb-2">
                       <button
-                        onClick={() => removeItem(item.id)}
-                        className="px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600 focus:outline-none"
-                        aria-label="Remove item"
+                        className="bg-yellow-500 text-white px-3 py-1 rounded"
+                        onClick={() => handleDecreaseQuantity(product.id)}
                       >
-                        Remove
+                        -
                       </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                      <span className="font-semibold text-gray-800">{product.quantity}</span>
+                      <button
+                        className="bg-yellow-500 text-white px-3 py-1 rounded"
+                        onClick={() => handleIncreaseQuantity(product.id)}
+                      >
+                        +
+                      </button>
+                    </div>
+                    <p className="text-gray-800 font-semibold">
+                      Subtotal: ₹{product.price * product.quantity}
+                    </p>
+                    <button
+                      className="text-red-500 hover:underline mt-2"
+                      onClick={() => handleRemoveFromCart(product.id)}
+                    >
+                      Remove
+                    </button>
+                  </div>
+                </div>
+              ))
+            )}
           </div>
 
-          {/* Total Price Section */}
-          <div className="mt-6 text-right">
-            <h3 className="text-xl font-semibold">Total: Rs. {calculateTotal()}</h3>
-          </div>
+            {/* Cart Summary */}
+          <div>
+          
+            <div className="bg-white rounded-lg shadow p-4  ">
+              <h2 className="text-xl font-semibold mb-4">Cart Summary</h2>
+              <p className="text-gray-800 font-semibold">
+                Subtotal ({cart.length} items): <span className="text-xl text-red-500">₹{totalPrice}</span>
+              </p>
+              <Link
+                to="/checkout"
+                className="block w-full bg-yellow-500 text-white text-center py-2 mt-4 rounded hover:bg-yellow-600"
+              >
+                Proceed to Buy
+              </Link>
+              <div className="mt-4">
+                <div className="relative">
+                  <button
+                    onClick={toggleDropdown}
+                    className="w-full bg-gray-100 text-gray-800 py-2 px-4 rounded flex justify-between items-center"
+                    type="button"
+                  >
+                    {selectedEMI ? `Selected: ${selectedEMI}` : 'EMI Options Available'}
+                    <span className="ml-2">{isDropdownOpen ? '▲' : '▼'}</span>
+                  </button>
+                  {isDropdownOpen && (
+                    <ul className="absolute bg-white shadow rounded mt-2 w-full z-10">
+                      <li
+                        className="px-4 py-2 text-sm text-gray-600 cursor-pointer hover:bg-gray-100"
+                        onClick={() => handleEMISelection('6 Months EMI')}
+                      >
+                        6 Months EMI
+                      </li>
+                      <li
+                        className="px-4 py-2 text-sm text-gray-600 cursor-pointer hover:bg-gray-100"
+                        onClick={() => handleEMISelection('12 Months EMI')}
+                      >
+                        12 Months EMI
+                      </li>
+                      <li
+                        className="px-4 py-2 text-sm text-gray-600 cursor-pointer hover:bg-gray-100"
+                        onClick={() => handleEMISelection('24 Months EMI')}
+                      >
+                        24 Months EMI
+                      </li>
+                    </ul>
+                  )}
+                </div>
+                <p className="mt-2 text-sm text-gray-600">Your order qualifies for EMI with valid credit cards.</p>
+              </div>
+            </div>
 
-          {/* Checkout Button */}
-          <div className="mt-6 text-right">
-            <Link to="/checkout" className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none">
-              Proceed to Checkout
-            </Link>
+            {/* Other Sidebar Content */}
+            <div className="bg-white rounded-lg shadow p-4 mt-6">
+              <h2 className="text-xl font-semibold mb-4">Customers also bought</h2>
+              <ul className="list-disc list-inside text-gray-600">
+                <li><a href="#" className="text-blue-500 hover:underline">Hero PLEASURE+ VX</a></li>
+                <li><a href="#" className="text-blue-500 hover:underline">Honda Activa 6G</a></li>
+                <li><a href="#" className="text-blue-500 hover:underline">Yamaha Fascino 125</a></li>
+              </ul>
+            </div>
           </div>
-        </>
-      )}
+        </div>
+      </div>
     </div>
   );
 };
