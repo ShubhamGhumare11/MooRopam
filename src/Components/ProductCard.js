@@ -1,15 +1,15 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-import { CartContext } from "../Components/CartContext";
-import ProductImage1 from "../Image/product1.jpg"; // Replace with actual images
-import ProductImage2 from "../Image/product1.jpg"; // Replace with actual images
-import { FaShippingFast, FaExchangeAlt, FaLock, FaCashRegister, FaTags } from "react-icons/fa";
+import { useCart } from "../Components/CartContext"; // Correct import for useCart
+import ProductImage1 from "../Image/product1.jpg"; 
+import ProductImage2 from "../Image/product1.jpg";
+import { FaTags } from "react-icons/fa";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const ProductCard = () => {
-  const { cart, dispatch } = useContext(CartContext);
+  const { cart, dispatch } = useCart(); // Use the useCart hook
   const navigate = useNavigate();
 
   const handleAddToCart = (product) => {
@@ -36,8 +36,8 @@ const ProductCard = () => {
     {
       id: 1,
       name: "MooRopan",
-      price: 12800, // Use number for price
-      oldPrice: 15000, // Use number for oldPrice
+      price: 12800,
+      oldPrice: 15000,
       discount: "15%",
       description:
         "Featuring soft foam cushioning and lightweight, woven fabric in the upper, the Jordan Proto-Lyte is perfect for runners. Make your cattle's healthcare effortless with MooRopan!",
@@ -49,8 +49,8 @@ const ProductCard = () => {
     {
       id: 2,
       name: "MooRopan Advanced",
-      price: 15000, // Use number for price
-      oldPrice: 18000, // Use number for oldPrice
+      price: 15000,
+      oldPrice: 18000,
       discount: "16%",
       description:
         "For improved cattle health with extra protection. Perfect for your livestock's daily care.",
@@ -76,99 +76,87 @@ const ProductCard = () => {
     autoplay: true,
   };
 
-  const generateProductCard = (product) => {
-    return (
-      <div
-        key={product.id}
-        className="bg-white  my-5 border rounded-lg shadow-lg p-6 max-w-4xl mx-auto flex flex-col md:flex-row mb-6 transition-transform duration-300 transform hover:scale-105"
-      >
-        {/* Product Image */}
-        <div className="md:w-1/3 flex justify-center items-center mb-4 md:mb-0">
-          <img
-            src={product.image}
-            alt={product.name}
-            className="rounded-lg w-full h-auto transition-transform duration-300 transform hover:scale-105"
-          />
-        </div>
-
-        {/* Product Details */}
-        <div className="md:w-2/3 md:pl-6 flex flex-col justify-between">
-          <div>
-            <h2 className="text-2xl font-bold text-gray-800 mb-2">{product.name}</h2>
-            <p className="text-sm text-gray-600 mb-1">Brand: {product.brand}</p>
-            <p className="text-sm text-yellow-500 mb-4">
-              ⭐ {product.ratings} ({product.reviews} reviews)
-            </p>
-            <p className="text-gray-700 text-sm mb-4">{product.description}</p>
-
-            <div className="mb-4 flex items-center space-x-2">
-              <span className="bg-red-500 text-white px-2 py-1 rounded">Limited time deal</span>
-              <span className="text-red-600 font-bold">-{product.discount}</span>
-            </div>
-
-            <div className="mb-4">
-              <h3 className="text-xl font-semibold text-gray-800">
-                ₹{product.price}{" "}
-                <span className="line-through text-gray-500">₹{product.oldPrice}</span>
-              </h3>
-            </div>
-
-            {/* Offers Section */}
-            <div className="mb-4">
-              <h4 className="text-lg font-semibold text-gray-800 mb-2 flex items-center">
-                <FaTags className="text-orange-500 mr-2" /> Offers
-              </h4>
-              <Slider {...settings} className="mb-4">
-                {offers.map((offer, index) => (
-                  <div
-                    key={index}
-                    className="bg-gray-100 p-3 rounded shadow-md text-sm text-gray-700 flex items-center"
-                  >
-                    <FaTags className="text-orange-500 mr-2" /> {offer}
-                  </div>
-                ))}
-              </Slider>
-            </div>
-          </div>
-
-          {/* Action Buttons */}
-          <div className="flex flex-wrap gap-4 mt-4">
-            <button
-              className="flex-1 min-w-[120px] px-6 py-2 bg-orange-500 text-white rounded-md shadow-md hover:bg-orange-400 transition-all"
-              onClick={() =>
-                handleAddToCart({
-                  id: product.id,
-                  name: product.name,
-                  price: product.price,  // Pass price as number
-                  image: product.image,
-                })
-              }
-            >
-              Add to Cart
-            </button>
-
-            <button
-              className="flex-1 min-w-[120px] px-6 py-2 bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-400 transition-all"
-              onClick={() =>
-                handleBuyNow({
-                  id: product.id,
-                  name: product.name,
-                  price: product.price,  // Pass price as number
-                  image: product.image,
-                })
-              }
-            >
-              Buy Now
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
   return (
     <div className="p-4 bg-gray-100 min-h-screen space-y-6">
-      {products.map((product) => generateProductCard(product))}
+      {products.map((product) => (
+        <div
+          key={product.id}
+          className="bg-white my-5 border rounded-lg shadow-lg p-6 max-w-4xl mx-auto flex flex-col md:flex-row mb-6 transition-transform duration-300 transform hover:scale-105"
+        >
+          <div className="md:w-1/3 flex justify-center items-center mb-4 md:mb-0">
+            <img
+              src={product.image}
+              alt={product.name}
+              className="rounded-lg w-full h-auto transition-transform duration-300 transform hover:scale-105"
+            />
+          </div>
+
+          <div className="md:w-2/3 md:pl-6 flex flex-col justify-between">
+            <div>
+              <h2 className="text-2xl font-bold text-gray-800 mb-2">{product.name}</h2>
+              <p className="text-sm text-gray-600 mb-1">Brand: {product.brand}</p>
+              <p className="text-sm text-yellow-500 mb-4">
+                ⭐ {product.ratings} ({product.reviews} reviews)
+              </p>
+              <p className="text-gray-700 text-sm mb-4">{product.description}</p>
+
+              <div className="mb-4 flex items-center space-x-2">
+                <span className="bg-red-500 text-white px-2 py-1 rounded">Limited time deal</span>
+                <span className="text-red-600 font-bold">-{product.discount}</span>
+              </div>
+
+              <div className="mb-4">
+                <h3 className="text-xl font-semibold text-gray-800">
+                  ₹{product.price}{" "}
+                  <span className="line-through text-gray-500">₹{product.oldPrice}</span>
+                </h3>
+              </div>
+
+              <div className="mb-4">
+                <h4 className="text-lg font-semibold text-gray-800 mb-2 flex items-center">
+                  <FaTags className="text-xl mr-2" />
+                  Offers:
+                </h4>
+                <ul className="list-disc pl-5 space-y-1">
+                  {offers.map((offer, index) => (
+                    <li key={index} className="text-gray-600 text-sm">{offer}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <div className="flex space-x-4 mt-6">
+              <button
+                onClick={() => handleAddToCart(product)}
+                className="bg-yellow-500 text-white px-6 py-2 rounded-md shadow-lg hover:bg-yellow-600 transition duration-300"
+              >
+                Add to Cart
+              </button>
+              <button
+                onClick={() => handleBuyNow(product)}
+                className="bg-green-600 text-white px-6 py-2 rounded-md shadow-lg hover:bg-green-700 transition duration-300"
+              >
+                Buy Now
+              </button>
+            </div>
+          </div>
+        </div>
+      ))}
+
+      {/* <div className="w-full mt-10">
+        <Slider {...settings}>
+          {products.map((product) => (
+            <div key={product.id} className="p-4">
+              <img
+                src={product.image}
+                alt={product.name}
+                className="rounded-lg w-full h-auto"
+              />
+              <h3 className="text-xl font-bold text-gray-800 mt-4">{product.name}</h3>
+            </div>
+          ))}
+        </Slider>
+      </div> */}
     </div>
   );
 };

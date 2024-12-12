@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { CartProvider } from './Components/CartContext';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
+import ScrollToTop from './Components/ScrollToTop'; // Import ScrollToTop component
 
 // Lazy load components
 const Home = React.lazy(() => import('./Components/Home'));
@@ -21,14 +22,14 @@ const Products = React.lazy(() => import('./Components/Products'));
 const CheckoutForm = React.lazy(() => import('./Components/CheckoutForm'));
 const OrderReceived = React.lazy(() => import('./Components/OrderReceived'));
 const Cart = React.lazy(() => import('./Components/Cart'));
-const NotFound = React.lazy(() => import('./Components/NotFound')); // Placeholder for 404
+const NotFound = React.lazy(() => import('./Components/NotFound')); // Lazy load NotFound
 
 function App() {
   return (
     <CartProvider>
       <Router>
         <Header />
-        <ScrollToTop />
+        <ScrollToTop /> {/* Ensures the page scrolls to the top on navigation */}
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
             <Route path="/" element={<Home />} />

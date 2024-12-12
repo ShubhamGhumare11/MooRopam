@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import { useCart } from './CartContext';
 import { Link } from 'react-router-dom';
+import { FaTrash, FaRegBookmark } from 'react-icons/fa'; // Import trash and discount icon
 
 const Cart = () => {
   const { cart, dispatch } = useCart();
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [selectedEMI, setSelectedEMI] = useState(null);
 
-  const toggleDropdown = () => setDropdownOpen(!isDropdownOpen);
+  const toggleDropdown = () => setDropdownOpen((prev) => !prev);
 
   const handleEMISelection = (option) => {
     setSelectedEMI(option);
-    setDropdownOpen(false); // Close the dropdown after selection
+    setDropdownOpen(false);
   };
 
   const handleIncreaseQuantity = (id) => {
@@ -38,6 +39,10 @@ const Cart = () => {
     dispatch({ type: 'REMOVE_FROM_CART', payload: id });
   };
 
+  const handleDeleteAll = () => {
+    dispatch({ type: 'CLEAR_CART' }); // Assuming a 'CLEAR_CART' action exists
+  };
+
   const totalPrice = cart.reduce(
     (total, product) => total + product.price * product.quantity,
     0
@@ -49,7 +54,7 @@ const Cart = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Main Cart Section */}
           <div className="md:col-span-2">
-            <h1 className="text-3xl font-semibold mb-6">Shopping Cart</h1>
+            <h1 className="text-3xl font-bold mb-6 text-blue-700">Shopping Cart</h1>
             {cart.length === 0 ? (
               <p className="text-center text-lg text-gray-600">Your cart is empty!</p>
             ) : (
@@ -69,8 +74,21 @@ const Cart = () => {
 
                   {/* Product Details */}
                   <div className="flex-1 px-4">
-                    <h2 className="text-xl font-semibold text-gray-800">{product.name}</h2>
+                    <h2 className="text-xl font-semibold text-gray-800" style={{ fontFamily: 'Arial, sans-serif' }}>
+                      {product.name}
+                    </h2>
                     <p className="text-gray-600 mt-2">{product.description}</p>
+                    <ul className="text-sm text-gray-700 mt-2">
+                      <li>✔ Free Shipping</li>
+                      <li>✔ Discount Available</li>
+                      <li>✔ In-stock Seller</li>
+                    </ul>
+                    <p className="text-green-500 font-semibold mt-2">In Stock</p> {/* In-stock green text */}
+                    <div className="flex items-center mt-2 text-gray-700">
+                      <FaRegBookmark className="text-yellow-500 mr-2" /> {/* Discount icon */}
+                      <p className="font-semibold">Discount Applied</p>
+                    </div>
+                    <p className="text-gray-700 mt-2">Seller: Mooropan</p> {/* Seller info */}
                     <p className="text-gray-800 font-semibold mt-2">Price: ₹{product.price}</p>
                   </div>
 
@@ -95,10 +113,10 @@ const Cart = () => {
                       Subtotal: ₹{product.price * product.quantity}
                     </p>
                     <button
-                      className="text-red-500 hover:underline mt-2"
+                      className="text-red-500 hover:underline mt-2 flex items-center justify-end"
                       onClick={() => handleRemoveFromCart(product.id)}
                     >
-                      Remove
+                      <FaTrash className="mr-2" /> Remove
                     </button>
                   </div>
                 </div>
@@ -106,11 +124,10 @@ const Cart = () => {
             )}
           </div>
 
-            {/* Cart Summary */}
+          {/* Cart Summary */}
           <div>
-          
-            <div className="bg-white rounded-lg shadow p-4  ">
-              <h2 className="text-xl font-semibold mb-4">Cart Summary</h2>
+            <div className="bg-white rounded-lg shadow p-4 my-14">
+              <h2 className="text-xl font-semibold mb-4 text-blue-600">Cart Summary</h2>
               <p className="text-gray-800 font-semibold">
                 Subtotal ({cart.length} items): <span className="text-xl text-red-500">₹{totalPrice}</span>
               </p>
@@ -125,31 +142,21 @@ const Cart = () => {
                   <button
                     onClick={toggleDropdown}
                     className="w-full bg-gray-100 text-gray-800 py-2 px-4 rounded flex justify-between items-center"
-                    type="button"
                   >
                     {selectedEMI ? `Selected: ${selectedEMI}` : 'EMI Options Available'}
                     <span className="ml-2">{isDropdownOpen ? '▲' : '▼'}</span>
                   </button>
                   {isDropdownOpen && (
                     <ul className="absolute bg-white shadow rounded mt-2 w-full z-10">
-                      <li
-                        className="px-4 py-2 text-sm text-gray-600 cursor-pointer hover:bg-gray-100"
-                        onClick={() => handleEMISelection('6 Months EMI')}
-                      >
-                        6 Months EMI
-                      </li>
-                      <li
-                        className="px-4 py-2 text-sm text-gray-600 cursor-pointer hover:bg-gray-100"
-                        onClick={() => handleEMISelection('12 Months EMI')}
-                      >
-                        12 Months EMI
-                      </li>
-                      <li
-                        className="px-4 py-2 text-sm text-gray-600 cursor-pointer hover:bg-gray-100"
-                        onClick={() => handleEMISelection('24 Months EMI')}
-                      >
-                        24 Months EMI
-                      </li>
+                      {['6 Months EMI', '12 Months EMI', '24 Months EMI'].map((option) => (
+                        <li
+                          key={option}
+                          className="px-4 py-2 text-sm text-gray-600 cursor-pointer hover:bg-gray-100"
+                          onClick={() => handleEMISelection(option)}
+                        >
+                          {option}
+                        </li>
+                      ))}
                     </ul>
                   )}
                 </div>
@@ -157,13 +164,35 @@ const Cart = () => {
               </div>
             </div>
 
+            {/* Clear Cart Button */}
+            <div className="mt-4">
+              <button
+                onClick={handleDeleteAll}
+                className="w-full bg-red-500 text-white py-2 rounded hover:bg-red-600"
+              >
+                Delete All
+              </button>
+            </div>
+            {/* Clear Cart Button */}
+            <div className="mt-4">
+             <Link to='/services'> <button
+                className="w-full bg-blue-400 text-white py-2 rounded hover:bg-blue-600"
+              >
+                Continue Shopping
+              </button></Link>
+            </div>
+
             {/* Other Sidebar Content */}
             <div className="bg-white rounded-lg shadow p-4 mt-6">
-              <h2 className="text-xl font-semibold mb-4">Customers also bought</h2>
+              <h2 className="text-xl font-semibold mb-4 text-blue-600">Customers also bought</h2>
               <ul className="list-disc list-inside text-gray-600">
-                <li><a href="#" className="text-blue-500 hover:underline">Hero PLEASURE+ VX</a></li>
-                <li><a href="#" className="text-blue-500 hover:underline">Honda Activa 6G</a></li>
-                <li><a href="#" className="text-blue-500 hover:underline">Yamaha Fascino 125</a></li>
+                {['Hero PLEASURE+ VX', 'Honda Activa 6G', 'Yamaha Fascino 125'].map((item) => (
+                  <li key={item}>
+                    <a href="#" className="text-blue-500 hover:underline">
+                      {item}
+                    </a>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>

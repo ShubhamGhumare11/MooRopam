@@ -8,10 +8,10 @@ import aim from "../Image/aim.jpg";
 import livelihood from "../Image/livelyhood.jpg";
 import goals from "../Image/goals.jpg";
 import ProductCard from './ProductCard';
-import
 
 
-const Services = () => {
+
+  const Services = () => {
   const navigate = useNavigate();
   const [sortedServices, setSortedServices] = useState(servicesData);
 

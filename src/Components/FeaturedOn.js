@@ -34,7 +34,7 @@ const FeaturedOn = () => {
       {/* Main Heading */}
       <div className="text-center mb-10">
         <h2 className="text-gray-900 text-4xl font-extrabold md:text-5xl lg:text-6xl">
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-indigo-600">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-900 to-orange-900">
             One of the Best Products With Low Cost For Farmers
           </span>
         </h2>
@@ -44,7 +44,7 @@ const FeaturedOn = () => {
       <div className="flex flex-col lg:flex-row justify-between items-center space-y-10 lg:space-y-0 lg:space-x-10">
         {/* Left Side */}
         <div className="w-full bg- p-10 rounded-xl shadow-lg space-y-10">
-          <h3 className="text-2xl font-bold text-center text-orange-500 mb-8">
+          <h3 className="text-3xl font-bold text-center text-blue-900 mb-8">
             MooRopan
           </h3>
 
