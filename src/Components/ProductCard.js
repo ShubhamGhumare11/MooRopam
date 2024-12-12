@@ -36,8 +36,8 @@ const ProductCard = () => {
     {
       id: 1,
       name: "MooRopan",
-      price: "\u20b912,800",
-      oldPrice: "\u20b915,000",
+      price: 12800, // Use number for price
+      oldPrice: 15000, // Use number for oldPrice
       discount: "15%",
       description:
         "Featuring soft foam cushioning and lightweight, woven fabric in the upper, the Jordan Proto-Lyte is perfect for runners. Make your cattle's healthcare effortless with MooRopan!",
@@ -49,8 +49,8 @@ const ProductCard = () => {
     {
       id: 2,
       name: "MooRopan Advanced",
-      price: "\u20b915,000",
-      oldPrice: "\u20b918,000",
+      price: 15000, // Use number for price
+      oldPrice: 18000, // Use number for oldPrice
       discount: "16%",
       description:
         "For improved cattle health with extra protection. Perfect for your livestock's daily care.",
@@ -62,7 +62,7 @@ const ProductCard = () => {
   ];
 
   const offers = [
-    "Upto \u20b92,000.00 discount on select Credit Cards, select Debit Cards",
+    "Upto ₹2,000.00 discount on select Credit Cards, select Debit Cards",
     "No Cost EMI on Amazon Pay ICICI Bank Credit Cards",
     "Get GST invoice and save up to 28% on business purchases",
   ];
@@ -108,8 +108,8 @@ const ProductCard = () => {
 
             <div className="mb-4">
               <h3 className="text-xl font-semibold text-gray-800">
-                {product.price}{" "}
-                <span className="line-through text-gray-500">{product.oldPrice}</span>
+                ₹{product.price}{" "}
+                <span className="line-through text-gray-500">₹{product.oldPrice}</span>
               </h3>
             </div>
 
@@ -139,7 +139,7 @@ const ProductCard = () => {
                 handleAddToCart({
                   id: product.id,
                   name: product.name,
-                  price: product.price,
+                  price: product.price,  // Pass price as number
                   image: product.image,
                 })
               }
@@ -153,29 +153,13 @@ const ProductCard = () => {
                 handleBuyNow({
                   id: product.id,
                   name: product.name,
-                  price: product.price,
+                  price: product.price,  // Pass price as number
                   image: product.image,
                 })
               }
             >
               Buy Now
             </button>
-          </div>
-
-          {/* Additional Features */}
-          <div className="mt-6 flex items-center justify-between text-gray-600 space-x-4">
-            <div className="flex items-center space-x-2 text-gray-700">
-              <FaExchangeAlt className="text-red-500 text-xl" /> <span>10 days Returnable</span>
-            </div>
-            <div className="flex items-center space-x-2 text-gray-700">
-              <FaCashRegister className="text-green-500 text-xl" /> <span>Pay on Delivery</span>
-            </div>
-            <div className="flex items-center space-x-2 text-gray-700">
-              <FaShippingFast className="text-yellow-500 text-xl" /> <span>Free Delivery</span>
-            </div>
-            <div className="flex items-center space-x-2 text-gray-700">
-              <FaLock className="text-blue-500 text-xl" /> <span>Secure Transaction</span>
-            </div>
           </div>
         </div>
       </div>

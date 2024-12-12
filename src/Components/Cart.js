@@ -1,93 +1,174 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useCart } from './CartContext';
+import { Link } from 'react-router-dom';
 
 const Cart = () => {
-  const { cart, removeFromCart, clearCart, updateQuantity } = useCart();
+  const { cart, dispatch } = useCart();
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [selectedEMI, setSelectedEMI] = useState(null);
 
-  const handleIncreaseQuantity = (productId) => {
-    updateQuantity(productId, 'increase');
+  const toggleDropdown = () => setDropdownOpen(!isDropdownOpen);
+
+  const handleEMISelection = (option) => {
+    setSelectedEMI(option);
+    setDropdownOpen(false); // Close the dropdown after selection
   };
 
-  const handleDecreaseQuantity = (productId) => {
-    updateQuantity(productId, 'decrease');
+  const handleIncreaseQuantity = (id) => {
+    const item = cart.find((product) => product.id === id);
+    if (item) {
+      dispatch({
+        type: 'UPDATE_QUANTITY',
+        payload: { id, quantity: item.quantity + 1 },
+      });
+    }
   };
 
-  const totalPrice = cart.reduce((total, product) => total + product.price * product.quantity, 0);
+  const handleDecreaseQuantity = (id) => {
+    const item = cart.find((product) => product.id === id);
+    if (item && item.quantity > 1) {
+      dispatch({
+        type: 'UPDATE_QUANTITY',
+        payload: { id, quantity: item.quantity - 1 },
+      });
+    }
+  };
+
+  const handleRemoveFromCart = (id) => {
+    dispatch({ type: 'REMOVE_FROM_CART', payload: id });
+  };
+
+  const totalPrice = cart.reduce(
+    (total, product) => total + product.price * product.quantity,
+    0
+  );
 
   return (
     <div className="min-h-screen p-6 bg-gray-100">
-      <h1 className="text-4xl font-semibold text-center mb-8 text-black">Your Cart</h1>
-      {cart.length === 0 ? (
-        <p className="text-center text-lg text-gray-600">Your cart is empty!</p>
-      ) : (
-        <div className="space-y-8">
-          {cart.map((product) => (
-            <div key={product.id} className="flex p-6 border bg-white rounded-lg shadow-lg items-center space-x-8 hover:shadow-xl">
-              {/* Image Section */}
-              <div className="flex-shrink-0">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-48 h-48 object-cover rounded-lg"
-                />
-              </div>
-
-              {/* Product Description */}
-              <div className="flex-1">
-                <h3 className="font-semibold text-xl text-black">{product.name}</h3>
-                <p className="text-sm text-gray-500 mt-2">{product.description}</p>
-              </div>
-
-              {/* Right Section: Quantity & Price */}
-              <div className="flex flex-col items-end space-y-2">
-                <div className="flex items-center space-x-4">
-                  <button
-                    className="px-3 py-1 bg-yellow-500 text-white rounded-full"
-                    onClick={() => handleDecreaseQuantity(product.id)}
-                  >
-                    -
-                  </button>
-                  <span className="font-semibold text-lg">Quantity: {product.quantity}</span>
-                  <button
-                    className="px-3 py-1 bg-yellow-500 text-white rounded-full"
-                    onClick={() => handleIncreaseQuantity(product.id)}
-                  >
-                    +
-                  </button>
-                </div>
-                <p className="font-semibold text-lg text-gray-800 mt-2">
-                  Rs. {product.price * product.quantity}
-                </p>
-                <button
-                  className="text-red-500 hover:text-red-700 mt-2"
-                  onClick={() => removeFromCart(product.id)}
+      <div className="container mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* Main Cart Section */}
+          <div className="md:col-span-2">
+            <h1 className="text-3xl font-semibold mb-6">Shopping Cart</h1>
+            {cart.length === 0 ? (
+              <p className="text-center text-lg text-gray-600">Your cart is empty!</p>
+            ) : (
+              cart.map((product) => (
+                <div
+                  key={product.id}
+                  className="flex flex-col md:flex-row bg-white rounded-lg shadow p-4 mb-4 items-center"
                 >
-                  Remove
-                </button>
+                  {/* Product Image */}
+                  <div className="w-full md:w-1/4">
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="object-cover w-full h-48 rounded-lg"
+                    />
+                  </div>
+
+                  {/* Product Details */}
+                  <div className="flex-1 px-4">
+                    <h2 className="text-xl font-semibold text-gray-800">{product.name}</h2>
+                    <p className="text-gray-600 mt-2">{product.description}</p>
+                    <p className="text-gray-800 font-semibold mt-2">Price: ₹{product.price}</p>
+                  </div>
+
+                  {/* Quantity and Subtotal */}
+                  <div className="w-full md:w-1/4 text-right">
+                    <div className="flex items-center justify-end space-x-2 mb-2">
+                      <button
+                        className="bg-yellow-500 text-white px-3 py-1 rounded"
+                        onClick={() => handleDecreaseQuantity(product.id)}
+                      >
+                        -
+                      </button>
+                      <span className="font-semibold text-gray-800">{product.quantity}</span>
+                      <button
+                        className="bg-yellow-500 text-white px-3 py-1 rounded"
+                        onClick={() => handleIncreaseQuantity(product.id)}
+                      >
+                        +
+                      </button>
+                    </div>
+                    <p className="text-gray-800 font-semibold">
+                      Subtotal: ₹{product.price * product.quantity}
+                    </p>
+                    <button
+                      className="text-red-500 hover:underline mt-2"
+                      onClick={() => handleRemoveFromCart(product.id)}
+                    >
+                      Remove
+                    </button>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+
+            {/* Cart Summary */}
+          <div>
+          
+            <div className="bg-white rounded-lg shadow p-4  ">
+              <h2 className="text-xl font-semibold mb-4">Cart Summary</h2>
+              <p className="text-gray-800 font-semibold">
+                Subtotal ({cart.length} items): <span className="text-xl text-red-500">₹{totalPrice}</span>
+              </p>
+              <Link
+                to="/checkout"
+                className="block w-full bg-yellow-500 text-white text-center py-2 mt-4 rounded hover:bg-yellow-600"
+              >
+                Proceed to Buy
+              </Link>
+              <div className="mt-4">
+                <div className="relative">
+                  <button
+                    onClick={toggleDropdown}
+                    className="w-full bg-gray-100 text-gray-800 py-2 px-4 rounded flex justify-between items-center"
+                    type="button"
+                  >
+                    {selectedEMI ? `Selected: ${selectedEMI}` : 'EMI Options Available'}
+                    <span className="ml-2">{isDropdownOpen ? '▲' : '▼'}</span>
+                  </button>
+                  {isDropdownOpen && (
+                    <ul className="absolute bg-white shadow rounded mt-2 w-full z-10">
+                      <li
+                        className="px-4 py-2 text-sm text-gray-600 cursor-pointer hover:bg-gray-100"
+                        onClick={() => handleEMISelection('6 Months EMI')}
+                      >
+                        6 Months EMI
+                      </li>
+                      <li
+                        className="px-4 py-2 text-sm text-gray-600 cursor-pointer hover:bg-gray-100"
+                        onClick={() => handleEMISelection('12 Months EMI')}
+                      >
+                        12 Months EMI
+                      </li>
+                      <li
+                        className="px-4 py-2 text-sm text-gray-600 cursor-pointer hover:bg-gray-100"
+                        onClick={() => handleEMISelection('24 Months EMI')}
+                      >
+                        24 Months EMI
+                      </li>
+                    </ul>
+                  )}
+                </div>
+                <p className="mt-2 text-sm text-gray-600">Your order qualifies for EMI with valid credit cards.</p>
               </div>
             </div>
-          ))}
 
-          {/* Cart Actions */}
-          <div className="flex justify-between items-center mt-8">
-            <button
-              className="text-red-500 hover:text-red-700 font-semibold"
-              onClick={clearCart}
-            >
-              Clear All
-            </button>
-            <div className="text-right">
-              <p className="font-semibold text-2xl text-black">Total: Rs. {totalPrice}</p>
-              <button
-                className="mt-4 px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600"
-                onClick={() => alert('Proceeding to checkout...')}
-              >
-                Buy Now
-              </button>
+            {/* Other Sidebar Content */}
+            <div className="bg-white rounded-lg shadow p-4 mt-6">
+              <h2 className="text-xl font-semibold mb-4">Customers also bought</h2>
+              <ul className="list-disc list-inside text-gray-600">
+                <li><a href="#" className="text-blue-500 hover:underline">Hero PLEASURE+ VX</a></li>
+                <li><a href="#" className="text-blue-500 hover:underline">Honda Activa 6G</a></li>
+                <li><a href="#" className="text-blue-500 hover:underline">Yamaha Fascino 125</a></li>
+              </ul>
             </div>
           </div>
         </div>
-      )}
+      </div>
     </div>
   );
 };
