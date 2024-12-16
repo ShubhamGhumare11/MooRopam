@@ -1,306 +1,195 @@
-import React, { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import cuid from 'cuid';
-import { orderConfirmForUserEmailTemplate, orderConfirmForAdminEmailTemplate, sendEmailWithAttachmentforAdminOrderConfirm, sendEmailWithAttachmentforOrderConfirm } from '../Email-service/emailSendingService';
+import React, { useState } from "react";
+import { useCart } from "../Components/CartContext";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const CheckoutForm = () => {
-  const location = useLocation();
+  const { cart, dispatch } = useCart();
   const navigate = useNavigate();
 
-  let { productName, price } = location.state || {};
-  if (!productName) {
-    productName = "test";
-  }
-  if (!price) {
-    price = 1000;
-  }
-  const newCuid = cuid();
-  const shortCuid = `${newCuid.substring(0, 4)}${newCuid.slice(-5)}`;  // First 4 and last 5 characters
-  const formattedInvoiceId = `INV-${shortCuid.toUpperCase()}`;
+  const [otp, setOtp] = useState("");
+  const [isOtpSent, setIsOtpSent] = useState(false);
+  const [isVerified, setIsVerified] = useState(false);
+  const [mobile, setMobile] = useState("");
 
-  const [formData, setFormData] = useState({
-    email: '',
-    firstName: '',
-    lastName: '',
-    phone: '',
-    address: '',
-    country: '',
-    city: '',
-    state: '',
-    pincode: '',
-  });
-  const date = new Date();
-  const formattedDate = date.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
+  const [personalDetails, setPersonalDetails] = useState({
+    fullName: "",
+    email: "",
+    alternateMobile: "",
+    address: "",
+    city: "",
+    state: "",
+    pincode: "",
+    landmark: "",
   });
 
-  const [isConfirmed, setIsConfirmed] = useState(false);
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const totalPrice = cart.reduce(
+    (total, product) => total + product.price * product.quantity,
+    0
+  );
 
-
-    const emptyFields = Object.entries(formData).filter(([key, value]) => !value);
-
-    if (emptyFields.length > 0) {
-      alert(`Please fill in the following fields: ${emptyFields.map(([key]) => key.charAt(0).toUpperCase() + key.slice(1)).join(', ')}`);
+  const handleSendOtp = async () => {
+    if (mobile.length !== 10) {
+      alert("Please enter a valid 10-digit mobile number.");
       return;
     }
 
-    if (!isConfirmed) {
-      alert('Please confirm that all information is correct.');
+    try {
+      await axios.post("http://localhost:5000/send-otp", { mobile });
+      setIsOtpSent(true);
+      alert("OTP sent successfully.");
+    } catch (error) {
+      console.error("Error sending OTP:", error);
+      alert("Failed to send OTP. Please try again.");
+    }
+  };
+
+  const handleVerifyOtp = async () => {
+    try {
+      const response = await axios.post("http://localhost:5000/verify-otp", {
+        mobile,
+        otp,
+      });
+
+      if (response.data.success) {
+        setIsVerified(true);
+        alert("OTP verified successfully.");
+      } else {
+        alert("Invalid OTP. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error verifying OTP:", error);
+      alert("Failed to verify OTP. Please try again.");
+    }
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setPersonalDetails((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handlePayment = async () => {
+    if (!isVerified) {
+      alert("Please complete OTP verification before proceeding.");
       return;
     }
 
-    const dataToSend = {
-      ...formData,
-      invoiceId: formattedInvoiceId,
-      productName,
-      price,
-      date: formattedDate,
-    };
+    try {
+      const response = await axios.post("http://localhost:5000/razorpay-order", {
+        amount: totalPrice,
+      });
+      const { orderId } = response.data;
 
-    navigate('/orderreceived', { state: { data: dataToSend } });
+      const options = {
+        key: "YOUR_RAZORPAY_KEY_ID", // Replace with your Razorpay key ID
+        amount: totalPrice * 100,
+        currency: "INR",
+        name: "Your Store Name",
+        description: "Test Transaction",
+        order_id: orderId,
+        handler: function (response) {
+          alert("Payment successful!");
+          dispatch({ type: "CLEAR_CART" });
+          navigate("/thank-you");
+        },
+        prefill: {
+          name: personalDetails.fullName,
+          email: personalDetails.email,
+          contact: mobile,
+        },
+        theme: {
+          color: "#3399cc",
+        },
+      };
 
-    const htmlEmailFormat =
-      orderConfirmForUserEmailTemplate({ address: formData.address, city: formData.city, country: formData.country, date: formattedDate, firstName: formData.firstName, invoiceId: formattedInvoiceId, lastName: formData.lastName, phone: formData.phone, pincode: formData.pincode, price: price, productName: productName, state: formData.state });
-    await sendEmailWithAttachmentforOrderConfirm({ htmlEmailFormat: htmlEmailFormat, userName: `${formData.firstName} ${formData.lastName}`, userEmail: formData.email })
-
-    const htmlEmailFormatforAdminOrder =
-      orderConfirmForAdminEmailTemplate({ address: formData.address, city: formData.city, country: formData.country, date: formattedDate, firstName: formData.firstName, invoiceId: formattedInvoiceId, lastName: formData.lastName, phone: formData.phone, pincode: formData.pincode, price: price, productName: productName, state: formData.state });
-    await sendEmailWithAttachmentforAdminOrderConfirm({ htmlEmailFormat: htmlEmailFormatforAdminOrder })
-
-
-    setFormData({
-      email: '',
-      firstName: '',
-      lastName: '',
-      phone: '',
-      address: '',
-      country: '',
-      city: '',
-      state: '',
-      pincode: '',
-    });
-    setIsConfirmed(false);
+      const rzp1 = new window.Razorpay(options);
+      rzp1.open();
+    } catch (error) {
+      console.error("Error during payment:", error);
+      alert("Payment failed. Please try again.");
+    }
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 py-10 px-4">
-      <h2 className="text-3xl font-bold mb-8 text-yellow-600 font-serif">Checkout Form</h2>
+    <div className="min-h-screen p-6 bg-gray-100">
+      <div className="container mx-auto">
+        <h1 className="text-3xl font-bold mb-6 text-blue-700">Checkout</h1>
 
-      <div className="flex flex-col md:flex-row w-full bg-white shadow-lg rounded-lg p-8">
-        <div className="w-full md:w-2/3 pr-0 md:pr-4 mb-8 md:mb-0">
-          <form onSubmit={handleSubmit}>
-            <div className="bg-gray-100 p-6 rounded-lg shadow-md mb-6">
-              <h3 className="text-lg font-bold text-gray-900 mb-4 font-serif">Contact Information</h3>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                Email
-              </label>
+        {/* OTP Section */}
+        <div className="bg-white rounded-lg shadow p-6 mb-6">
+          <h2 className="text-xl font-semibold mb-4 text-blue-600">
+            Mobile OTP Verification
+          </h2>
+          {!isOtpSent ? (
+            <>
               <input
-
-                type="email"
-                id="email"
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                required
-                className="mt-2 p-3 border border-gray-300 rounded-md w-full focus:outline-none focus:border-yellow-500 focus:ring focus:ring-yellow-100"
+                type="text"
+                value={mobile}
+                onChange={(e) => setMobile(e.target.value)}
+                className="w-full px-4 py-2 border rounded-lg mb-4"
+                placeholder="Enter your 10-digit mobile number"
               />
-              <p className="mt-2 text-sm text-gray-800 text-center">
-                We'll use this email to send you details and updates about your order.
-              </p>
-            </div>
-
-            {/* Step 2: Billing Address */}
-            <div className="bg-gray-100 p-6 rounded-lg shadow-md mb-6">
-              <h3 className="text-lg font-bold text-gray-900 mb-4 font-serif">Billing Address</h3>
-              <p className="text-sm text-gray-600 mb-4">
-                Enter the billing address that matches your payment method.
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
-                <div>
-                  <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">First Name</label>
-                  <input
-                    type="text"
-                    id="firstName"
-                    value={formData.firstName}
-                    onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                    required
-                    className="mt-2 p-3 border border-gray-300 rounded-md w-full focus:outline-none focus:border-yellow-500 focus:ring focus:ring-yellow-100"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="lastName" className="block text-sm font-medium text-gray-700">Last Name</label>
-                  <input
-                    type="text"
-                    id="lastName"
-                    value={formData.lastName}
-                    onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                    required
-                    className="mt-2 p-3 border border-gray-300 rounded-md w-full focus:outline-none focus:border-yellow-500 focus:ring focus:ring-yellow-100"
-                  />
-                </div>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-4">
-                <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700">Phone</label>
-                  <input
-                    type="text"
-                    id="phone"
-                    value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    required
-                    className="mt-2 p-3 border border-gray-300 rounded-md w-full focus:outline-none focus:border-yellow-500 focus:ring focus:ring-yellow-100"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="address" className="block text-sm font-medium text-gray-700">Address</label>
-                  <input
-                    type="text"
-                    id="address"
-                    value={formData.address}
-                    onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                    required
-                    className="mt-2 p-3 border border-gray-300 rounded-md w-full focus:outline-none focus:border-yellow-500 focus:ring focus:ring-yellow-100"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="country" className="block text-sm font-medium text-gray-700">Country</label>
-                  <input
-                    type="text"
-                    id="country"
-                    value={formData.country}
-                    onChange={(e) => setFormData({ ...formData, country: e.target.value })}
-                    required
-                    className="mt-2 p-3 border border-gray-300 rounded-md w-full focus:outline-none focus:border-yellow-500 focus:ring focus:ring-yellow-100"
-                  />
-                </div>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div>
-                  <label htmlFor="city" className="block text-sm font-medium text-gray-700">City</label>
-                  <input
-                    type="text"
-                    id="city"
-                    value={formData.city}
-                    onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                    required
-                    className="mt-2 p-3 border border-gray-300 rounded-md w-full focus:outline-none focus:border-yellow-500 focus:ring focus:ring-yellow-100"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="state" className="block text-sm font-medium text-gray-700">State</label>
-                  <input
-                    type="text"
-                    id="state"
-                    value={formData.state}
-                    onChange={(e) => setFormData({ ...formData, state: e.target.value })}
-                    required
-                    className="mt-2 p-3 border border-gray-300 rounded-md w-full focus:outline-none focus:border-yellow-500 focus:ring focus:ring-yellow-100"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="pincode" className="block text-sm font-medium text-gray-700">Pincode</label>
-                  <input
-                    type="text"
-                    id="pincode"
-                    value={formData.pincode}
-                    onChange={(e) => setFormData({ ...formData, pincode: e.target.value })}
-                    required
-                    className="mt-2 p-3 border border-gray-300 rounded-md w-full focus:outline-none focus:border-yellow-500 focus:ring focus:ring-yellow-100"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Confirmation Checkbox */}
-            <div className="flex items-center mb-4">
+              <button
+                onClick={handleSendOtp}
+                className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
+              >
+                Send OTP
+              </button>
+            </>
+          ) : !isVerified ? (
+            <>
               <input
-                type="checkbox"
-                id="confirm"
-                checked={isConfirmed}
-                onChange={(e) => setIsConfirmed(e.target.checked)}
-                className="w-4 h-4 text-yellow-600 border-gray-300 rounded focus:ring-yellow-500"
-                required
+                type="text"
+                value={otp}
+                onChange={(e) => setOtp(e.target.value)}
+                className="w-full px-4 py-2 border rounded-lg mb-4"
+                placeholder="Enter OTP"
               />
-              <label htmlFor="confirm" className="ml-2 text-sm text-gray-700">
-                I confirm that all information is correct.
-              </label>
-            </div>
-          </form>
+              <button
+                onClick={handleVerifyOtp}
+                className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
+              >
+                Verify OTP
+              </button>
+            </>
+          ) : (
+            <p className="text-green-500 font-bold">OTP Verified!</p>
+          )}
         </div>
 
-        {/* Right Side: Payment Options and Order Summary */}
-        <div className="w-full md:w-1/3 pl-0 md:pl-4">
-          {/* Step 3: Payment Options */}
-          <div className="bg-gray-100 p-6 rounded-lg shadow-md mb-6">
-            <h3 className="text-lg font-bold text-gray-900 mb-4 font-serif">Payment Options</h3>
-
-            {/* Payment Instructions */}
-            <div className="flex flex-col mb-4">
-              <div className="w-full mb-6">
-                <p className="text-sm text-gray-700 font-semibold mb-2">Direct Bank Transfer</p>
-                <p className="text-sm text-gray-600 mb-4">Please follow the steps to complete the payment:</p>
-                <ol className="list-decimal list-inside text-sm text-gray-600 mb-4">
-                  <li className="mb-1">Make your payment directly into our bank account below.</li>
-                  <li className="mb-1">Use your Order ID as the reference.</li>
-                  <li className="mb-1">Share the screenshot on email and number 8390005111.</li>
-                </ol>
-              </div>
-
-              {/* Bank Details */}
-              <div className="w-full">
-                <h4 className="font-bold text-gray-800 mb-2">Bank Details:</h4>
-                <div className="bg-white p-4 rounded-lg shadow-lg">
-                  <p className="text-sm font-semibold mb-2">Account Name:
-                    <span className="font-bold text-indigo-600"> Sumiit Madhukar Messhram</span>
-                  </p>
-                  <p className="text-sm font-semibold mb-2">Bank Name:
-                    <span className="font-bold text-indigo-600"> AXIS BANK, WARDHA</span>
-                  </p>
-                  <p className="text-sm font-semibold mb-2">Account Number:
-                    <span className="font-bold text-indigo-600"> 915010033347967</span>
-                  </p>
-                  <p className="text-sm font-semibold mb-2">IFSC Code:
-                    <span className="font-bold text-indigo-600"> UTIB0000808</span>
-                  </p>
-                  <p className="text-sm font-semibold mb-2">Swift Code:
-                    <span className="font-bold text-indigo-600"> AXISINBB048</span>
-                  </p>
-                </div>
-              </div>
+        {/* Personal Details */}
+        <div className="bg-white rounded-lg shadow p-6 mb-6">
+          <h2 className="text-xl font-semibold mb-4 text-blue-600">
+            Personal Information
+          </h2>
+          {Object.keys(personalDetails).map((key) => (
+            <div key={key} className="mb-4">
+              <label className="block text-gray-700 capitalize">{key}</label>
+              <input
+                type="text"
+                name={key}
+                value={personalDetails[key]}
+                onChange={handleInputChange}
+                className="w-full px-4 py-2 border rounded-lg"
+                placeholder={`Enter your ${key}`}
+              />
             </div>
-          </div>
-
-
-          {/* Step 4: Order Summary */}
-          <div className="bg-gray-100 p-6 rounded-lg shadow-md mb-6">
-            <h3 className="text-lg   text-gray-1000 mb-4 font-serif font-bold">Order Summary</h3>
-            <div className="mb-4">
-              <div className="flex justify-between mb-2">
-                <span className="text-gray-800">Product</span>
-                <span className="text-gray-800">Price</span>
-              </div>
-              <div className="flex justify-between mb-2">
-                <span className="text-gray-1000 font-bold">{productName}</span>
-                <span className="text-gray-600">{price}</span>
-              </div>
-              <div className="border-t border-gray-300 my-4" />
-              <div className="flex justify-between font-semibold">
-                <span>Total</span>
-                <span>{price}</span>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
-      </div>
 
-      {/* Root-level Complete Order button */}
-      <div className="text-center mt-8">
-        <button onClick={handleSubmit} className="bg-yellow-600 text-white font-semibold px-6 py-3 rounded-md shadow hover:bg-yellow-500 transition duration-200">
-          Complete Order
-        </button>
+        {/* Payment Section */}
+        <div className="bg-white rounded-lg shadow p-6">
+          <h2 className="text-xl font-semibold mb-4 text-blue-600">Payment</h2>
+          <h3 className="text-lg font-semibold text-gray-800">
+            Total: ₹{totalPrice}
+          </h3>
+          <button
+            onClick={handlePayment}
+            className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 mt-4"
+          >
+            Pay Now
+          </button>
+        </div>
       </div>
     </div>
   );

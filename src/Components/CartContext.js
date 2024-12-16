@@ -30,7 +30,7 @@ const cartReducer = (state, action) => {
             : item
         ),
       };
-    case "CLEAR_CART": // New action to clear the cart
+    case "CLEAR_CART": // Clear the cart
       return {
         ...state,
         cart: [],
