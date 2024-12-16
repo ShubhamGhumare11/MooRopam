@@ -1,198 +1,88 @@
-import React, { useState } from "react";
-import { useCart } from "../Components/CartContext";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import React, { useState } from 'react';
+import { useCart } from './CartContext';
+import ProgressBar from './ProgressBar';
+import LoginForm from './LoginForm';
+import PhoneForm from './PhoneForm';
+import OtpForm from './OtpForm';
+import AddressForm from './AddressForm';
+import OrderSummary from './OrderSummary';
+import PaymentForm from './PaymentForm';
 
-const CheckoutForm = () => {
-  const { cart, dispatch } = useCart();
-  const navigate = useNavigate();
+const CheckoutPage = () => {
+  const { cart } = useCart(); // Access the cart from context
+  const [currentStep, setCurrentStep] = useState(1);
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [otp, setOtp] = useState('');
+  const [generatedOtp, setGeneratedOtp] = useState(null);
+  const [address, setAddress] = useState({ name: '', address: '', city: '', state: '', zip: '' });
+  const [paymentMethod, setPaymentMethod] = useState('');
 
-  const [otp, setOtp] = useState("");
-  const [isOtpSent, setIsOtpSent] = useState(false);
-  const [isVerified, setIsVerified] = useState(false);
-  const [mobile, setMobile] = useState("");
+  const calculateTotal = () => {
+    return cart.reduce((total, item) => total + item.quantity * item.price, 0).toFixed(2);
+  };
 
-  const [personalDetails, setPersonalDetails] = useState({
-    fullName: "",
-    email: "",
-    alternateMobile: "",
-    address: "",
-    city: "",
-    state: "",
-    pincode: "",
-    landmark: "",
-  });
-
-  const totalPrice = cart.reduce(
-    (total, product) => total + product.price * product.quantity,
-    0
-  );
-
-  const handleSendOtp = async () => {
-    if (mobile.length !== 10) {
-      alert("Please enter a valid 10-digit mobile number.");
-      return;
-    }
-
-    try {
-      await axios.post("http://localhost:5000/send-otp", { mobile });
-      setIsOtpSent(true);
-      alert("OTP sent successfully.");
-    } catch (error) {
-      console.error("Error sending OTP:", error);
-      alert("Failed to send OTP. Please try again.");
+  const handleSubmit = (e, step) => {
+    e.preventDefault();
+    switch (step) {
+      case 'email':
+        setCurrentStep(2);
+        break;
+      case 'phone':
+        const otp = Math.floor(1000 + Math.random() * 9000).toString();
+        setGeneratedOtp(otp);
+        setCurrentStep(3);
+        break;
+      case 'otp':
+        setCurrentStep(4);
+        break;
+      case 'address':
+        setCurrentStep(5);
+        break;
+      case 'payment':
+        alert(`Payment method selected: ${paymentMethod}`);
+        break;
+      default:
+        break;
     }
   };
 
-  const handleVerifyOtp = async () => {
-    try {
-      const response = await axios.post("http://localhost:5000/verify-otp", {
-        mobile,
-        otp,
-      });
-
-      if (response.data.success) {
-        setIsVerified(true);
-        alert("OTP verified successfully.");
-      } else {
-        alert("Invalid OTP. Please try again.");
-      }
-    } catch (error) {
-      console.error("Error verifying OTP:", error);
-      alert("Failed to verify OTP. Please try again.");
-    }
-  };
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setPersonalDetails((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handlePayment = async () => {
-    if (!isVerified) {
-      alert("Please complete OTP verification before proceeding.");
-      return;
-    }
-
-    try {
-      const response = await axios.post("http://localhost:5000/razorpay-order", {
-        amount: totalPrice,
-      });
-      const { orderId } = response.data;
-
-      const options = {
-        key: "YOUR_RAZORPAY_KEY_ID", // Replace with your Razorpay key ID
-        amount: totalPrice * 100,
-        currency: "INR",
-        name: "Your Store Name",
-        description: "Test Transaction",
-        order_id: orderId,
-        handler: function (response) {
-          alert("Payment successful!");
-          dispatch({ type: "CLEAR_CART" });
-          navigate("/thank-you");
-        },
-        prefill: {
-          name: personalDetails.fullName,
-          email: personalDetails.email,
-          contact: mobile,
-        },
-        theme: {
-          color: "#3399cc",
-        },
-      };
-
-      const rzp1 = new window.Razorpay(options);
-      rzp1.open();
-    } catch (error) {
-      console.error("Error during payment:", error);
-      alert("Payment failed. Please try again.");
+  const renderFormStep = () => {
+    switch (currentStep) {
+      case 1: return <LoginForm email={email} setEmail={setEmail} handleSubmit={handleSubmit} />;
+      case 2: return <PhoneForm phone={phone} setPhone={setPhone} handleSubmit={handleSubmit} />;
+      case 3: return <OtpForm otp={otp} setOtp={setOtp} handleSubmit={handleSubmit} />;
+      case 4: return <AddressForm address={address} setAddress={setAddress} handleSubmit={handleSubmit} />;
+      case 5: return <OrderSummary cart={cart} calculateTotal={calculateTotal} handleSubmit={handleSubmit} />;
+      case 6: return <PaymentForm paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod} handleSubmit={handleSubmit} />;
+      default: return null;
     }
   };
 
   return (
-    <div className="min-h-screen p-6 bg-gray-100">
-      <div className="container mx-auto">
-        <h1 className="text-3xl font-bold mb-6 text-blue-700">Checkout</h1>
-
-        {/* OTP Section */}
-        <div className="bg-white rounded-lg shadow p-6 mb-6">
-          <h2 className="text-xl font-semibold mb-4 text-blue-600">
-            Mobile OTP Verification
-          </h2>
-          {!isOtpSent ? (
-            <>
-              <input
-                type="text"
-                value={mobile}
-                onChange={(e) => setMobile(e.target.value)}
-                className="w-full px-4 py-2 border rounded-lg mb-4"
-                placeholder="Enter your 10-digit mobile number"
-              />
-              <button
-                onClick={handleSendOtp}
-                className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
-              >
-                Send OTP
-              </button>
-            </>
-          ) : !isVerified ? (
-            <>
-              <input
-                type="text"
-                value={otp}
-                onChange={(e) => setOtp(e.target.value)}
-                className="w-full px-4 py-2 border rounded-lg mb-4"
-                placeholder="Enter OTP"
-              />
-              <button
-                onClick={handleVerifyOtp}
-                className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
-              >
-                Verify OTP
-              </button>
-            </>
-          ) : (
-            <p className="text-green-500 font-bold">OTP Verified!</p>
-          )}
-        </div>
-
-        {/* Personal Details */}
-        <div className="bg-white rounded-lg shadow p-6 mb-6">
-          <h2 className="text-xl font-semibold mb-4 text-blue-600">
-            Personal Information
-          </h2>
-          {Object.keys(personalDetails).map((key) => (
-            <div key={key} className="mb-4">
-              <label className="block text-gray-700 capitalize">{key}</label>
-              <input
-                type="text"
-                name={key}
-                value={personalDetails[key]}
-                onChange={handleInputChange}
-                className="w-full px-4 py-2 border rounded-lg"
-                placeholder={`Enter your ${key}`}
-              />
+    <div className="container mx-auto px-6 py-8">
+      <h1 className="text-4xl font-bold text-center text-indigo-600 mb-8">Checkout</h1>
+      <ProgressBar currentStep={currentStep} />
+      <div className="flex flex-col md:flex-row gap-6">
+        {/* Sidebar Steps */}
+        <div className="w-full md:w-1/4">
+          {['Email', 'Phone Verification', 'Enter OTP', 'Delivery Address', 'Order Summary', 'Payment Options'].map((step, index) => (
+            <div
+              key={index}
+              className={`p-4 border mb-4 rounded-lg ${currentStep >= index + 1 ? 'border-blue-500' : 'border-gray-300'} hover:shadow-lg transition-all`}
+            >
+              <h2 className="text-lg font-semibold">{index + 1}. {step}</h2>
             </div>
           ))}
         </div>
 
-        {/* Payment Section */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-xl font-semibold mb-4 text-blue-600">Payment</h2>
-          <h3 className="text-lg font-semibold text-gray-800">
-            Total: ₹{totalPrice}
-          </h3>
-          <button
-            onClick={handlePayment}
-            className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 mt-4"
-          >
-            Pay Now
-          </button>
+        {/* Main Content */}
+        <div className="w-full md:w-3/4">
+          {renderFormStep()}
         </div>
       </div>
     </div>
   );
 };
 
-export default CheckoutForm;
+export default CheckoutPage;
