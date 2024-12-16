@@ -4,6 +4,7 @@ import { CartProvider } from './Components/CartContext';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
 import ScrollToTop from './Components/ScrollToTop'; // Import ScrollToTop component
+// import LoginForm from './Components/LoginForm';
 
 // Lazy load components
 const Home = React.lazy(() => import('./Components/Home'));
@@ -48,6 +49,7 @@ function App() {
             <Route path="/checkout" element={<CheckoutForm />} />
             <Route path="/order-received" element={<OrderReceived />} />
             <Route path="/cart" element={<Cart />} />
+            {/* <Route path='/loginform' element={<LoginForm/>}/> */}
             <Route path="*" element={<NotFound />} /> {/* Catch-all route */}
           </Routes>
         </Suspense>
