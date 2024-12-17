@@ -4,7 +4,7 @@ import { CartProvider } from './Components/CartContext';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
 import ScrollToTop from './Components/ScrollToTop'; // Import ScrollToTop component
-// import LoginForm from './Components/LoginForm';
+import AddressForm from './Components/AddressForm';
 
 // Lazy load components
 const Home = React.lazy(() => import('./Components/Home'));
@@ -24,6 +24,7 @@ const CheckoutForm = React.lazy(() => import('./Components/CheckoutForm'));
 const OrderReceived = React.lazy(() => import('./Components/OrderReceived'));
 const Cart = React.lazy(() => import('./Components/Cart'));
 const NotFound = React.lazy(() => import('./Components/NotFound')); // Lazy load NotFound
+const PhoneForm = React.lazy(() => import('./Components/PhoneForm'));  // Add PhoneForm lazy load
 
 function App() {
   return (
@@ -49,7 +50,9 @@ function App() {
             <Route path="/checkout" element={<CheckoutForm />} />
             <Route path="/order-received" element={<OrderReceived />} />
             <Route path="/cart" element={<Cart />} />
-            {/* <Route path='/loginform' element={<LoginForm/>}/> */}
+            {/* <Route path="/address" element={<AddressForm />} />  Add PhoneForm route */}
+
+            {/* <Route path="/phone-form" element={<PhoneForm />} />  Add PhoneForm route */}
             <Route path="*" element={<NotFound />} /> {/* Catch-all route */}
           </Routes>
         </Suspense>

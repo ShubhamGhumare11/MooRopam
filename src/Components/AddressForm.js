@@ -1,53 +1,69 @@
-import React from 'react';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const AddressForm = ({ address, setAddress, handleSubmit }) => {
+const AddressForm = () => {
+  const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [zip, setZip] = useState("");
+  const [message, setMessage] = useState("");
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Perform address validation here (optional)
+    if (!address || !city || !state || !zip) {
+      setMessage("Please fill all fields.");
+      return;
+    }
+
+    setMessage("Address added successfully.");
+    setTimeout(() => {
+      navigate("/order-summary"); // Navigate to order summary or checkout confirmation
+    }, 1000);
+  };
+
   return (
-    <form onSubmit={(e) => handleSubmit(e, 'address')} className="p-6 bg-white border rounded-lg shadow-lg">
-      <h2 className="text-2xl font-semibold mb-4">Delivery Address</h2>
-      <div className="grid grid-cols-1 gap-4">
+    <div style={{ maxWidth: "400px", margin: "auto", padding: "20px", textAlign: "center", border: "1px solid #ddd", borderRadius: "10px", boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)" }}>
+      <h2 style={{ color: "#4a90e2", marginBottom: "20px" }}>Enter Your Address</h2>
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="Name"
-          value={address.name}
-          onChange={(e) => setAddress({ ...address, name: e.target.value })}
-          className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-300"
+          placeholder="Enter Address"
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
+          style={{ marginBottom: "10px", width: "100%", padding: "8px", borderRadius: "5px", border: "1px solid #ccc" }}
         />
         <input
           type="text"
-          placeholder="Address"
-          value={address.address}
-          onChange={(e) => setAddress({ ...address, address: e.target.value })}
-          className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-300"
+          placeholder="Enter City"
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
+          style={{ marginBottom: "10px", width: "100%", padding: "8px", borderRadius: "5px", border: "1px solid #ccc" }}
         />
         <input
           type="text"
-          placeholder="City"
-          value={address.city}
-          onChange={(e) => setAddress({ ...address, city: e.target.value })}
-          className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-300"
+          placeholder="Enter State"
+          value={state}
+          onChange={(e) => setState(e.target.value)}
+          style={{ marginBottom: "10px", width: "100%", padding: "8px", borderRadius: "5px", border: "1px solid #ccc" }}
         />
         <input
           type="text"
-          placeholder="State"
-          value={address.state}
-          onChange={(e) => setAddress({ ...address, state: e.target.value })}
-          className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-300"
+          placeholder="Enter Zip Code"
+          value={zip}
+          onChange={(e) => setZip(e.target.value)}
+          style={{ marginBottom: "10px", width: "100%", padding: "8px", borderRadius: "5px", border: "1px solid #ccc" }}
         />
-        <input
-          type="text"
-          placeholder="ZIP Code"
-          value={address.zip}
-          onChange={(e) => setAddress({ ...address, zip: e.target.value })}
-          className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-300"
-        />
-      </div>
-      <button
-        type="submit"
-        className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition duration-300 mt-4"
-      >
-        Next
-      </button>
-    </form>
+        <button
+          type="submit"
+          style={{ padding: "10px 20px", backgroundColor: "#28a745", color: "white", border: "none", borderRadius: "5px", cursor: "pointer" }}
+        >
+          Submit Address
+        </button>
+      </form>
+      {message && <p style={{ marginTop: "10px", color: "#333" }}>{message}</p>}
+    </div>
   );
 };
 

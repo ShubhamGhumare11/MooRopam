@@ -2,13 +2,12 @@ import React from 'react';
 import { FaEnvelope, FaPhone, FaKey, FaHome, FaShoppingCart, FaMoneyCheckAlt, FaCheck } from 'react-icons/fa'; // Import icons
 
 const ProgressBar = ({ currentStep }) => {
-  const totalSteps = 6;
+  const totalSteps = 5;
 
   // Icon mapping for each step
   const stepIcons = [
     <FaEnvelope />, // Step 1: Email
     <FaPhone />,    // Step 2: Phone
-    <FaKey />,      // Step 3: OTP
     <FaHome />,     // Step 4: Address
     <FaShoppingCart />, // Step 5: Summary
     <FaMoneyCheckAlt />, // Step 6: Payment

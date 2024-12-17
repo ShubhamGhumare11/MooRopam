@@ -1,51 +1,99 @@
-import React from 'react';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const PaymentForm = ({ paymentMethod, setPaymentMethod, handleSubmit }) => {
+const PaymentForm = () => {
+  const [cardNumber, setCardNumber] = useState("");
+  const [expirationDate, setExpirationDate] = useState("");
+  const [cvv, setCvv] = useState("");
+  const [message, setMessage] = useState("");
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Basic validation
+    if (!cardNumber || !expirationDate || !cvv) {
+      setMessage("Please fill out all fields.");
+      return;
+    }
+
+    // Simulate payment processing
+    console.log("Payment Info:", { cardNumber, expirationDate, cvv });
+    setMessage("Payment processed successfully!");
+
+    // Navigate to the final confirmation page
+    navigate("/review");
+  };
+
   return (
-    <form onSubmit={(e) => handleSubmit(e, 'payment')} className="p-6 bg-white border rounded-lg shadow-lg">
-      <h2 className="text-2xl font-semibold mb-4">Payment Options</h2>
-      <div className="space-y-3">
-        <div>
-          <input
-            type="radio"
-            id="card"
-            name="paymentMethod"
-            value="Credit/Debit Card"
-            onChange={(e) => setPaymentMethod(e.target.value)}
-            className="mr-2"
-          />
-          <label htmlFor="card" className="text-gray-700">Credit/Debit Card</label>
-        </div>
-        <div>
-          <input
-            type="radio"
-            id="upi"
-            name="paymentMethod"
-            value="UPI"
-            onChange={(e) => setPaymentMethod(e.target.value)}
-            className="mr-2"
-          />
-          <label htmlFor="upi" className="text-gray-700">UPI</label>
-        </div>
-        <div>
-          <input
-            type="radio"
-            id="cod"
-            name="paymentMethod"
-            value="Cash on Delivery"
-            onChange={(e) => setPaymentMethod(e.target.value)}
-            className="mr-2"
-          />
-          <label htmlFor="cod" className="text-gray-700">Cash on Delivery</label>
-        </div>
-      </div>
-      <button
-        type="submit"
-        className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition duration-300 mt-4"
-      >
-        Confirm Payment
-      </button>
-    </form>
+    <div
+      style={{
+        maxWidth: "400px",
+        margin: "auto",
+        padding: "20px",
+        textAlign: "center",
+        border: "1px solid #ddd",
+        borderRadius: "10px",
+        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+      }}
+    >
+      <h2 style={{ color: "#4a90e2", marginBottom: "20px" }}>Enter Payment Details</h2>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Card Number"
+          value={cardNumber}
+          onChange={(e) => setCardNumber(e.target.value)}
+          style={{
+            marginBottom: "10px",
+            width: "100%",
+            padding: "8px",
+            borderRadius: "5px",
+            border: "1px solid #ccc",
+          }}
+        />
+        <input
+          type="text"
+          placeholder="Expiration Date (MM/YY)"
+          value={expirationDate}
+          onChange={(e) => setExpirationDate(e.target.value)}
+          style={{
+            marginBottom: "10px",
+            width: "100%",
+            padding: "8px",
+            borderRadius: "5px",
+            border: "1px solid #ccc",
+          }}
+        />
+        <input
+          type="text"
+          placeholder="CVV"
+          value={cvv}
+          onChange={(e) => setCvv(e.target.value)}
+          style={{
+            marginBottom: "10px",
+            width: "100%",
+            padding: "8px",
+            borderRadius: "5px",
+            border: "1px solid #ccc",
+          }}
+        />
+        <button
+          type="submit"
+          style={{
+            padding: "10px 20px",
+            backgroundColor: "#4a90e2",
+            color: "white",
+            border: "none",
+            borderRadius: "5px",
+            cursor: "pointer",
+          }}
+        >
+          Process Payment
+        </button>
+      </form>
+      {message && <p style={{ marginTop: "10px", color: "#333" }}>{message}</p>}
+    </div>
   );
 };
 

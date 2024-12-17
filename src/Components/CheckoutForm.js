@@ -1,46 +1,67 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useCart } from './CartContext';
 import ProgressBar from './ProgressBar';
 import LoginForm from './LoginForm';
 import PhoneForm from './PhoneForm';
-import OtpForm from './OtpForm';
 import AddressForm from './AddressForm';
 import OrderSummary from './OrderSummary';
 import PaymentForm from './PaymentForm';
+
+// Utility function to calculate the cart total
+const calculateCartTotal = (cart) => {
+  return cart.reduce((total, item) => total + item.quantity * item.price, 0).toFixed(2);
+};
 
 const CheckoutPage = () => {
   const { cart } = useCart(); // Access the cart from context
   const [currentStep, setCurrentStep] = useState(1);
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  const [otp, setOtp] = useState('');
-  const [generatedOtp, setGeneratedOtp] = useState(null);
-  const [address, setAddress] = useState({ name: '', address: '', city: '', state: '', zip: '' });
+  const [address, setAddress] = useState({
+    name: '',
+    address: '',
+    city: '',
+    state: '',
+    zip: ''
+  });
   const [paymentMethod, setPaymentMethod] = useState('');
 
-  const calculateTotal = () => {
-    return cart.reduce((total, item) => total + item.quantity * item.price, 0).toFixed(2);
-  };
+  // Persist form data in local storage
+  useEffect(() => {
+    localStorage.setItem('checkoutData', JSON.stringify({ email, phone, address, paymentMethod }));
+  }, [email, phone, address, paymentMethod]);
 
   const handleSubmit = (e, step) => {
     e.preventDefault();
     switch (step) {
       case 'email':
+        if (!email || !email.includes('@')) {
+          alert('Please enter a valid email address');
+          return;
+        }
         setCurrentStep(2);
         break;
       case 'phone':
-        const otp = Math.floor(1000 + Math.random() * 9000).toString();
-        setGeneratedOtp(otp);
+        if (!phone || phone.length < 10) {
+          alert('Please enter a valid phone number');
+          return;
+        }
         setCurrentStep(3);
         break;
-      case 'otp':
+      case 'address':
+        if (!address.name || !address.city || !address.zip) {
+          alert('Please fill in all required address fields');
+          return;
+        }
         setCurrentStep(4);
         break;
-      case 'address':
-        setCurrentStep(5);
-        break;
       case 'payment':
+        if (!paymentMethod) {
+          alert('Please select a payment method');
+          return;
+        }
         alert(`Payment method selected: ${paymentMethod}`);
+        setCurrentStep(5);
         break;
       default:
         break;
@@ -49,13 +70,18 @@ const CheckoutPage = () => {
 
   const renderFormStep = () => {
     switch (currentStep) {
-      case 1: return <LoginForm email={email} setEmail={setEmail} handleSubmit={handleSubmit} />;
-      case 2: return <PhoneForm phone={phone} setPhone={setPhone} handleSubmit={handleSubmit} />;
-      case 3: return <OtpForm otp={otp} setOtp={setOtp} handleSubmit={handleSubmit} />;
-      case 4: return <AddressForm address={address} setAddress={setAddress} handleSubmit={handleSubmit} />;
-      case 5: return <OrderSummary cart={cart} calculateTotal={calculateTotal} handleSubmit={handleSubmit} />;
-      case 6: return <PaymentForm paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod} handleSubmit={handleSubmit} />;
-      default: return null;
+      case 1:
+        return <LoginForm email={email} setEmail={setEmail} handleSubmit={handleSubmit} />;
+      case 2:
+        return <PhoneForm phone={phone} setPhone={setPhone} handleSubmit={handleSubmit} />;
+      case 3:
+        return <AddressForm address={address} setAddress={setAddress} handleSubmit={handleSubmit} />;
+      case 4:
+        return <OrderSummary cart={cart} calculateTotal={calculateCartTotal} handleSubmit={handleSubmit} />;
+      case 5:
+        return <PaymentForm paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod} handleSubmit={handleSubmit} />;
+      default:
+        return null;
     }
   };
 
@@ -66,10 +92,11 @@ const CheckoutPage = () => {
       <div className="flex flex-col md:flex-row gap-6">
         {/* Sidebar Steps */}
         <div className="w-full md:w-1/4">
-          {['Email', 'Phone Verification', 'Enter OTP', 'Delivery Address', 'Order Summary', 'Payment Options'].map((step, index) => (
+          {['Email', 'Phone Verification', 'Delivery Address', 'Order Summary', 'Payment Options'].map((step, index) => (
             <div
               key={index}
-              className={`p-4 border mb-4 rounded-lg ${currentStep >= index + 1 ? 'border-blue-500' : 'border-gray-300'} hover:shadow-lg transition-all`}
+              onClick={() => setCurrentStep(index + 1)} // Allow clicking back to previous steps
+              className={`cursor-pointer p-4 border mb-4 rounded-lg ${currentStep >= index + 1 ? 'border-blue-500' : 'border-gray-300'} hover:shadow-lg transition-all`}
             >
               <h2 className="text-lg font-semibold">{index + 1}. {step}</h2>
             </div>
