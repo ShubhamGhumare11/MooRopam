@@ -4,7 +4,8 @@ import { CartProvider } from './Components/CartContext';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
 import ScrollToTop from './Components/ScrollToTop'; // Import ScrollToTop component
-import AddressForm from './Components/AddressForm';
+// import PhoneVerification from './Components/PhoneVerification';
+// import LoginForm from './Components/LoginForm';
 
 // Lazy load components
 const Home = React.lazy(() => import('./Components/Home'));
@@ -54,6 +55,8 @@ function App() {
 
             {/* <Route path="/phone-form" element={<PhoneForm />} />  Add PhoneForm route */}
             <Route path="*" element={<NotFound />} /> {/* Catch-all route */}
+          
+           
           </Routes>
         </Suspense>
         <Footer />
