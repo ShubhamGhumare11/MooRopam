@@ -4,6 +4,7 @@ import { CartProvider } from './Components/CartContext';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
 import ScrollToTop from './Components/ScrollToTop'; // Import ScrollToTop component
+// import PhoneVerification from './Components/PhoneVerification';
 // import LoginForm from './Components/LoginForm';
 
 // Lazy load components
@@ -51,6 +52,8 @@ function App() {
             <Route path="/cart" element={<Cart />} />
             {/* <Route path='/loginform' element={<LoginForm/>}/> */}
             <Route path="*" element={<NotFound />} /> {/* Catch-all route */}
+          
+           
           </Routes>
         </Suspense>
         <Footer />
