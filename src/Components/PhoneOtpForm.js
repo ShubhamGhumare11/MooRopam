@@ -146,8 +146,12 @@ const PhoneOtpForm = ({ phone, setPhone, onOtpVerified }) => {
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const [otpMode, setOtpMode] = useState(false); // Toggle between Phone and OTP form
+  const [generatedOtp, setGeneratedOtp] = useState(''); // Store the randomly generated OTP
 
-  const tempOtp = '123456'; // Temporary OTP for testing purposes
+  // Generate a random 6-digit OTP
+  const generateOtp = () => {
+    return Math.floor(100000 + Math.random() * 900000).toString();
+  };
 
   // Handle phone number input change
   const handlePhoneChange = (e) => {
@@ -174,30 +178,28 @@ const PhoneOtpForm = ({ phone, setPhone, onOtpVerified }) => {
     }
 
     setLoading(true);
-    // Simulate OTP generation and sending
     setTimeout(() => {
-      setMessage('OTP sent successfully! Your OTP is: ' + tempOtp);
+      const otp = generateOtp(); // Generate a random OTP
+      setGeneratedOtp(otp);
+      console.log(`Generated OTP: ${otp}`); // Log the OTP for testing purposes
+      setMessage('OTP sent successfully! Please check your console for the OTP.');
       setPhone(phoneInput); // Pass phone number to parent component
       setOtpMode(true); // Switch to OTP form
       setLoading(false);
-    }, 1000); // Simulating a delay for OTP sending
+    }, 1000); // Simulate delay for UX
   };
 
   // Handle OTP form submission
   const handleOtpSubmit = (e) => {
     e.preventDefault();
-    if (otpInput.length !== 6) {
-      setMessage('Please enter a valid 6-digit OTP.');
+    if (otpInput !== generatedOtp) {
+      setMessage('Invalid OTP. Please try again.');
       return;
     }
 
-    if (otpInput === tempOtp) {
-      setMessage('OTP verified successfully!');
-      if (onOtpVerified) {
-        onOtpVerified(); // Callback to handle OTP success and move to next step
-      }
-    } else {
-      setMessage('Invalid OTP. Please try again.');
+    setMessage('OTP verified successfully!');
+    if (onOtpVerified) {
+      onOtpVerified(); // Callback to handle OTP success and move to next step
     }
   };
 

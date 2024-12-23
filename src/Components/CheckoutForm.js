@@ -1,26 +1,17 @@
-import React, { useState } from "react";
-import { useCart } from "./CartContext";
-import ProgressBar from "./ProgressBar";
-import LoginForm from "./LoginForm";
-import PhoneOtpForm from "./PhoneOtpForm";
-import AddressForm from "./AddressForm";
-import OrderSummary from "./OrderSummary";
-import PaymentForm from "./PaymentForm";
-import axios from "axios";
+import React, { useState } from 'react';
+import { useCart } from './CartContext';
+import ProgressBar from './ProgressBar';
+import LoginForm from './LoginForm';
+import PhoneOtpForm from './PhoneOtpForm'; // Import the merged PhoneOtpForm
+import AddressForm from './AddressForm';
+import OrderSummary from './OrderSummary';
 
 const CheckoutPage = () => {
   const { cart } = useCart();
   const [currentStep, setCurrentStep] = useState(1);
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [address, setAddress] = useState({
-    name: "",
-    address: "",
-    city: "",
-    state: "",
-    zip: "",
-  });
-  const [paymentMethod, setPaymentMethod] = useState("");
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [address, setAddress] = useState({ name: '', address: '', city: '', state: '', zip: '' });
 
   // Calculate cart total
   const calculateTotal = () => {
@@ -44,9 +35,7 @@ const CheckoutPage = () => {
   };
 
   // Handle form submissions for each step
-  const handleSubmit = async (e, step) => {
-    e.preventDefault();
-
+  const handleSubmit = (step) => {
     switch (step) {
       case "email":
         setCurrentStep(2); // Move to phone step after email
@@ -59,32 +48,6 @@ const CheckoutPage = () => {
       case "address":
         setCurrentStep(4); // Move to order summary
         break;
-
-      case "payment":
-        if (!paymentMethod) {
-          alert("Please select a payment method");
-          return;
-        }
-
-        const paymentData = {
-          totalAmount: calculateTotal(),
-          paymentMethod,
-          cart,
-        };
-
-        try {
-          const response = await initiatePayment(paymentData);
-          if (response.success) {
-            alert("Payment successful! Order placed.");
-            setCurrentStep(5); // Final step
-          } else {
-            alert("Payment failed. Please try again.");
-          }
-        } catch (error) {
-          alert("Payment processing error. Please try again later.");
-        }
-        break;
-
       default:
         break;
     }
@@ -99,13 +62,7 @@ const CheckoutPage = () => {
   const renderFormStep = () => {
     switch (currentStep) {
       case 1:
-        return (
-          <LoginForm
-            email={email}
-            setEmail={setEmail}
-            handleSubmit={(e) => handleSubmit(e, "email")}
-          />
-        );
+        return <LoginForm email={email} setEmail={setEmail} handleSubmit={() => handleSubmit('email')} />;
       case 2:
         return (
           <PhoneOtpForm
@@ -115,29 +72,9 @@ const CheckoutPage = () => {
           />
         );
       case 3:
-        return (
-          <AddressForm
-            address={address}
-            setAddress={setAddress}
-            handleSubmit={(e) => handleSubmit(e, "address")}
-          />
-        );
+        return <AddressForm address={address} setAddress={setAddress} handleSubmit={() => handleSubmit('address')} />;
       case 4:
-        return (
-          <OrderSummary
-            cart={cart}
-            calculateTotal={calculateTotal}
-            handleSubmit={(e) => handleSubmit(e, "payment")}
-          />
-        );
-      case 5:
-        return (
-          <PaymentForm
-            paymentMethod={paymentMethod}
-            setPaymentMethod={setPaymentMethod}
-            handleSubmit={(e) => handleSubmit(e, "payment")}
-          />
-        );
+        return <OrderSummary cart={cart} calculateTotal={calculateTotal} />;
       default:
         return null;
     }
@@ -151,13 +88,7 @@ const CheckoutPage = () => {
       <ProgressBar currentStep={currentStep} />
       <div className="flex flex-col md:flex-row gap-6">
         <div className="w-full md:w-1/4">
-          {[
-            "Email",
-            "Phone Verification",
-            "Delivery Address",
-            "Order Summary",
-            "Payment Options",
-          ].map((step, index) => (
+          {['Email', 'Phone Verification', 'Delivery Address', 'Order Summary'].map((step, index) => (
             <div
               key={index}
               onClick={() => setCurrentStep(index + 1)} // Allow clicking back to previous steps
