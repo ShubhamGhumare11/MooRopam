@@ -5,7 +5,6 @@ import LoginForm from './LoginForm';
 import PhoneOtpForm from './PhoneOtpForm'; // Import the merged PhoneOtpForm
 import AddressForm from './AddressForm';
 import OrderSummary from './OrderSummary';
-import PaymentForm from './PaymentForm';
 
 const CheckoutPage = () => {
   const { cart } = useCart();
@@ -13,7 +12,6 @@ const CheckoutPage = () => {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState({ name: '', address: '', city: '', state: '', zip: '' });
-  const [paymentMethod, setPaymentMethod] = useState('');
 
   // Calculate total amount from cart
   const calculateTotal = () => {
@@ -21,8 +19,7 @@ const CheckoutPage = () => {
   };
 
   // Handle form submissions for each step
-  const handleSubmit = (e, step) => {
-    e.preventDefault();
+  const handleSubmit = (step) => {
     switch (step) {
       case 'email':
         setCurrentStep(2); // Move to phone step after email
@@ -32,9 +29,6 @@ const CheckoutPage = () => {
         break;
       case 'address':
         setCurrentStep(4); // Move to order summary
-        break;
-      case 'payment':
-        alert(`Payment method selected: ${paymentMethod}`);
         break;
       default:
         break;
@@ -50,7 +44,7 @@ const CheckoutPage = () => {
   const renderFormStep = () => {
     switch (currentStep) {
       case 1:
-        return <LoginForm email={email} setEmail={setEmail} handleSubmit={(e) => handleSubmit(e, 'email')} />;
+        return <LoginForm email={email} setEmail={setEmail} handleSubmit={() => handleSubmit('email')} />;
       case 2:
         return (
           <PhoneOtpForm
@@ -60,11 +54,9 @@ const CheckoutPage = () => {
           />
         );
       case 3:
-        return <AddressForm address={address} setAddress={setAddress} handleSubmit={(e) => handleSubmit(e, 'address')} />;
+        return <AddressForm address={address} setAddress={setAddress} handleSubmit={() => handleSubmit('address')} />;
       case 4:
-        return <OrderSummary cart={cart} calculateTotal={calculateTotal} handleSubmit={(e) => handleSubmit(e, 'payment')} />;
-      case 5:
-        return <PaymentForm paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod} handleSubmit={(e) => handleSubmit(e, 'payment')} />;
+        return <OrderSummary cart={cart} calculateTotal={calculateTotal} />;
       default:
         return null;
     }
@@ -77,7 +69,7 @@ const CheckoutPage = () => {
       <div className="flex flex-col md:flex-row gap-6">
         {/* Step Indicator Sidebar */}
         <div className="w-full md:w-1/4">
-          {['Email', 'Phone Verification', 'Delivery Address', 'Order Summary', 'Payment Options'].map((step, index) => (
+          {['Email', 'Phone Verification', 'Delivery Address', 'Order Summary'].map((step, index) => (
             <div
               key={index}
               className={`p-4 border mb-4 rounded-lg ${currentStep >= index + 1 ? 'border-blue-500' : 'border-gray-300'} hover:shadow-lg transition-all`}

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 
 const PhoneOtpForm = ({ phone, setPhone, onOtpVerified }) => {
   const [phoneInput, setPhoneInput] = useState(phone || ''); // Use phone prop if available
@@ -7,6 +6,12 @@ const PhoneOtpForm = ({ phone, setPhone, onOtpVerified }) => {
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const [otpMode, setOtpMode] = useState(false); // Toggle between Phone and OTP form
+  const [generatedOtp, setGeneratedOtp] = useState(''); // Store the randomly generated OTP
+
+  // Generate a random 6-digit OTP
+  const generateOtp = () => {
+    return Math.floor(100000 + Math.random() * 900000).toString();
+  };
 
   // Handle phone number input change
   const handlePhoneChange = (e) => {
@@ -24,7 +29,7 @@ const PhoneOtpForm = ({ phone, setPhone, onOtpVerified }) => {
   };
 
   // Handle phone form submission
-  const handlePhoneSubmit = async (e) => {
+  const handlePhoneSubmit = (e) => {
     e.preventDefault();
     const phoneRegex = /^[6-9]\d{9}$/;
     if (!phoneRegex.test(phoneInput)) {
@@ -33,49 +38,28 @@ const PhoneOtpForm = ({ phone, setPhone, onOtpVerified }) => {
     }
 
     setLoading(true);
-    try {
-      // Update the API endpoint to use the correct one for sending OTP
-      const response = await axios.post('http://localhost:5000/api/otp/send', { phoneNumber: phoneInput });
-      
-      if (response.status === 200) {
-        setMessage('OTP sent successfully!');
-        setPhone(phoneInput); // Pass phone number to parent component
-        setOtpMode(true); // Switch to OTP form
-      } else {
-        setMessage('Failed to send OTP. Please try again.');
-      }
-    } catch (error) {
-      setMessage(error.response?.data?.error || 'Failed to send OTP. Please try again.');
-    } finally {
+    setTimeout(() => {
+      const otp = generateOtp(); // Generate a random OTP
+      setGeneratedOtp(otp);
+      console.log(`Generated OTP: ${otp}`); // Log the OTP for testing purposes
+      setMessage('OTP sent successfully! Please check your console for the OTP.');
+      setPhone(phoneInput); // Pass phone number to parent component
+      setOtpMode(true); // Switch to OTP form
       setLoading(false);
-    }
+    }, 1000); // Simulate delay for UX
   };
 
   // Handle OTP form submission
-  const handleOtpSubmit = async (e) => {
+  const handleOtpSubmit = (e) => {
     e.preventDefault();
-    if (otpInput.length !== 6) {
-      setMessage('Please enter a valid 6-digit OTP.');
+    if (otpInput !== generatedOtp) {
+      setMessage('Invalid OTP. Please try again.');
       return;
     }
 
-    const otpInputTrimmed = otpInput.trim(); // Trim any spaces
-    setLoading(true);
-    try {
-      const response = await axios.post('http://localhost:5000/api/otp/verify', { phoneNumber: phone, otp: otpInputTrimmed });
-      
-      if (response.status === 200) {
-        setMessage('OTP verified successfully!');
-        if (onOtpVerified) {
-          onOtpVerified(); // Callback to handle OTP success and move to next step
-        }
-      } else {
-        setMessage('Invalid OTP. Please try again.');
-      }
-    } catch (error) {
-      setMessage(error.response?.data?.message || 'Invalid OTP. Please try again.');
-    } finally {
-      setLoading(false);
+    setMessage('OTP verified successfully!');
+    if (onOtpVerified) {
+      onOtpVerified(); // Callback to handle OTP success and move to next step
     }
   };
 
