@@ -22,7 +22,7 @@ const Header = () => {
 
   return (
     <header className="bg-gradient-to-r from-yellow-500 to-green-600 text-white p-3 sticky top-0 z-50 shadow-2xl">
-      <div className="container mx-1 my-6 flex justify-between items-center whitespace-nowrap">
+      <div className="container mx-1 my-2 flex justify-between items-center whitespace-nowrap">
         <div className="flex items-center whitespace-nowrap">
           <Link to="/" className="flex items-center px-7 whitespace-nowrap">
             <img

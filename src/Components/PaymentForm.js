@@ -1,14 +1,12 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
-const PaymentForm = () => {
+const PaymentForm = ({ totalAmount, initiatePayment }) => {
   const [cardNumber, setCardNumber] = useState("");
   const [expirationDate, setExpirationDate] = useState("");
   const [cvv, setCvv] = useState("");
   const [message, setMessage] = useState("");
-  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Basic validation
@@ -17,12 +15,13 @@ const PaymentForm = () => {
       return;
     }
 
-    // Simulate payment processing
-    console.log("Payment Info:", { cardNumber, expirationDate, cvv });
-    setMessage("Payment processed successfully!");
-
-    // Navigate to the final confirmation page
-    navigate("/review");
+    // Process the payment
+    try {
+      await initiatePayment(totalAmount);
+      setMessage("Redirecting to payment...");
+    } catch (error) {
+      setMessage("Payment failed. Please try again.");
+    }
   };
 
   return (
@@ -38,6 +37,7 @@ const PaymentForm = () => {
       }}
     >
       <h2 style={{ color: "#4a90e2", marginBottom: "20px" }}>Enter Payment Details</h2>
+      <p>Total Amount: ₹{totalAmount}</p>
       <form onSubmit={handleSubmit}>
         <input
           type="text"

@@ -1,6 +1,11 @@
 import React from 'react';
 
-const OrderSummary = ({ cart, calculateTotal, handleSubmit }) => {
+const OrderSummary = ({ cart, calculateTotal, initiatePayment }) => {
+  const handlePayment = () => {
+    const totalAmount = calculateTotal();
+    initiatePayment(totalAmount);
+  };
+
   return (
     <div className="p-6 bg-white border rounded-lg shadow-lg">
       <h2 className="text-2xl font-semibold mb-4">Order Summary</h2>
@@ -27,7 +32,7 @@ const OrderSummary = ({ cart, calculateTotal, handleSubmit }) => {
         <p className="font-semibold text-xl text-gray-800">Total: <span className="text-blue-600">${calculateTotal()}</span></p>
       </div>
       <button
-        onClick={() => handleSubmit('payment')}
+        onClick={handlePayment}
         className="w-full bg-indigo-500 text-white py-2 rounded hover:bg-indigo-600 transition duration-300 mt-6"
       >
         Proceed to Payment

@@ -3,6 +3,9 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { CartProvider } from './Components/CartContext';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
+import PaymentSuccess from './Components/PaymentSuccess';
+import PaymentFailure from './Components/PaymentFailure';
+
 import ScrollToTop from './Components/ScrollToTop'; // Import ScrollToTop component
 // import PhoneVerification from './Components/PhoneVerification';
 // import LoginForm from './Components/LoginForm';
@@ -25,7 +28,6 @@ const CheckoutForm = React.lazy(() => import('./Components/CheckoutForm'));
 const OrderReceived = React.lazy(() => import('./Components/OrderReceived'));
 const Cart = React.lazy(() => import('./Components/Cart'));
 const NotFound = React.lazy(() => import('./Components/NotFound')); // Lazy load NotFound
-const PhoneForm = React.lazy(() => import('./Components/PhoneForm'));  // Add PhoneForm lazy load
 
 function App() {
   return (
@@ -55,8 +57,8 @@ function App() {
 
             {/* <Route path="/phone-form" element={<PhoneForm />} />  Add PhoneForm route */}
             <Route path="*" element={<NotFound />} /> {/* Catch-all route */}
-          
-           
+        <Route path="/payment-success" element={<PaymentSuccess></PaymentSuccess>} />
+        <Route path="/payment-failure" element={<PaymentFailure></PaymentFailure>} />           
           </Routes>
         </Suspense>
         <Footer />
