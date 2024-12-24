@@ -5,6 +5,7 @@ import LoginForm from './LoginForm';
 import PhoneOtpForm from './PhoneOtpForm'; // Import the merged PhoneOtpForm
 import AddressForm from './AddressForm';
 import OrderSummary from './OrderSummary';
+import axios from 'axios';
 
 const CheckoutPage = () => {
   const { cart } = useCart();

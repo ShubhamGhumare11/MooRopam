@@ -1,24 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Chatbot from './Chatbot';
-import herosection from "../Image/herosection.jpg";
+import herosection from "../Image/mainpagephoto.png";
 import { predictionData } from './data';
 import logo from '../Image/auspiciousNumerologyLogo.png';
-import PredictCard1 from '../PredictionDetails/PredictCard1';
-import PredictCard2 from '../PredictionDetails/PredictCard2';
-import PredictCard3 from '../PredictionDetails/PredictCard3';
-import PredictCard4 from '../PredictionDetails/PredictCard4';
-import PredictCard5 from '../PredictionDetails/PredictCard5';
-import PredictCard6 from '../PredictionDetails/PredictCard6';
-import PredictCard7 from '../PredictionDetails/PredictCard7';
-import PredictCard8 from '../PredictionDetails/PredictCard8';
-import PredictCard9 from '../PredictionDetails/PredictCard9';
-import PredictCard10 from '../PredictionDetails/PredictCard10';
-import PredictCard11 from '../PredictionDetails/PredictCard11';
-import PredictCard12 from '../PredictionDetails/PredictCard12';
-import PredictCard13 from '../PredictionDetails/PredictCard13';
-import PredictCard14 from '../PredictionDetails/PredictCard14';
-import PredictCard15 from '../PredictionDetails/PredictCard15';
-import PredictCard16 from '../PredictionDetails/PredictCard16';
+
 import { useNavigate } from 'react-router-dom';
 
 const Shimmer = () => (
@@ -71,10 +56,10 @@ const Prediction = () => {
         />
         <div className="relative z-10 flex flex-col items-start justify-start md:justify-center h-full text-left text-white px-8 md:px-16 lg:px-24 pt-8 md:pb-20 font-serif">
           <h1 className="text-3xl md:text-2xl lg:text-4xl font-bold mb-4 md:mb-6 leading-snug">
-            <span className="block text-yellow-500 ">
+            {/* <span className="block text-yellow-500 ">
               Dr. Sumiit Messhram’s 
-            </span>
-            <span className="block text-white">Predictions: </span>
+            </span> */}
+            {/* <span className="block text-white">Predictions: </span> */}
           </h1>
           {/* <div className="mt-1 mr-1">
             <Link to="/services" className="px-8 py-4 border text-sm md:text-base font-semibold rounded-full hover:bg-amber-400 hover:text-black transition duration-300">

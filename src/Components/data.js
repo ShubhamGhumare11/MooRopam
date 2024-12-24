@@ -13,9 +13,9 @@ import service12 from "../Image/service12.jpg"
 import service13 from "../Image/service13.jpg"
 import service14 from "../Image/service14.jpg"
 import service15 from "../Image/service15.jpg"
-import yearSur from "../Image/yearSur.png"
-import pandya from "../Image/pandya.png"
-import summit from "../Image/summit.png"
+import Siloropan from "../Image/SiloRopan.png"
+import Mastimed from "../Image/Mastimed.png"
+import MastiSense from "../Image/MastiSense.png"
 import nidhi from "../Image/nidhi.png"
 import fashion from "../Image/fashion.png"
 import rio from "../Image/rio.png"
@@ -44,133 +44,133 @@ import siloropan from "../Image/siloropanproduct.png"
 export const predictionData = [
     {
         "id": 1,
-        "title": "2023 Predictions Come True!",
-        "image": yearSur ,
-        "paragraph": "2023 Predictions: A Look Back at What Came True! In the ever-evolving tapestry of life, …",
+        "title": "Silage is a type of fodder  prepared by ensiling of green  foliage crops.",
+        "image": Siloropan ,
+        "paragraph": " The process of ensiling involes intentional addition of bacterial culture to obtain balanced ratio of lactic and acetic acid.",
         "quote": "\"As we bid farewell to 2023, we are left in awe of the remarkable alignment between predictions and reality.\"",
         "buttonText": "Read More"
     },
     {
         "id": 2,
-        "title": "Number six and its significance on Indian cricket",
-        "image":  pandya,
-        "paragraph": "Cricket is a game of numbers. Runs, wickets, averages, strike rate, economy, records...",
+        "title": "Mastitis is udder inflammation  in cows resultant of bacterial  infection.",
+        "image":  Mastimed,
+        "paragraph": " Conventionally dairy farmers  depend on animal veterinarian  for diagnosing and prescription of antibiotics for mastitis  treatment in cows ",
         "quote": "Number 6 is very lucky for India",
         "buttonText": "Read More"
     },
     {
         "id": 3,
-        "title": "9/11 World Trade Center Attack",
-        "image": summit,
-        "paragraph": "Can A Number Be Responsible For Such A Massive Attack.",
-        "quote": "Is There Any Number Connection Of Osama’s Death.",
+        "title": "Mastitis is udder inflammation",
+        "image": MastiSense,
+        "paragraph": "Such infection results in breaching of Blood Milk Barrier.",
+        "quote": "MastiSense -TM detects bovine  mastitis at an early stage and is a  cow side device, easy to use and  interpret",
         "buttonText": "Read More"
     },
 
     {
-        "id": 5,
-        "title": "Your Date of Birth is a road map of your destiny.",
-        "image": nidhi ,
-        "paragraph": "Whats a better way to feel proud as a numerologist, When Your prediction come true.",
-        "quote": "#ProudMoment #ProudPrediction #Proud_of_you_Nidhi",
+       "id": 5,
+        "title": "Mastitis is udder inflammation",
+        "image": MastiSense,
+        "paragraph": "Such infection results in breaching of Blood Milk Barrier.",
+        "quote": "MastiSense -TM detects bovine  mastitis at an early stage and is a  cow side device, easy to use and  interpret",
         "buttonText": "Read More"
     },
-    {
-        "id": 6,
-        "title": "IS YOUR CAREER SUITABLE ACCORDING TO YOUR DATE OF BIRTH",
-        "image":  fashion,
-        "paragraph": "I assessed her birth chart and told her to choose Fashion designing and predicted that her 24 age would be her turning point.",
-        "quote": "#inifdrocks #londonfashionweek #fashionscout #historymaking#proudofyouNidhi",
-        "buttonText": "Read More"
-    },
-    {
-        "id": 7,
-        "title": "Rio Olympic 2016",
-        "image":  rio ,
-        "paragraph": "Most of the games in the olympic are used to be the individual sports.",
-        "quote": "Success = when preparation meets the opportunity",
-        "buttonText": "Read More"
-    },
-    {
-        "id": 8,
-        "title": "What numbers can do ???",
-        "image": topten,
-        "paragraph": "I suggested my well-wisher Mr. Bablu Maheshwari to let his daughter choose the fashion designing field.",
-        "quote": "Numbers can definitely assist your Hard Work.",
-        "buttonText": "Read More"
-    },
-    {
-        "id": 9,
-        "title": "OMG Sultan’s success lies in the numbers.",
-        "image": sultan ,
-        "paragraph": "The Salman Khan, Anushka Sharma film has earned a gross of Rs 520 crore at the box office.",
-        "quote": "Numbers can definitely assist your Hard Work.",
-        "buttonText": "Read More"
-    },
-    {
-        "id": 10,
-        "title": "THE GREATEST ‘MUHAMMAD ALI’ HAS PASSED AWAY AT THE AGE OF 74",
-        "image": muhmmad ,
-        "paragraph": "It was predicted by me on 14th January 2016 that the world may loose few famous sports person this year.",
-        "quote": "Numbers can definitely assist your Hard Work.",
-        "buttonText": "Read More"
-    },
-    {
-        "id": 11,
-        "title":  "It was already predicted by me, on date 7th feb 2016" ,
-        "image": AMMUNITION ,
-        "paragraph": "It was already predicted by me, on date 7th feb 2016, that more fire incidents would happen in india this year.",
-        "quote": "Previously a chemical factory blast in Mumbai and now in Vidarbha.",
-        "buttonText": "Read More"
-    },
-    {
-        "id": 12,
-        "title": "RCB vs SRH Big final",
-        "image": rcb ,
-        "paragraph": "Today’s date is 29th May 2016, which comes under the effect of 2 and 7.",
-        "quote": "Today’s date is more favourable to RCB",
-        "buttonText": "Read More"
-    },
-    {
-        "id": 13,
-        "title": "Vivo IPL 2016 Qualifier 2",
-        "image":  vivoipl,
-        "paragraph": "Today’s prediction.As today’s date is also 27=2+7=(9)Its lucky for both the captains.",
-        "quote": "Today’s prediction.As today’s date is also 27=2+7=(9)",
-        "buttonText": "Read More"
-    },
-    {
-        "id": 14,
-        "title": "The GOD of CRICKET. SACHIN RAMESH TENDULKAR",
-        "image":  sachin,
-        "paragraph": "The god of cricket Sachin Tendulkar turns 43 today (24th April 2016).",
-        "quote": "He is truly a blessed person.",
-        "buttonText": "Read More"
-    },
-    {
-        "id": 15,
-        "title": "Sir Ravindra Jadeja - Bangladesh Tour",
-        "image": sirjadeja,
-        "paragraph": "Sir Ravindra Jadeja is dropped from the Indian Cricket Team for Bangladesh Tour",
-        "quote": "Numbers can definitely assist your Hard Work.",
-        "buttonText": "Read More"
-    },
-    {
-        "id": 16,
-        "title": "India will be facing Bangladesh in asia cup final",
-        "image": indbang , 
-        "paragraph": "No doubt inform india is having more chances to win the asia cup but today it could be a day of Shikhar, kohli , Raina in batting.",
-        "quote": "Numbers can definitely assist your Hard Work.",
-        "buttonText": "Read More"
-    },
-    {
-        "id": 4,
-        "title": "Can a specific number help you achieve success?",
-        "image": "https://static.toiimg.com/thumb/msid-66246674,width-400,resizemode-4/66246674.jpg",
-        "paragraph": "Despite the loss of 2nd ODI, we must praise Hardik Pandya and Umesh Yadav for their efforts…",
-        "quote": "Now, Umesh has become an integral part of the team India.",
-        "buttonText": "Read More"
-    },
+    // {
+    //     "id": 6,
+    //     "title": "IS YOUR CAREER SUITABLE ACCORDING TO YOUR DATE OF BIRTH",
+    //     "image":  fashion,
+    //     "paragraph": "I assessed her birth chart and told her to choose Fashion designing and predicted that her 24 age would be her turning point.",
+    //     "quote": "#inifdrocks #londonfashionweek #fashionscout #historymaking#proudofyouNidhi",
+    //     "buttonText": "Read More"
+    // },
+    // {
+    //     "id": 7,
+    //     "title": "Rio Olympic 2016",
+    //     "image":  rio ,
+    //     "paragraph": "Most of the games in the olympic are used to be the individual sports.",
+    //     "quote": "Success = when preparation meets the opportunity",
+    //     "buttonText": "Read More"
+    // },
+    // {
+    //     "id": 8,
+    //     "title": "What numbers can do ???",
+    //     "image": topten,
+    //     "paragraph": "I suggested my well-wisher Mr. Bablu Maheshwari to let his daughter choose the fashion designing field.",
+    //     "quote": "Numbers can definitely assist your Hard Work.",
+    //     "buttonText": "Read More"
+    // },
+    // {
+    //     "id": 9,
+    //     "title": "OMG Sultan’s success lies in the numbers.",
+    //     "image": sultan ,
+    //     "paragraph": "The Salman Khan, Anushka Sharma film has earned a gross of Rs 520 crore at the box office.",
+    //     "quote": "Numbers can definitely assist your Hard Work.",
+    //     "buttonText": "Read More"
+    // },
+    // {
+    //     "id": 10,
+    //     "title": "THE GREATEST ‘MUHAMMAD ALI’ HAS PASSED AWAY AT THE AGE OF 74",
+    //     "image": muhmmad ,
+    //     "paragraph": "It was predicted by me on 14th January 2016 that the world may loose few famous sports person this year.",
+    //     "quote": "Numbers can definitely assist your Hard Work.",
+    //     "buttonText": "Read More"
+    // },
+    // {
+    //     "id": 11,
+    //     "title":  "It was already predicted by me, on date 7th feb 2016" ,
+    //     "image": AMMUNITION ,
+    //     "paragraph": "It was already predicted by me, on date 7th feb 2016, that more fire incidents would happen in india this year.",
+    //     "quote": "Previously a chemical factory blast in Mumbai and now in Vidarbha.",
+    //     "buttonText": "Read More"
+    // },
+    // {
+    //     "id": 12,
+    //     "title": "RCB vs SRH Big final",
+    //     "image": rcb ,
+    //     "paragraph": "Today’s date is 29th May 2016, which comes under the effect of 2 and 7.",
+    //     "quote": "Today’s date is more favourable to RCB",
+    //     "buttonText": "Read More"
+    // },
+    // {
+    //     "id": 13,
+    //     "title": "Vivo IPL 2016 Qualifier 2",
+    //     "image":  vivoipl,
+    //     "paragraph": "Today’s prediction.As today’s date is also 27=2+7=(9)Its lucky for both the captains.",
+    //     "quote": "Today’s prediction.As today’s date is also 27=2+7=(9)",
+    //     "buttonText": "Read More"
+    // },
+    // {
+    //     "id": 14,
+    //     "title": "The GOD of CRICKET. SACHIN RAMESH TENDULKAR",
+    //     "image":  sachin,
+    //     "paragraph": "The god of cricket Sachin Tendulkar turns 43 today (24th April 2016).",
+    //     "quote": "He is truly a blessed person.",
+    //     "buttonText": "Read More"
+    // },
+    // {
+    //     "id": 15,
+    //     "title": "Sir Ravindra Jadeja - Bangladesh Tour",
+    //     "image": sirjadeja,
+    //     "paragraph": "Sir Ravindra Jadeja is dropped from the Indian Cricket Team for Bangladesh Tour",
+    //     "quote": "Numbers can definitely assist your Hard Work.",
+    //     "buttonText": "Read More"
+    // },
+    // {
+    //     "id": 16,
+    //     "title": "India will be facing Bangladesh in asia cup final",
+    //     "image": indbang , 
+    //     "paragraph": "No doubt inform india is having more chances to win the asia cup but today it could be a day of Shikhar, kohli , Raina in batting.",
+    //     "quote": "Numbers can definitely assist your Hard Work.",
+    //     "buttonText": "Read More"
+    // },
+    // {
+    //     "id": 4,
+    //     "title": "Can a specific number help you achieve success?",
+    //     "image": "https://static.toiimg.com/thumb/msid-66246674,width-400,resizemode-4/66246674.jpg",
+    //     "paragraph": "Despite the loss of 2nd ODI, we must praise Hardik Pandya and Umesh Yadav for their efforts…",
+    //     "quote": "Now, Umesh has become an integral part of the team India.",
+    //     "buttonText": "Read More"
+    // },
 ];
 
 export const blogsData = [

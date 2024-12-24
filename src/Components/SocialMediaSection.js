@@ -1,12 +1,13 @@
 import React from "react";
 import { FaYoutube, FaInstagram, FaTwitter, FaLinkedin, FaFacebook } from "react-icons/fa";
-import imagescow2 from "../Image/imagescow2.jpg";
+// import imagescow2 from "../Image/imagescow2.jpg";
 const SocialMediaSection = () => {
     return (
         <div
         className="body-font text-black py-12 font-serif"
         style={{
-          backgroundImage: `url(${imagescow2})`,
+        //   backgroundImage: `url(${imagescow2})`,
+        backgroundColor:"lime-200",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}

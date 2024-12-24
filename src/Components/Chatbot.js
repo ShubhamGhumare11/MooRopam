@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { IoCallOutline, IoCloseOutline } from "react-icons/io5";
+import { IoLogoWhatsapp, IoCloseOutline } from "react-icons/io5";
 
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,7 +9,6 @@ const Chatbot = () => {
   const toggleChat = () => {
     setIsOpen(!isOpen);
   };
-
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -39,13 +38,13 @@ const Chatbot = () => {
   return (
     <div className="fixed bottom-6 right-6 z-50">
       <div
-        className={`relative flex items-center bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 rounded-full p-4 cursor-pointer transition-transform transform-gpu hover:scale-110 hover:rotate-3 hover:shadow-2xl ${isOpen ? "rotate-45" : ""
+        className={`relative flex items-center bg-gradient-to-r from-green-900 via-black-300 to-green-600 rounded-full p-4 cursor-pointer transition-transform transform-gpu hover:scale-110 hover:rotate-3 hover:shadow-2xl ${isOpen ? "rotate-45" : ""
           } ${isFloating ? "animate-float" : "animate-zoom"}`}
         onClick={toggleChat}
         style={{ perspective: "500px" }}
       >
         <div className="absolute inset-0 rounded-full overflow-hidden z-0">
-          <div className="w-full h-full bg-yellow-600 rounded-full animate-pulse bg-opacity-20 blur-sm"></div>
+          <div className="w-full h-full bg-green-300 rounded-full animate-pulse bg-opacity-20 blur-sm"></div>
           <div className="absolute inset-0 bg-yellow-200 opacity-10 rounded-full animate-ping"></div>
         </div>
 
@@ -54,14 +53,13 @@ const Chatbot = () => {
             <IoCloseOutline className="text-white" size={24} />
           ) : (
             <>
-              <IoCallOutline
+              <IoLogoWhatsapp
                 className="text-white animate-spin-slow transition-transform duration-300"
                 size={24}
               />
               <span className="ml-2 text-white font-medium text-base">
-                Book your appointment
+                Message on WhatsApp
               </span>
-
             </>
           )}
         </div>
@@ -74,27 +72,18 @@ const Chatbot = () => {
         >
           <div className="bg-white bg-opacity-60 rounded-2xl p-4 shadow-inner">
             <div className="flex items-center mb-4">
-              <div className="flex-shrink-0 bg-yellow-600 p-2 rounded-full">
-                <IoCallOutline className="text-white" size={24} />
+              <div className="flex-shrink-0 bg-green-600 p-2 rounded-full">
+                <IoLogoWhatsapp className="text-white" size={24} />
               </div>
               <div className="ml-3">
                 <h3 className="text-gray-900 text-xl font-bold font-serif">
-                  Book Your Appointment
+                  Message Us on WhatsApp
                 </h3>
                 <p className="text-gray-600 text-sm font-sans">
-                  Available between 6-9 PM
+                  Available 24/7
                 </p>
               </div>
             </div>
-
-            <a href="tel:+918390005111">
-              <button
-                className="relative bg-yellow-600 text-white px-6 py-3 rounded-lg w-full transition-transform transform hover:scale-105 shadow-lg hover:shadow-xl font-serif overflow-hidden"
-              >
-                <span className="absolute inset-0  opacity-30 animate-pulse rounded-full"></span>
-                <span className="relative z-10 font-bold text-gray-900">Call Now</span>
-              </button>
-            </a>
 
             <a
               href="https://wa.me/918390005111"
@@ -117,7 +106,6 @@ const Chatbot = () => {
       )}
     </div>
   );
-
 };
 
 export default Chatbot;
