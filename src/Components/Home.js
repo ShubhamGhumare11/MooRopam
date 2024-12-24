@@ -11,64 +11,21 @@ import soilropan from "../Image/SiloRopan.png";
 import Mastimed from "../Image/Mastimed.png";
 import grass from "../Image/grass.jpg";
 import cowart from "../Image/cowart.png"
-import {
-  FaUserGraduate,
-  FaAward,
-  FaMicroscope,
-  FaServicestack,
-  FaStar,
-  FaChalkboardTeacher,
-} from "react-icons/fa";
+
 import { Link, useNavigate } from "react-router-dom";
 import SocialMediaSection from "./SocialMediaSection";
 import FeaturedOn from "./FeaturedOn";
-import course1 from "../Image/course1.jpg";
-import course2 from "../Image/course2.jpg";
-import course3 from "../Image/course3.jpg";
-import course4 from "../Image/course4.jpg";
-import Book from "../Image/Book.png";
-import {
-  newInterestedUserForNumerologyBookEmailFormat,
-  sendEmailWithAttachment,
-} from "../Email-service/emailSendingService";
-import imagescow2 from "../Image/imagescow2.jpg";
-import yearSur from "../Image/yearSur.png";
-import pandya from "../Image/pandya.png";
-import summit from "../Image/summit.png";
-import nidhi from "../Image/nidhi.png";
-import bollywood from "../Image/bollywood.png";
-import service1 from "../Image/service1.jpg";
-import service2 from "../Image/service2.jpg";
-import service3 from "../Image/service3.jpg";
-import service5 from "../Image/service5.jpg";
-import eight from "../Image/eightnumber.png";
+
+
 import VideoPage from "./VideoPage";
 
 const Home = () => {
-  const [showEmailInput, setShowEmailInput] = useState(false);
-  const [intrestedEmail, setintrestedEmail] = useState("");
-  const [intrestedName, setintrestedName] = useState("");
-
+ 
   const nav = useNavigate();
   const navigate = useNavigate();
-  const handleInterestedClick = () => {
-    setShowEmailInput(true);
-  };
 
-  const handleCancelClick = () => {
-    setShowEmailInput(false);
-  };
-  const handleStayUpdatedClick = async (e) => {
-    e.preventDefault();
-    const htmlEmailFormat = newInterestedUserForNumerologyBookEmailFormat({
-      name: intrestedName,
-      email: intrestedEmail,
-    });
-    await sendEmailWithAttachment(htmlEmailFormat);
-    setShowEmailInput(false);
-    setintrestedEmail("");
-    setintrestedName("");
-  };
+  
+
   // services
   const handlepredictions = () => {
     nav("/prediction");
@@ -81,9 +38,7 @@ const Home = () => {
     nav("/blogs");
   };
 
-  const handleCardClick = (id) => {
-    nav(`/subcard/${id}`);
-  };
+
 
   const handlePredictCardClick = (id) => {
     navigate(`/prediction/${id}`);
@@ -130,7 +85,6 @@ const Home = () => {
                   src={slide}
                   className="absolute block w-full h-full object-cover top-0 left-0"
                   alt={`Slide ${index + 1}`}
-                  
                 />
               </div>
             ))}
@@ -206,7 +160,7 @@ const Home = () => {
       </div>
 
       <FeaturedOn />
-      <VideoPage/>
+      <VideoPage />
 
       <div className="flex flex-col md:flex-row items-center mt-4 md:mt-8 px-4 md:px-8 lg:px-12  ">
         <div className="flex-1 p-4 sm:p-6 md:p-10 lg:p-12 mb-10 font-serif">
@@ -220,32 +174,27 @@ const Home = () => {
           </p>
         </div>
         <div className="flex-1  my-11">
-  <div className="relative w-full max-w-xl mx-auto border-4 border-yellow-600 rounded-lg shadow-xl overflow-hidden">
-    <a
-      href="https://youtu.be/4QqkWmI_kX0?si=sr8dN2R8xWMuIe6g"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="block w-full h-full"
-    >
-      <div className="relative w-full h-60 md:h-72 lg:h-80 bg-gray-200 rounded-lg overflow-hidden">
-        <iframe
-          className="w-full h-full"
-          src="https://www.youtube.com/embed/4QqkWmI_kX0"
-          title="YouTube video player"
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        ></iframe>
+          <div className="relative w-full max-w-xl mx-auto border-4 border-yellow-600 rounded-lg shadow-xl overflow-hidden">
+            <a
+              href="https://youtu.be/4QqkWmI_kX0?si=sr8dN2R8xWMuIe6g"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block w-full h-full"
+            >
+              <div className="relative w-full h-60 md:h-72 lg:h-80 bg-gray-200 rounded-lg overflow-hidden">
+                <iframe
+                  className="w-full h-full"
+                  src="https://www.youtube.com/embed/4QqkWmI_kX0"
+                  title="YouTube video player"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              </div>
+            </a>
+          </div>
+        </div>
       </div>
-    </a>
-  </div>
-</div>
-
-      </div>
-
-
-
-
 
       <div
         className="p-6 md:p-8 font-normal"
@@ -264,8 +213,8 @@ const Home = () => {
         </div>
 
         {/* Single Div Wrapper for Everything */}
-        <div className="bg-gradient-to-r from-lime-300 to-transparent relative overflow-hidden p-2 md:p-6 mt-2 flex flex-col lg:flex-row items-center lg:items-start rounded-lg shadow-2xl hover:shadow-xl transition-shadow duration-300 ease-in-out w-full h-screen max-w-screen">
-          {/* Content Section */}
+        <div className="bg-gradient-to-r from-lime-300 to-transparent relative overflow-hidden p-2 md:p-6 mt-2 flex flex-col lg:flex-row items-center lg:items-start rounded-lg shadow-2xl hover:shadow-xl transition-shadow duration-300 ease-in-out w-full  max-w-screen">
+         {/* Content Section */}
           <div className="w-full lg:w-3/5 py-6 md:py-8 px-4 md:px-6 lg:py-14 lg:px-10 z-20">
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-orange-900 mb-4 md:mb-5">
               <span className="block">MooRopan India Pvt. Ltd.</span>
@@ -285,53 +234,6 @@ const Home = () => {
               Sign up now to receive exclusive updates and a special early-bird
               offer.
             </p>
-            <div className="mt-6 md:mt-8 lg:mt-8 inline-flex rounded-md shadow-lg">
-              <button
-                onClick={handleInterestedClick}
-                className="py-3 px-6 bg-customOrange hover:bg-orange-600 focus:ring-customBrown focus:ring-offset-customOrange text-white transition-transform transform-gpu hover:scale-105 duration-300 text-center text-base font-semibold shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
-              >
-                Enter your Email
-              </button>
-            </div>
-            {showEmailInput && (
-              <div className="mt-6 md:mt-8 bg-gray-50 p-4 md:p-5 rounded-lg shadow-inner">
-                <label className="block text-sm md:text-base font-medium text-gray-700 mb-2">
-                  Enter your Name:
-                </label>
-                <input
-                  onChange={(e) => {
-                    setintrestedName(e.target.value);
-                  }}
-                  className="mb-4 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-customOrange transition-shadow shadow-sm hover:shadow-lg"
-                  placeholder="Name"
-                />
-                <label className="block text-sm md:text-base font-medium text-gray-700 mb-2">
-                  Enter your email:
-                </label>
-                <input
-                  onChange={(e) => {
-                    setintrestedEmail(e.target.value);
-                  }}
-                  className="mb-4 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-customOrange transition-shadow shadow-sm hover:shadow-lg"
-                  placeholder="you@example.com"
-                />
-
-                <div className="flex flex-col sm:flex-row sm:justify-between">
-                  <button
-                    onClick={handleStayUpdatedClick}
-                    className="py-2 px-4 sm:py-2 sm:px-5 bg-customOrange hover:bg-orange-500 focus:ring-customBrown focus:ring-offset-customOrange text-white transition-transform transform-gpu hover:scale-105 duration-300 text-center text-base font-semibold shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg mb-2 sm:mb-0"
-                  >
-                    Stay Updated
-                  </button>
-                  <button
-                    onClick={handleCancelClick}
-                    className="py-2 px-4 sm:py-2 sm:px-5 bg-gray-400 hover:bg-gray-500 text-white transition-transform transform-gpu hover:scale-105 duration-300 text-center text-base font-semibold shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 rounded-lg"
-                  >
-                    Cancel
-                  </button>
-                </div>
-              </div>
-            )}
           </div>
 
           {/* Image Section */}
@@ -347,6 +249,8 @@ const Home = () => {
         </div>
       </div>
 
+      {/* ------------------------ */}
+
       <div className="py-8 bg-lime-200 text-black font-serif ">
         <div className="container mx-auto px-6 sm:px-8 lg:px-16 max-w-7xl text-center">
           <div className="text-center mb-6">
@@ -357,7 +261,7 @@ const Home = () => {
               One of the Best and low Cost Products Compare to Other Products{" "}
             </p>
           </div>
-
+ 
           <div className="flex flex-wrap justify-start -mx-2">
             <div
               className="w-full sm:w-1/2 lg:w-1/4 px-2 mb-4"
@@ -369,7 +273,7 @@ const Home = () => {
                   src={soilropan}
                   alt="Prediction Image"
                 />
-
+ 
                 <div className="absolute inset-0 bg-black bg-opacity-20 transition-opacity duration-300 hover:bg-opacity-40"></div>
                 <div className="relative bg-white p-3 flex-grow flex flex-col">
                   <h1 className="text-customBrown font-bold text-lg mb-1 transition-colors duration-300 hover:text-customOrange cursor-pointer">
@@ -390,7 +294,7 @@ const Home = () => {
                 </div>
               </div>
             </div>
-
+ 
             <div
               className="w-full sm:w-1/2 lg:w-1/4 px-2 mb-4"
               onClick={() => handlePredictCardClick(1)}
@@ -401,7 +305,7 @@ const Home = () => {
                   src={Mastimed}
                   alt="Prediction Image"
                 />
-
+ 
                 <div className="absolute inset-0 bg-black bg-opacity-20 transition-opacity duration-300 hover:bg-opacity-40"></div>
                 <div className="relative bg-white p-3 flex-grow flex flex-col">
                   <h1 className="text-customBrown font-bold text-lg mb-1 transition-colors duration-300 hover:text-customOrange cursor-pointer">
@@ -424,7 +328,7 @@ const Home = () => {
                 </div>
               </div>
             </div>
-
+ 
             <div
               className="w-full sm:w-1/2 lg:w-1/4 px-2 mb-4"
               onClick={() => handlePredictCardClick(2)}
@@ -435,7 +339,7 @@ const Home = () => {
                   src={soilropan}
                   alt="Prediction Image"
                 />
-
+ 
                 <div className="absolute inset-0 bg-black bg-opacity-20 transition-opacity duration-300 hover:bg-opacity-40"></div>
                 <div className="relative bg-white p-3 flex-grow flex flex-col">
                   <h1 className="text-customBrown font-bold text-lg mb-1 transition-colors duration-300 hover:text-customOrange cursor-pointer">
@@ -457,7 +361,7 @@ const Home = () => {
                 </div>
               </div>
             </div>
-
+ 
             <div
               className="w-full sm:w-1/2 lg:w-1/4 px-2 mb-4"
               onClick={() => handlePredictCardClick(5)} // Move onClick here
@@ -500,11 +404,14 @@ const Home = () => {
           </div>
         </div>
       </div>
+      {/* --------------------------------- */}
 
-      <SocialMediaSection />
+     
+
+      {/* ----------------------------------------- */}
 
       <div className="text-gray-600 body-font font-serif bg-lime-200">
-        <div className="py-7 px-6 md:px-10 lg:px-20 mt-5 font-serif bg-cover bg-center mb-6">
+        <div className="py-7 px-6 md:px-10 lg:px-20  font-serif bg-cover bg-center mb-6">
           <div className="flex flex-col text-center w-full mb-2 md:mb-6">
             <h2 className="text-4xl font-bold text-customBrown">
               Explore Our Services
@@ -520,15 +427,17 @@ const Home = () => {
             <h2 className="text-4xl font-bold text-customBrown mb-4 text-center">
               Services we Provide
             </h2>
+
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               <div className="w-full max-w-sm bg-white border border-golden rounded-lg shadow-lg ">
-                <a href="#" onClick={() => handleCardClick(1)}>
+                <Link to="/services">
                   <img
-                    className="p-4 rounded-t-lg object-cover w-full h-52 md:h-56 "
+                    className="p-4 rounded-t-lg object-cover w-full h-52 md:h-56"
                     src={Mastimed}
-                    alt="service image"
+                    alt="Mastimed Service"
                   />
-                </a>
+                </Link>
+
                 <div className="px-5 pb-5">
                   <a href="#">
                     <h5 className="text-xl font-semibold tracking-tight text-gray-900   truncate">
@@ -606,39 +515,17 @@ const Home = () => {
                       (Duration: 25-30 Days )
                     </span>
                   </div>
-
-                  {/* Button Section */}
-                  {/* <a
-                    href="#"
-                    className="flex items-center justify-center w-full rounded-lg bg-golden  focus:ring-4 focus:outline-none  font-medium text-sm px-5 py-2.5 text-center text-white mt-5 "
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="mr-1 h-4 w-4"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                      />
-                    </svg>
-                    Add To Cart
-                  </a> */}
                 </div>
               </div>
 
               <div className="w-full max-w-sm bg-white border border-golden rounded-lg shadow-lg">
-                <a href="#" onClick={() => handleCardClick(2)}>
+              <Link to="/services">
                   <img
                     className="p-4 rounded-t-lg object-cover w-full h-52 md:h-56"
                     src={soilropan}
                     alt="service image"
                   />
-                </a>
+               </Link>
                 <div className="px-5 pb-5">
                   <a href="#">
                     <h5 className="text-xl font-semibold tracking-tight text-gray-900 truncate">
@@ -716,13 +603,13 @@ const Home = () => {
               </div>
 
               <div className="w-full max-w-sm bg-white border border-golden rounded-lg shadow-lg ">
-                <a href="#" onClick={() => handleCardClick(3)}>
+              <Link to="/services">
                   <img
                     className="p-4 rounded-t-lg object-cover w-full h-52 md:h-56 "
                     src={Mastimed}
                     alt="service image"
                   />
-                </a>
+                </Link>
                 <div className="px-5 pb-5">
                   <a href="#">
                     <h5 className="text-xl font-semibold tracking-tight text-gray-900   truncate">
@@ -800,39 +687,17 @@ const Home = () => {
                       (Duration: 25-30 Days )
                     </span>
                   </div>
-
-                  {/* Button Section */}
-                  {/* <a
-                    href="#"
-                    className="flex items-center justify-center w-full rounded-lg bg-golden  focus:ring-4 focus:outline-none  font-medium text-sm px-5 py-2.5 text-center text-white mt-5 "
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="mr-1 h-4 w-4"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                      />
-                    </svg>
-                    Add To Cart
-                  </a> */}
                 </div>
               </div>
 
               <div className="w-full max-w-sm bg-white border border-golden rounded-lg shadow-lg ">
-                <a href="#" onClick={() => handleCardClick(5)}>
+              <Link to="/services">
                   <img
                     className="p-4 rounded-t-lg object-cover w-full h-52 md:h-56 "
                     src={soilropan}
                     alt="service image"
                   />
-                </a>
+              </Link>
                 <div className="px-5 pb-5">
                   <a href="#">
                     <h5 className="text-xl font-semibold tracking-tight text-gray-900   truncate">
@@ -910,28 +775,6 @@ const Home = () => {
                       (Duration: 25-30 Days )
                     </span>
                   </div>
-
-                  {/* Button Section */}
-                  {/* <a
-                    href="#"
-                    className="flex items-center justify-center w-full rounded-lg bg-golden  focus:ring-4 focus:outline-none  font-medium text-sm px-5 py-2.5 text-center text-white mt-5 "
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="mr-1 h-4 w-4"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                      />
-                    </svg>
-                    Add To Cart
-                  </a> */}
                 </div>
               </div>
             </div>
@@ -945,180 +788,14 @@ const Home = () => {
               Explore All Services →
             </button>
           </div>
-
-          {/* <div className="text-end mt-8">
-            <button
-              onClick={handleServices}
-              className="bg-customBrown text-white font-semibold py-3 px-6 rounded-full hover:bg-customOrange transition-colors duration-300"
-            >
-              Explore All Services →
-            </button>
-          </div> */}
         </div>
       </div>
 
-      {/* <div className="pt-4 pb-16 bg-white text-black font-serif">
-        <div className="container mx-auto px-6 sm:px-8 lg:px-16 max-w-7xl text-center">
-          <div className="text-center mb-6">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-customBrown">
-              Our Courses
-            </h2>
-            <p className="mt-3 text-lg text-customOrange">
-              Discover insights and courses designed to guide you through life's
-              journey.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <a
-              href="https://pgtlm.courses.store/436648"
-              target="_blank"
-              className="flex flex-col md:flex-row bg-white border border-gray-300 rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:shadow-xl"
-            >
-              <img
-                className="object-cover w-full md:w-64 h-[200px] md:h-[250px] md:rounded-l-lg border-b md:border-b-0 md:border-r border-gray-200"
-                src={course2}
-                alt="Auspicious Numerology LIFETIME"
-              />
-              <div className="flex flex-col justify-between p-4 w-full">
-                <h5 className="mb-2 text-xl sm:text-2xl font-bold text-gray-900">
-                  Auspicious Numerology LIFETIME
-                </h5>
-                <h6 className="mb-2 text-lg sm:text-xl font-semibold text-amber-600">
-                  Basic to Advance
-                </h6>
-                <p className="text-lg font-bold text-gray-800 mr-2">
-                  Starts at
-                </p>
-                <p className="text-gray-700">
-                  <span className="line-through text-black mr-2 font-bold">
-                    INR 28,000
-                  </span>
-                  <span className="text-customBrown text-xl font-bold">
-                    INR 9,199 /-
-                  </span>
-                </p>
-                <button className="bg-customBrown text-white font-semibold py-2 px-4 rounded-full mt-3 hover:bg-customOrange transition-colors duration-300 text-sm">
-                  Enroll Now
-                </button>
-              </div>
-            </a>
-
-            <a
-              href="https://pgtlm.courses.store/160862"
-              target="_blank"
-              className="flex flex-col md:flex-row bg-white border border-gray-300 rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:shadow-xl"
-            >
-              <img
-                className="object-cover w-full md:w-64 h-[200px] md:h-[250px] md:rounded-l-lg border-b md:border-b-0 md:border-r border-gray-200"
-                src={course3}
-                alt="Auspicious Numerology Course"
-              />
-              <div className="flex flex-col justify-between p-4 w-full">
-                <h5 className="mb-2 text-xl sm:text-2xl font-bold text-gray-900">
-                  Auspicious Numerology Course
-                </h5>
-                <h6 className="mb-2 text-lg sm:text-xl font-semibold text-amber-600">
-                  Basic to Advance
-                </h6>
-                <p className="text-lg font-bold text-gray-800 mr-2">
-                  Starts at
-                </p>
-                <p className="text-gray-700">
-                  <span className="line-through text-gray-900 mr-2 font-bold">
-                    INR 5,599
-                  </span>
-                  <span className="text-customBrown text-xl font-bold">
-                    INR 4,599 /-
-                  </span>
-                </p>
-                <button className="bg-customBrown text-white font-semibold py-2 px-4 rounded-full mt-3 hover:bg-customOrange transition-colors duration-300 text-sm">
-                  Enroll Now
-                </button>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      {/*       <div className="pt-4 pb-16 bg-white text-black font-serif">
-        <div className="container mx-auto px-6 sm:px-8 lg:px-16 max-w-7xl text-center">
-          <div className="text-center flex flex-col items-center justify-center mb-6">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-customBrown mb-8">
-              Upcoming Course
-            </h2>
-
-            <a
-              href="#"
-              className="mt-2 block max-w-lg w-full p-12 bg-gradient-to-r from-amber-50 via-white to-amber-100 border border-gray-300 rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:shadow-2xl"
-            >
-              <h5 className="mb-8 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                How to Succeed in Business / Business Numerology
-              </h5>
-              <p className="font-normal text-amber-600 dark:text-gray-400">
-                Discover how business numerology can help you make strategic decisions, optimize your financial outcomes, and gain a competitive edge in the business world. Learn the secret numbers behind success!
-              </p>
-            </a>
-          </div>
-        </div>
-      </div>
- */}
-      {/* <section className="bg-amber-600 text-black font-serif py-2">
-        <div className="px-4 py-10 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-8  bg-amber-200">
-          <div className="max-w-2xl mx-auto sm:max-w-xl md:max-w-2xl">
-            <div className="text-center">
-              <div className="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-customBrown mb-8">
-                  Upcoming Course
-                </h2>
-                <h2 className=" max-w-lg mb-6 font-serif text-3xl font-bold leading-none tracking-tight text-[#000000] sm:text-4xl md:mx-auto">
-                  <span className="relative inline-block">
-                    <svg
-                      viewBox="0 0 52 24"
-                      fill="currentColor"
-                      className="absolute top-0 left-0 z-0 hidden w-32 -mt-8 -ml-20 text-[#FAFAFA] lg:w-32 lg:-ml-28 lg:-mt-10 sm:block"
-                    >
-                      <defs>
-                        <pattern
-                          id="b039bae0-fdd5-4311-b198-8557b064fce0"
-                          x="0"
-                          y="0"
-                          width=".135"
-                          height=".30"
-                        >
-                          <circle cx="1" cy="1" r=".7" />
-                        </pattern>
-                      </defs>
-                      <rect
-                        fill="url(#b039bae0-fdd5-4311-b198-8557b064fce0)"
-                        width="52"
-                        height="24"
-                      />
-                    </svg>
-                    <span className="relative">How to Succeed in</span>
-                  </span>{" "}
-                  Business / Business Numerology
-                </h2>
-                <p className="text-base text-[#6A4A00] md:text-lg">
-                  Discover how business numerology can help you make strategic
-                  decisions, optimize your financial outcomes, and gain a
-                  competitive edge in the business world. Learn the secret
-                  numbers behind success!
-                </p>
-              </div>
-
-              <p className="max-w-md mx-auto mb-10 text-xs text-[#6A4A00] sm:text-sm md:mb-10">
-                Limited seats available. Don't miss your chance to transform
-                your business!
-              </p>
-            </div>
-          </div>
-        </div>
-      </section> */}
+      {/* --------------------------------------------- */}
 
       <Testimonials />
 
-      <section className="bg-customLightOrange text-black font-serif py-2">
+      <section className="bg-lime-200 text-black font-serif py-2">
         <div className="container max-w-6xl p-6 mx-auto space-y-6 sm:space-y-12">
           <div className="flex flex-col text-center w-full mb-10 md:mb-20">
             <h2 className="text-4xl font-bold text-customBrown">
@@ -1152,55 +829,6 @@ const Home = () => {
             </div>
           </a>
 
-          {/* <div className="grid justify-center grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {[
-              {
-                title: "Mumbai terror attacks and numerology behind it",
-                date: "January 21, 2021",
-                description:
-                  "⁠⁠⁠On the eve of sixth anniversary of MUMBAI TERROR ATTACK wanna share something about number 26 and number 8. Dangerous number 8 This year 17 July 2014 Malaysia Airlines flight MH17 has crashed in Ukraine...",
-                imgSrc:
-                  "https://static.tnn.in/thumb/msid-105505021,thumbsize-839491,width-1280,height-720,resizemode-75/105505021.jpg?quality=100",
-              },
-              {
-                title: "Romantic Bollywood couple and their numerology",
-                date: "January 22, 2021",
-                description:
-                  "Bollywood, the heart of Indian cinema, has given rise to legendary on-screen couples whose chemistry transcends the boundaries of the silver screen...",
-                imgSrc: bollywood,
-              },
-              {
-                title: "Dangerous number 8",
-                date: "January 23, 2021",
-                description:
-                  "If you observe my posts about number 8 … You will come to know that I consider this number as a dangerous number … I used to warn all 8 number peoples to be cautious and carefull on these dates 8,17 and 26 ….",
-                imgSrc: eight,
-              },
-            ].map((post, index) => (
-              <a
-                key={index}
-                rel="noopener noreferrer"
-                href="#"
-                className="max-w-sm mx-auto group hover:no-underline focus:no-underline text-black shadow-lg bg-white rounded"
-              >
-                <img
-                  role="presentation"
-                  className="object-cover w-full rounded-t h-44 bg-gray-500"
-                  src={post.imgSrc}
-                  alt={post.title}
-                />
-                <div className="p-6 space-y-2">
-                  <h3 className="text-2xl font-semibold group-hover:underline group-focus:underline text-customBrown">
-                    {post.title}
-                  </h3>
-                  <span className="text-xs text-gray-500">{post.date}</span>
-                  <p>{post.description}</p>
-                </div>
-              </a>
-            ))}
-          </div> */}
-          
-
           <div className="flex justify-center">
             <button
               onClick={handleBlogs}
@@ -1213,143 +841,60 @@ const Home = () => {
         </div>
       </section>
       <section>
-        <img
-        src={cowart}>
-        
-        </img>
+        <img src={cowart}></img>
       </section>
 
-      <section className="text-gray-600 body-font bg-gradient-to-r from-lime-500 to-blue-950 py-3">
-        <div className="container px-6 py-10 mx-auto font-serif">
-          <div className="flex flex-wrap justify-center text-center">
-            <div className="p-4 w-full sm:w-1/4">
-              <div className="flex flex-col items-center justify-center">
-                <h2 className="text-5xl font-bold text-white mb-2"> 15 K</h2>
-                <p className="leading-relaxed text-gray-200 text-lg font-semibold">
-                  
-                </p>
-              </div>
-            </div>
-            <div className="p-4 w-full sm:w-1/4">
-              <div className="flex flex-col items-center justify-center">
-                <h2 className="text-5xl font-bold text-white mb-2"> 1700</h2>
-                <p className="leading-relaxed text-gray-200 text-lg font-semibold">
-                  Cattel Cure
-                </p>
-              </div>
-            </div>
-            <div className="p-4 w-full sm:w-1/4">
-              <div className="flex flex-col items-center justify-center">
-                {/* Subscribers in thousands */}
-                <h2 className="text-5xl font-bold text-white mb-2"> 125 k</h2>
-                <p className="leading-relaxed text-gray-200 text-lg font-semibold">
-                  Happy Farmers
-                </p>
-              </div>
-            </div>
-            <div className="p-4 w-full sm:w-1/4">
-              <div className="flex flex-col items-center justify-center">
-                {/* Total Views in millions */}
-                <h2 className="text-5xl font-bold text-white mb-2"> 19.7 B</h2>
-                <p className="leading-relaxed text-gray-200 text-lg font-semibold">
-                  Happy Coustomers
-                </p>
-              </div>
-            </div>
-          </div>
+      <section className="text-gray-600 body-font bg-lime-100 py-8">
+  <div className="container mx-auto px-6 py-10 font-serif">
+    <div className="text-center mb-10">
+      <h1 className="text-4xl font-bold text-gray-700 tracking-wide mb-4">
+        Our Achievements
+      </h1>
+      <p className="text-lg text-gray-600">
+        Trusted by thousands of farmers and veterinarians across the country.
+      </p>
+    </div>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {/* Card 1 */}
+      <div className="p-6 rounded-lg shadow-md text-center transform hover:scale-105 transition-transform duration-300 bg-blue-300">
+        <div className="flex items-center justify-center bg-white bg-opacity-20 w-20 h-20 rounded-full mb-4">
+          <span className="text-white text-5xl font-bold">🌾</span>
         </div>
-      </section>
-{/* 
-      <section className="py-8 bg-white text-black font-serif">
-        <div className="container mx-auto px-6 sm:px-8 lg:px-16 max-w-7xl text-center">
-          <h2 className="text-4xl font-bold text-customBrown">
-            Reasons to Trust
-          </h2>
-          <p className="mt-4 text-lg text-customBrown">
-            Discover the unique blend of expertise, experience, and commitment
-            that sets Dr. Sumiit Messhram apart.
-          </p>
+        <h2 className="text-3xl font-extrabold text-white mb-2">15 K</h2>
+        <p className="text-white font-medium text-lg">Farmers Reached</p>
+      </div>
+      {/* Card 2 */}
+      <div className="p-6 rounded-lg shadow-md text-center transform hover:scale-105 transition-transform duration-300 bg-orange-300">
+        <div className="flex items-center justify-center bg-white bg-opacity-20 w-20 h-20 rounded-full mb-4">
+          <span className="text-white text-5xl font-bold">🐄</span>
         </div>
-        <div className="container mx-auto px-6 sm:px-8 lg:px-16 max-w-7xl grid gap-8 sm:grid-cols-2 lg:grid-cols-3 mt-8">
-          {[
-            {
-              title: "Expertise",
-              description:
-                "Dr. Sumiit Messhram brings a unique blend of medical knowledge and numerological expertise, offering a scientific and holistic approach to numerology.",
-              icon: <FaUserGraduate className="text-customOrange w-10 h-10" />,
-              additionalInfo:
-                "With over 20 years of experience, Dr. Messhram's guidance has positively impacted countless lives.",
-            },
-            {
-              title: "Proven Track Record",
-              description:
-                "With a history of accurate predictions, Dr. Messhram has earned the trust of renowned personalities, including international cricketers and politicians.",
-              icon: <FaAward className="text-customBrown w-10 h-10" />,
-              additionalInfo:
-                "His predictions have guided key decisions in the careers of many high-profile individuals.",
-            },
-            {
-              title: "Scientific Approach",
-              description:
-                "Our numerological analyses are based on rigorous calculations rather than mysticism, ensuring logical and reasonable predictions.",
-              icon: <FaMicroscope className="text-golden w-10 h-10" />,
-              additionalInfo:
-                "Every analysis is backed by data and a deep understanding of numerological principles.",
-            },
-            {
-              title: "Diverse Services",
-              description:
-                "Dr. Sumiit Messhram brings a unique blend of medical knowledge and numerological expertise, offering a scientific and holistic approach to numerology.",
-              icon: (
-                <FaServicestack className="text-customLightOrange w-10 h-10" />
-              ),
-              additionalInfo:
-                "From personal consultations to corporate advice, Dr. Messhram offers a wide range of services.",
-            },
-            {
-              title: "Celebrity Clientele",
-              description:
-                "Dr. Messhram has successfully guided well-known individuals, including movie stars, athletes, and politicians, with his numerological insights.",
-              icon: <FaStar className="text-customOrange w-10 h-10" />,
-              additionalInfo:
-                "His insights have been sought after by some of the most influential figures in various industries.",
-            },
-            {
-              title: "Commitment to Education",
-              description:
-                "Beyond numerology, Dr. Messhram is a multifaceted individual actively involved in education and social work, demonstrating his commitment to making a positive impact.",
-              icon: (
-                <FaChalkboardTeacher className="text-customBrown w-10 h-10" />
-              ),
-              additionalInfo:
-                "He regularly conducts workshops and seminars to share his knowledge and empower others.",
-            },
-          ].map((item, index) => (
-            <div
-              key={index}
-              className="flex flex-col items-center p-4 bg-white text-black rounded-lg shadow-lg"
-            >
-              {item.icon}
-              <h3 className="text-2xl font-semibold mt-4 text-customBrown">
-                {item.title}
-              </h3>
-              <p className="text-center mt-2">{item.description}</p>
-              <p className="text-sm mt-2 text-customBrown">
-                {item.additionalInfo}
-              </p>
-            </div>
-          ))}
+        <h2 className="text-3xl font-extrabold text-white mb-2">1700</h2>
+        <p className="text-white font-medium text-lg">Cattle Cure</p>
+      </div>
+      {/* Card 3 */}
+      <div className="p-6 rounded-lg shadow-md text-center transform hover:scale-105 transition-transform duration-300 bg-purple-300">
+        <div className="flex items-center justify-center bg-white bg-opacity-20 w-20 h-20 rounded-full mb-4">
+          <span className="text-white text-5xl font-bold">😊</span>
         </div>
-        <div className="container mx-auto text-center mt-12">
-          <Link
-            to="/contact"
-            className="px-8 py-3 bg-customOrange text-white font-semibold rounded hover:bg-customBrown transition duration-300"
-          >
-            Contact Dr. Messhram Today
-          </Link>
+        <h2 className="text-3xl font-extrabold text-white mb-2">125 K</h2>
+        <p className="text-white font-medium text-lg">Happy Farmers</p>
+      </div>
+      {/* Card 4 */}
+      <div className="p-6 rounded-lg shadow-md text-center transform hover:scale-105 transition-transform duration-300 bg-red-300">
+        <div className="flex items-center justify-center bg-white bg-opacity-20 w-20 h-20 rounded-full mb-4">
+          <span className="text-white text-5xl font-bold">🌟</span>
         </div>
-      </section> */}
-      
+        <h2 className="text-3xl font-extrabold text-white mb-2">19.7 B</h2>
+        <p className="text-white font-medium text-lg">Happy Customers</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<SocialMediaSection />
+
+
+
     </div>
   );
 };

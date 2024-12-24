@@ -4,6 +4,7 @@ import android from "../Image/android.png";
 import ios from "../Image/ios.jpg";
 import { IoCallOutline } from "react-icons/io5";
 import { TfiEmail } from "react-icons/tfi";
+import { FaXTwitter } from "react-icons/fa6";
 
 import {
   FaFacebookSquare,
@@ -52,11 +53,7 @@ const Contact = () => {
             </span>
             {/* <span className="block mt-2 text-white">Explore Our  </span> */}
           </h1>
-          {/* <div className="mt-1 mr-1">
-            <Link to="/services" className="px-8 py-4 border text-sm md:text-base font-semibold rounded-full hover:bg-amber-400 hover:text-black transition duration-300">
-              Explore Services &rarr;
-            </Link>
-          </div> */}
+         
         </div>
       </div>
 
@@ -95,15 +92,15 @@ const Contact = () => {
           </h2>
           <div className="flex flex-wrap gap-4 text-xl sm:text-2xl md:text-3xl lg:text-4xl">
             <a
-              href="https://www.facebook.com/AuspiciousNumerology/"
+              href="https://x.com/mooropan"
               target="_blank"
-              aria-label="Facebook"
+              aria-label="Twitter"
               className="text-gray-700 hover:text-yellow-600 transition duration-300 transform hover:scale-110"
             >
-              <FaFacebookSquare />
+              <FaXTwitter/>
             </a>
             <a
-              href="https://www.instagram.com/auspicious_numerology/"
+              href="https://www.instagram.com/mooropan_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
               target="_blank"
               aria-label="Instagram"
               className="text-gray-700 hover:text-yellow-600 transition duration-300 transform hover:scale-110"
@@ -111,21 +108,21 @@ const Contact = () => {
               <FaInstagram />
             </a>
             <a
-              href="https://www.youtube.com/@AuspiciousNumerology"
+              href="https://teams.live.com/l/message/19:uni01_7eavbsfsi7cfn2mi4h3kccd3m6kdousk3kmsjgew7vycsmkh4lyq@thread.v2/1735038142560?context=%7B%22contextType%22%3A%22chat%22%7D"
               target="_blank"
               aria-label="YouTube"
               className="text-gray-700 hover:text-yellow-600 transition duration-300 transform hover:scale-110"
             >
               <FaYoutube />
             </a>
-            <a
-              href="https://twitter.com/AuspiciousNumerology"
+            {/* <a
+              href="https://x.com/mooropan"
               target="_blank"
               aria-label="Twitter"
               className="text-gray-700 hover:text-yellow-600 transition duration-300 transform hover:scale-110"
             >
               <FaTwitter />
-            </a>
+            </a> */}
           </div>
         </div>
 
