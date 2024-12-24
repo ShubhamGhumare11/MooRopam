@@ -16,38 +16,16 @@ import { Link, useNavigate } from "react-router-dom";
 import SocialMediaSection from "./SocialMediaSection";
 import FeaturedOn from "./FeaturedOn";
 
-import {
-  newInterestedUserForNumerologyBookEmailFormat,
-  sendEmailWithAttachment,
-} from "../Email-service/emailSendingService";
 
 import VideoPage from "./VideoPage";
 
 const Home = () => {
-  const [showEmailInput, setShowEmailInput] = useState(false);
-  const [intrestedEmail, setintrestedEmail] = useState("");
-  const [intrestedName, setintrestedName] = useState("");
-
+ 
   const nav = useNavigate();
   const navigate = useNavigate();
-  const handleInterestedClick = () => {
-    setShowEmailInput(true);
-  };
 
-  const handleCancelClick = () => {
-    setShowEmailInput(false);
-  };
-  const handleStayUpdatedClick = async (e) => {
-    e.preventDefault();
-    const htmlEmailFormat = newInterestedUserForNumerologyBookEmailFormat({
-      name: intrestedName,
-      email: intrestedEmail,
-    });
-    await sendEmailWithAttachment(htmlEmailFormat);
-    setShowEmailInput(false);
-    setintrestedEmail("");
-    setintrestedName("");
-  };
+  
+
   // services
   const handlepredictions = () => {
     nav("/prediction");
@@ -60,9 +38,7 @@ const Home = () => {
     nav("/blogs");
   };
 
-  const handleCardClick = (id) => {
-    nav(`/subcard/${id}`);
-  };
+
 
   const handlePredictCardClick = (id) => {
     navigate(`/prediction/${id}`);
@@ -109,7 +85,6 @@ const Home = () => {
                   src={slide}
                   className="absolute block w-full h-full object-cover top-0 left-0"
                   alt={`Slide ${index + 1}`}
-                  
                 />
               </div>
             ))}
@@ -185,7 +160,7 @@ const Home = () => {
       </div>
 
       <FeaturedOn />
-      <VideoPage/>
+      <VideoPage />
 
       <div className="flex flex-col md:flex-row items-center mt-4 md:mt-8 px-4 md:px-8 lg:px-12  ">
         <div className="flex-1 p-4 sm:p-6 md:p-10 lg:p-12 mb-10 font-serif">
@@ -199,32 +174,27 @@ const Home = () => {
           </p>
         </div>
         <div className="flex-1  my-11">
-  <div className="relative w-full max-w-xl mx-auto border-4 border-yellow-600 rounded-lg shadow-xl overflow-hidden">
-    <a
-      href="https://youtu.be/4QqkWmI_kX0?si=sr8dN2R8xWMuIe6g"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="block w-full h-full"
-    >
-      <div className="relative w-full h-60 md:h-72 lg:h-80 bg-gray-200 rounded-lg overflow-hidden">
-        <iframe
-          className="w-full h-full"
-          src="https://www.youtube.com/embed/4QqkWmI_kX0"
-          title="YouTube video player"
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        ></iframe>
+          <div className="relative w-full max-w-xl mx-auto border-4 border-yellow-600 rounded-lg shadow-xl overflow-hidden">
+            <a
+              href="https://youtu.be/4QqkWmI_kX0?si=sr8dN2R8xWMuIe6g"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block w-full h-full"
+            >
+              <div className="relative w-full h-60 md:h-72 lg:h-80 bg-gray-200 rounded-lg overflow-hidden">
+                <iframe
+                  className="w-full h-full"
+                  src="https://www.youtube.com/embed/4QqkWmI_kX0"
+                  title="YouTube video player"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              </div>
+            </a>
+          </div>
+        </div>
       </div>
-    </a>
-  </div>
-</div>
-
-      </div>
-
-
-
-
 
       <div
         className="p-6 md:p-8 font-normal"
@@ -243,8 +213,8 @@ const Home = () => {
         </div>
 
         {/* Single Div Wrapper for Everything */}
-        <div className="bg-gradient-to-r from-lime-300 to-transparent relative overflow-hidden p-2 md:p-2 mt-2 flex flex-col lg:flex-row items-center lg:items-start rounded-lg shadow-2xl hover:shadow-xl transition-shadow duration-300 ease-in-out w-full h- max-w-screen">
-          {/* Content Section */}
+        <div className="bg-gradient-to-r from-lime-300 to-transparent relative overflow-hidden p-2 md:p-6 mt-2 flex flex-col lg:flex-row items-center lg:items-start rounded-lg shadow-2xl hover:shadow-xl transition-shadow duration-300 ease-in-out w-full  max-w-screen">
+         {/* Content Section */}
           <div className="w-full lg:w-3/5 py-6 md:py-8 px-4 md:px-6 lg:py-14 lg:px-10 z-20">
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-orange-900 mb-4 md:mb-5">
               <span className="block">MooRopan India Pvt. Ltd.</span>
@@ -264,7 +234,6 @@ const Home = () => {
               Sign up now to receive exclusive updates and a special early-bird
               offer.
             </p>
-           
           </div>
 
           {/* Image Section */}
@@ -280,6 +249,8 @@ const Home = () => {
         </div>
       </div>
 
+      {/* ------------------------ */}
+
       <div className="py-8 bg-lime-200 text-black font-serif ">
         <div className="container mx-auto px-6 sm:px-8 lg:px-16 max-w-7xl text-center">
           <div className="text-center mb-6">
@@ -290,7 +261,7 @@ const Home = () => {
               One of the Best and low Cost Products Compare to Other Products{" "}
             </p>
           </div>
-
+ 
           <div className="flex flex-wrap justify-start -mx-2">
             <div
               className="w-full sm:w-1/2 lg:w-1/4 px-2 mb-4"
@@ -302,7 +273,7 @@ const Home = () => {
                   src={soilropan}
                   alt="Prediction Image"
                 />
-
+ 
                 <div className="absolute inset-0 bg-black bg-opacity-20 transition-opacity duration-300 hover:bg-opacity-40"></div>
                 <div className="relative bg-white p-3 flex-grow flex flex-col">
                   <h1 className="text-customBrown font-bold text-lg mb-1 transition-colors duration-300 hover:text-customOrange cursor-pointer">
@@ -323,7 +294,7 @@ const Home = () => {
                 </div>
               </div>
             </div>
-
+ 
             <div
               className="w-full sm:w-1/2 lg:w-1/4 px-2 mb-4"
               onClick={() => handlePredictCardClick(1)}
@@ -334,7 +305,7 @@ const Home = () => {
                   src={Mastimed}
                   alt="Prediction Image"
                 />
-
+ 
                 <div className="absolute inset-0 bg-black bg-opacity-20 transition-opacity duration-300 hover:bg-opacity-40"></div>
                 <div className="relative bg-white p-3 flex-grow flex flex-col">
                   <h1 className="text-customBrown font-bold text-lg mb-1 transition-colors duration-300 hover:text-customOrange cursor-pointer">
@@ -357,7 +328,7 @@ const Home = () => {
                 </div>
               </div>
             </div>
-
+ 
             <div
               className="w-full sm:w-1/2 lg:w-1/4 px-2 mb-4"
               onClick={() => handlePredictCardClick(2)}
@@ -368,7 +339,7 @@ const Home = () => {
                   src={soilropan}
                   alt="Prediction Image"
                 />
-
+ 
                 <div className="absolute inset-0 bg-black bg-opacity-20 transition-opacity duration-300 hover:bg-opacity-40"></div>
                 <div className="relative bg-white p-3 flex-grow flex flex-col">
                   <h1 className="text-customBrown font-bold text-lg mb-1 transition-colors duration-300 hover:text-customOrange cursor-pointer">
@@ -390,7 +361,7 @@ const Home = () => {
                 </div>
               </div>
             </div>
-
+ 
             <div
               className="w-full sm:w-1/2 lg:w-1/4 px-2 mb-4"
               onClick={() => handlePredictCardClick(5)} // Move onClick here
@@ -435,11 +406,14 @@ const Home = () => {
           </div>
         </div>
       </div>
+      {/* --------------------------------- */}
 
-      <SocialMediaSection />
+     
+
+      {/* ----------------------------------------- */}
 
       <div className="text-gray-600 body-font font-serif bg-lime-200">
-        <div className="py-7 px-6 md:px-10 lg:px-20 mt-5 font-serif bg-cover bg-center mb-6">
+        <div className="py-7 px-6 md:px-10 lg:px-20  font-serif bg-cover bg-center mb-6">
           <div className="flex flex-col text-center w-full mb-2 md:mb-6">
             <h2 className="text-4xl font-bold text-customBrown">
               Explore Our Services
@@ -455,15 +429,17 @@ const Home = () => {
             <h2 className="text-4xl font-bold text-customBrown mb-4 text-center">
               Services we Provide
             </h2>
+
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               <div className="w-full max-w-sm bg-white border border-golden rounded-lg shadow-lg ">
-                <a href="#" onClick={() => handleCardClick(1)}>
+                <Link to="/services">
                   <img
-                    className="p-4 rounded-t-lg object-cover w-full h-52 md:h-56 "
+                    className="p-4 rounded-t-lg object-cover w-full h-52 md:h-56"
                     src={Mastimed}
-                    alt="service image"
+                    alt="Mastimed Service"
                   />
-                </a>
+                </Link>
+
                 <div className="px-5 pb-5">
                   <a href="#">
                     <h5 className="text-xl font-semibold tracking-tight text-gray-900   truncate">
@@ -541,19 +517,17 @@ const Home = () => {
                       (Duration: 25-30 Days )
                     </span>
                   </div>
-
-                  
                 </div>
               </div>
 
               <div className="w-full max-w-sm bg-white border border-golden rounded-lg shadow-lg">
-                <a href="#" onClick={() => handleCardClick(2)}>
+              <Link to="/services">
                   <img
                     className="p-4 rounded-t-lg object-cover w-full h-52 md:h-56"
                     src={soilropan}
                     alt="service image"
                   />
-                </a>
+               </Link>
                 <div className="px-5 pb-5">
                   <a href="#">
                     <h5 className="text-xl font-semibold tracking-tight text-gray-900 truncate">
@@ -631,13 +605,13 @@ const Home = () => {
               </div>
 
               <div className="w-full max-w-sm bg-white border border-golden rounded-lg shadow-lg ">
-                <a href="#" onClick={() => handleCardClick(3)}>
+              <Link to="/services">
                   <img
                     className="p-4 rounded-t-lg object-cover w-full h-52 md:h-56 "
                     src={Mastimed}
                     alt="service image"
                   />
-                </a>
+                </Link>
                 <div className="px-5 pb-5">
                   <a href="#">
                     <h5 className="text-xl font-semibold tracking-tight text-gray-900   truncate">
@@ -715,19 +689,17 @@ const Home = () => {
                       (Duration: 25-30 Days )
                     </span>
                   </div>
-
-                
                 </div>
               </div>
 
               <div className="w-full max-w-sm bg-white border border-golden rounded-lg shadow-lg ">
-                <a href="#" onClick={() => handleCardClick(5)}>
+              <Link to="/services">
                   <img
                     className="p-4 rounded-t-lg object-cover w-full h-52 md:h-56 "
                     src={soilropan}
                     alt="service image"
                   />
-                </a>
+              </Link>
                 <div className="px-5 pb-5">
                   <a href="#">
                     <h5 className="text-xl font-semibold tracking-tight text-gray-900   truncate">
@@ -805,8 +777,6 @@ const Home = () => {
                       (Duration: 25-30 Days )
                     </span>
                   </div>
-
-                  
                 </div>
               </div>
             </div>
@@ -820,16 +790,14 @@ const Home = () => {
               Explore All Services →
             </button>
           </div>
-
-         
         </div>
       </div>
 
-      
+      {/* --------------------------------------------- */}
 
       <Testimonials />
 
-      <section className="bg-customLightOrange text-black font-serif py-2">
+      <section className="bg-lime-200 text-black font-serif py-2">
         <div className="container max-w-6xl p-6 mx-auto space-y-6 sm:space-y-12">
           <div className="flex flex-col text-center w-full mb-10 md:mb-20">
             <h2 className="text-4xl font-bold text-customBrown">
@@ -863,9 +831,6 @@ const Home = () => {
             </div>
           </a>
 
-         
-          
-
           <div className="flex justify-center">
             <button
               onClick={handleBlogs}
@@ -878,54 +843,60 @@ const Home = () => {
         </div>
       </section>
       <section>
-        <img
-        src={cowart}>
-        
-        </img>
+        <img src={cowart}></img>
       </section>
 
-      <section className="text-gray-600 body-font bg-gradient-to-r from-lime-500 to-blue-950 py-3 ">
-        <div className="container px-6 py-10 mx-auto font-serif">
-          <div className="flex flex-wrap justify-center text-center">
-            <div className="p-4 w-full sm:w-1/4">
-              <div className="flex flex-col items-center justify-center">
-                <h2 className="text-5xl font-bold text-white mb-2"> 15 K</h2>
-                <p className="leading-relaxed text-gray-200 text-lg font-semibold">
-                  
-                </p>
-              </div>
-            </div>
-            <div className="p-4 w-full sm:w-1/4">
-              <div className="flex flex-col items-center justify-center">
-                <h2 className="text-5xl font-bold text-white mb-2"> 1700</h2>
-                <p className="leading-relaxed text-gray-200 text-lg font-semibold">
-                  Cattel Cure
-                </p>
-              </div>
-            </div>
-            <div className="p-4 w-full sm:w-1/4">
-              <div className="flex flex-col items-center justify-center">
-                {/* Subscribers in thousands */}
-                <h2 className="text-5xl font-bold text-white mb-2"> 125 k</h2>
-                <p className="leading-relaxed text-gray-200 text-lg font-semibold">
-                  Happy Farmers
-                </p>
-              </div>
-            </div>
-            <div className="p-4 w-full sm:w-1/4">
-              <div className="flex flex-col items-center justify-center">
-                {/* Total Views in millions */}
-                <h2 className="text-5xl font-bold text-white mb-2"> 19.7 B</h2>
-                <p className="leading-relaxed text-gray-200 text-lg font-semibold">
-                  Happy Coustomers
-                </p>
-              </div>
-            </div>
-          </div>
+      <section className="text-gray-600 body-font bg-lime-100 py-8">
+  <div className="container mx-auto px-6 py-10 font-serif">
+    <div className="text-center mb-10">
+      <h1 className="text-4xl font-bold text-gray-700 tracking-wide mb-4">
+        Our Achievements
+      </h1>
+      <p className="text-lg text-gray-600">
+        Trusted by thousands of farmers and veterinarians across the country.
+      </p>
+    </div>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {/* Card 1 */}
+      <div className="p-6 rounded-lg shadow-md text-center transform hover:scale-105 transition-transform duration-300 bg-blue-300">
+        <div className="flex items-center justify-center bg-white bg-opacity-20 w-20 h-20 rounded-full mb-4">
+          <span className="text-white text-5xl font-bold">🌾</span>
         </div>
-      </section>
+        <h2 className="text-3xl font-extrabold text-white mb-2">15 K</h2>
+        <p className="text-white font-medium text-lg">Farmers Reached</p>
+      </div>
+      {/* Card 2 */}
+      <div className="p-6 rounded-lg shadow-md text-center transform hover:scale-105 transition-transform duration-300 bg-orange-300">
+        <div className="flex items-center justify-center bg-white bg-opacity-20 w-20 h-20 rounded-full mb-4">
+          <span className="text-white text-5xl font-bold">🐄</span>
+        </div>
+        <h2 className="text-3xl font-extrabold text-white mb-2">1700</h2>
+        <p className="text-white font-medium text-lg">Cattle Cure</p>
+      </div>
+      {/* Card 3 */}
+      <div className="p-6 rounded-lg shadow-md text-center transform hover:scale-105 transition-transform duration-300 bg-purple-300">
+        <div className="flex items-center justify-center bg-white bg-opacity-20 w-20 h-20 rounded-full mb-4">
+          <span className="text-white text-5xl font-bold">😊</span>
+        </div>
+        <h2 className="text-3xl font-extrabold text-white mb-2">125 K</h2>
+        <p className="text-white font-medium text-lg">Happy Farmers</p>
+      </div>
+      {/* Card 4 */}
+      <div className="p-6 rounded-lg shadow-md text-center transform hover:scale-105 transition-transform duration-300 bg-red-300">
+        <div className="flex items-center justify-center bg-white bg-opacity-20 w-20 h-20 rounded-full mb-4">
+          <span className="text-white text-5xl font-bold">🌟</span>
+        </div>
+        <h2 className="text-3xl font-extrabold text-white mb-2">19.7 B</h2>
+        <p className="text-white font-medium text-lg">Happy Customers</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-      
+<SocialMediaSection />
+
+
+
     </div>
   );
 };

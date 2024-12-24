@@ -1,11 +1,8 @@
 import React, { useRef, useState } from "react";
-import aim from "../Image/slide1.png";
-import livelihood from "../Image/livelyhood.jpg";
-import goals from "../Image/goals.jpg";
-import zoo from "../Image/zoo.jpg";
+import { FaSyringe, FaAppleAlt } from "react-icons/fa"; // Correct imports from Font Awesome
+import { MdOutlineAgriculture } from "react-icons/md"; // Correct cow icon from Material Design
 import cattlevideo from "../Image/cattlevideo.mp4";
 import cowbg8 from "../Image/imagesbg.jpg";
-
 
 const FeaturedOn = () => {
   const videoRef = useRef(null);
@@ -23,182 +20,88 @@ const FeaturedOn = () => {
   };
 
   return (
-<div
-  className="py-16 px-6"
-  style={{
-    backgroundImage: `url(${cowbg8})`,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-  }}
->
+    <div
+      className="py-16 px-6"
+      style={{
+        backgroundImage: `url(${cowbg8})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundAttachment: "fixed",
+      }}
+    >
       {/* Main Heading */}
-      <div className="text-center mb-10">
-        <h2 className="text-gray-900 text-4xl font-extrabold md:text-5xl lg:text-6xl">
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-900 to-orange-900">
-            One of the Best Products With Low Cost For Farmers
+      <div className="text-center mb-12">
+        <h2 className="text-4xl font-extrabold text-gray-900 md:text-5xl lg:text-6xl">
+          <span className="bg-customBrown  text-transparent bg-clip-text">
+            Premium Products at Affordable Prices for Farmers
           </span>
         </h2>
       </div>
 
       {/* Content Section */}
-      <div className="flex flex-col lg:flex-row justify-between items-center space-y-10 lg:space-y-0 lg:space-x-10">
-        {/* Left Side */}
-        <div className="w-full bg- p-10 rounded-xl shadow-lg space-y-10">
-          <h3 className="text-3xl font-bold text-center text-blue-900 mb-8">
+      <div className="flex flex-col lg:flex-row justify-between items-center space-y-12 lg:space-y-0 lg:space-x-12">
+        {/* Left Side - MooRopan Section */}
+        <div className="flex-1 max-w-lg lg:max-w-none lg:h-[500px] flex flex-col justify-between p-10 rounded-2xl shadow-2xl bg-gradient-to-br from-green-100 to-green-200">
+          <h3 className="text-3xl font-bold text-center text-blue-900 mb-6">
             MooRopan
           </h3>
+          <p className="text-base text-gray-700 text-center mb-6">
+            MooRopan India Pvt. Ltd. provides cattle healthcare aid, devices, and consultations pan India. Established in May 2023 with the motive of "Gau-swasthayam Rakshatu," we aim to enhance cattle health and productivity.
+          </p>
+          {/* Cards Section */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            {/* Medicine Card */}
+            <div className="bg-gradient-to-br from-orange-300 to-orange-500 shadow-lg rounded-lg overflow-hidden transform transition hover:scale-105 p-6 text-center">
+              <FaSyringe className="text-5xl text-white mb-4 mx-auto" />
+              <h2 className="text-lg font-semibold text-white">Medicine</h2>
+              <p className="text-sm text-gray-200 mt-2">
+                Find the best treatments and medications for your cattle's needs.
+              </p>
+            </div>
 
-          {/* Card Section */}
-          <div className="flex flex-col sm:flex-row justify-between space-x-0 sm:space-x-6 sm:space-y-0 space-y-6">
-            {/* Card 1 */}
-            {/* <div
-              className="relative group w-full sm:w-1/4 h-96 bg-cover bg-center rounded-lg overflow-hidden shadow-lg transform transition-all duration-300 hover:w-3/4 group-hover:w-1/4"
-              style={{ backgroundImage: `url(${aim})` }}
-            >
-              <div className="absolute inset-0 flex justify-center items-end opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <h4 className="text-red-400 text-xl font-bold text-center">
-                  Pioneers in Protein-Led Nutraceuticals
-                </h4>
-              </div>
-            </div> */}
+            {/* Food Card */}
+            <div className="bg-gradient-to-br from-pink-300 to-pink-500 shadow-lg rounded-lg overflow-hidden transform transition hover:scale-105 p-6 text-center">
+              <FaAppleAlt className="text-5xl text-white mb-4 mx-auto" />
+              <h2 className="text-lg font-semibold text-white">Food</h2>
+              <p className="text-sm text-gray-200 mt-2">
+                Provide healthy and nutritious food options for your cattle.
+              </p>
+            </div>
 
-            {/* Card 2 */}
-            {/* <div
-              className="relative group w-full sm:w-1/4 h-96 bg-cover bg-center rounded-lg overflow-hidden shadow-lg transform transition-all duration-300 hover:w-3/4 group-hover:w-1/4"
-              style={{ backgroundImage: `url(${livelihood})` }}
-            >
-              <div className="absolute inset-0 flex justify-center items-end opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <h4 className="text-red-400 text-xl font-bold text-center">
-                  High Quality
-                </h4>
-              </div>
-            </div> */}
-
-            {/* Card 3 */}
-            {/* <div
-              className="relative group w-full sm:w-1/4 h-96 bg-cover bg-center rounded-lg overflow-hidden shadow-lg transform transition-all duration-300 hover:w-3/4 group-hover:w-1/4"
-              style={{ backgroundImage: `url(${goals})` }}
-            >
-              <div className="absolute inset-0 flex justify-center items-end opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <h4 className="text-red-400 text-xl font-bold text-center">
-                  Customizable & Scalable
-                </h4>
-              </div>
-            </div> */}
-
-            {/* Card 4 */}
-            {/* <div
-              className="relative group w-full sm:w-1/4 h-96 bg-cover bg-center rounded-lg overflow-hidden shadow-lg transform transition-all duration-300 hover:w-3/4 group-hover:w-1/4"
-              style={{ backgroundImage: `url(${zoo})` }}
-            >
-              <div className="absolute inset-0 flex justify-center items-end opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <h4 className="text-red-400 text-xl font-bold text-center">
-                  Innovative Solutions
-                </h4>
-              </div>
-            </div> */}
-
-<div className="grid grid-cols-1 sm:grid-cols-3 gap-6 p-6">
-  {/* Medicine Card */}
-  <div className="bg-orange-300 shadow-lg rounded-lg p-6 flex flex-col items-center">
-    <div className="bg-blue-100 p-4 rounded-full">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="w-12 h-12 text-blue-500"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        strokeWidth="2"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M13 16h-1v-4H9m4-4h.01M21 21l-6-6m2-10a9 9 0 11-9-9 9 9 0 019 9z"
-        />
-      </svg>
-    </div>
-    <h2 className="text-xl font-bold mt-4">Medicine</h2>
-    <p className="text-gray-600 text-center mt-2">
-      Find the best treatments and medications for your needs.
-    </p>
-  </div>
-
-  {/* Food Card */}
-  <div className="bg-pink-200 shadow-lg rounded-lg p-6 flex flex-col items-center">
-    <div className="bg-green-100 p-4 rounded-full">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="w-12 h-12 text-green-500"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        strokeWidth="2"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M3 10l4-4 6 6 7-7"
-        />
-      </svg>
-    </div>
-    <h2 className="text-xl font-bold mt-4">Food</h2>
-    <p className="text-gray-600 text-center mt-2">
-      Healthy and nutritious food options for your family.
-    </p>
-  </div>
-
-  {/* Cattle Card */}
-  <div className="bg-yellow-200 shadow-lg rounded-lg p-6 flex flex-col items-center">
-    <div className="bg-yellow-100 p-4 rounded-full">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="w-12 h-12 text-yellow-500"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        strokeWidth="2"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"
-        />
-      </svg>
-    </div>
-    <h2 className="text-xl font-bold mt-4">Cattle</h2>
-    <p className="text-gray-600 text-center mt-2">
-      Ensure proper care and feeding for your livestock.
-    </p>
-  </div>
-</div>
-
+            {/* Cattle Card */}
+            <div className="bg-gradient-to-br from-yellow-300 to-yellow-500 shadow-lg rounded-lg overflow-hidden transform transition hover:scale-105 p-6 text-center">
+              <MdOutlineAgriculture className="text-5xl text-white mb-4 mx-auto" />
+              <h2 className="text-lg font-semibold text-white">Cattle</h2>
+              <p className="text-sm text-gray-200 mt-2">
+                Ensure proper care and feeding for your livestock.
+              </p>
+            </div>
           </div>
         </div>
 
-        {/* Right Side - Video */}
-        <div className="w-full  ">
-          <h1 className="text-2xl font-bold text-center text-blue-900 mb-8">
-            Feed your Cow with Care.
-          </h1>
-          <div className="absolute top-2 right-2 z-10">
+        {/* Right Side - Feed Your Cows with Care Video Section */}
+        <div className="flex-1 max-w-lg lg:max-w-none lg:h-[500px] flex flex-col justify-between p-10 rounded-2xl shadow-2xl bg-gradient-to-br from-green-100 to-green-200">
+          <h3 className="text-2xl font-semibold text-center text-blue-900 mb-6">
+            Feed Your Cows with Care
+          </h3>
+          <div className="relative flex-1">
+            <video
+              ref={videoRef}
+              className="w-full h-full rounded-xl shadow-lg"
+              autoPlay
+              muted
+              loop
+            >
+              <source src={cattlevideo} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
             <button
               onClick={togglePlayPause}
-              className="px-4 py-2 bg-white text-black rounded-lg shadow-lg"
+              className="absolute bottom-4 left-4 px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg shadow-md hover:bg-blue-700 transition-all"
             >
               {isPlaying ? "Pause" : "Play"}
             </button>
           </div>
-
-          <video
-            ref={videoRef}
-            className="w-full h-144 rounded-lg shadow-lg h-96"
-            autoPlay
-            muted
-            loop
-          >
-            <source src={cattlevideo} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
         </div>
       </div>
     </div>

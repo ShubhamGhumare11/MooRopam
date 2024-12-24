@@ -1,43 +1,41 @@
 import React from "react";
 import {
-  FaTwitter,
-  FaFacebookSquare,
+ 
   FaYoutube,
   FaInstagram,
   FaSearchengin,
+  FaLinkedin,
 } from "react-icons/fa";
-import ANLogo from "../Image/ANLogo.png";
-import android from "../Image/android.png";
+import { FaXTwitter } from "react-icons/fa6";
+
 import mooropanlogo from "../Image/mooropan logo.png";
-import ios from "../Image/ios.jpg";
-import TermsConditions from "./TermsConditions";
-import PrivacyPolicy from "./PrivacyPolicy";
+
 import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <div className="relative mt-16 bg-gradient-to-r from-lime-600 to-green-950 text-white ">
+    <div className="relative bg-gradient-to-r from-lime-600 to-green-950 text-white">
       <div className="relative z-10 flex flex-col items-start justify-center h-full text-left text-white px-8 md:px-16 lg:px-24 font-serif">
         <div className="grid gap-16 row-gap-10 mb-8 lg:grid-cols-6 mt-6">
           <div className="md:max-w-md lg:col-span-2">
-            <img src={mooropanlogo} className="w-17 h-13 mr-4" />
+            <img src={mooropanlogo} className="w-17 h-13 mr-4" alt="MooRopan Logo" />
             <div className="mt-4 lg:max-w-sm xl:max-w-screen-md">
               <p className="text-sm text-deep-purple-50">
                 MooRopan India Pvt. Ltd. was established with the motive of
                 "Gau-swasthayam Rakshatu" in May 2023. We provide cattle
-                healthcare aid/ devices, services and consultations pan India.{" "}
+                healthcare aid/devices, services, and consultations pan India.
               </p>
               <p className="mt-4 text-sm text-deep-purple-50">
-                Our products facilitate better management of herd. Our
-                affordable products reduce cow morbidity, enhance milk quantity
-                and quality.{" "}
+                Our products facilitate better management of the herd. Our
+                affordable products reduce cow morbidity, enhancing milk
+                quantity and quality.
               </p>
             </div>
           </div>
           <div className="grid grid-cols-2 gap-5 row-gap-8 xl:col-span-4 lg:col-span-4 md:grid-cols-4">
             <div>
               <p className="font-semibold tracking-wide text-yellow-600">
-                Our Products{" "}
+                Our Products
               </p>
               <ul className="mt-2 space-y-2">
                 {[1, 2, 3, 4].map((num) => (
@@ -65,7 +63,7 @@ const Footer = () => {
                     to="/prediction"
                     className="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400"
                   >
-                    Predictions
+                    Research Products
                   </Link>
                 </li>
                 <li>
@@ -78,7 +76,8 @@ const Footer = () => {
                 </li>
                 <li>
                   <Link
-                    to="/videos"
+                    to="https://www.youtube.com/watch?v=4QqkWmI_kX0"
+                    target="_balnk"
                     className="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400"
                   >
                     Videos
@@ -124,49 +123,33 @@ const Footer = () => {
               <div className="mt-2">
                 <div className="flex items-center space-x-4 sm:mt-0">
                   <a
-                    href="https://www.facebook.com/AuspiciousNumerology/"
+                    href="https://x.com/mooropan"
                     target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    <FaFacebookSquare className="text-2xl hover:text-white" />
+                    <FaXTwitter className="text-2xl hover:text-white" />
                   </a>
                   <a
-                    href="https://www.instagram.com/auspicious_numerology/"
+                    href="https://www.instagram.com/mooropan_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
                     target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <FaInstagram className="text-2xl hover:text-white" />
                   </a>
                   <a
-                    href="https://www.youtube.com/@AuspiciousNumerology"
+                    href="https://youtube.com/@mooropan1?si=2Ji9qW7jGj2hOPwk"
                     target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <FaYoutube className="text-2xl hover:text-white" />
                   </a>
-                </div>
-                <div className="mt-24 w-5/6">
-                  {/* <a
-                                        href="https://play.google.com/store/apps/details?id=co.edvin.pgtlm&hl=en_IN&pli=1"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="block w-full"
-                                    >
-                                        <img
-                                            src={android}
-                                            alt="Android App"
-                                            className="w-full h-auto cursor-pointer rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
-                                        />
-                                    </a> */}
-                  {/* <a
-                                        href="https://play.google.com/store/apps/details?id=co.edvin.pgtlm&hl=en_IN&pli=1"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="block w-full mt-2"
-                                    >
-                                        <img
-                                            src={ios}
-                                            alt="iOS App"
-                                            className="cursor-pointer rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 h-10 w-40"
-                                        />
-                                    </a> */}
+                  <a
+                    href="https://www.linkedin.com/in/mooropan/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <FaLinkedin className="text-2xl hover:text-white" />
+                  </a>
                 </div>
               </div>
             </div>

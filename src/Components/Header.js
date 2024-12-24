@@ -3,23 +3,23 @@ import { Link } from 'react-router-dom';
 import { FiShoppingCart } from 'react-icons/fi';
 import { useCart } from '../Components/CartContext'; // Correct import for useCart
 import logo from '../Image/mooropan logo.png';
-
+ 
 const Header = () => {
   const { cart } = useCart(); // Use the useCart hook
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+ 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-
+ 
   const closeMenu = () => {
     setIsMenuOpen(false);
   };
-
+ 
   const getTotalItems = () => {
     return cart.reduce((total, item) => total + item.quantity, 0); // Calculate total items
   };
-
+ 
   return (
     <header className="bg-gradient-to-r from-yellow-500 to-green-600 text-white p-3 sticky top-0 z-50 shadow-2xl">
       <div className="container mx-1 my-2 flex justify-between items-center whitespace-nowrap">
@@ -32,7 +32,7 @@ const Header = () => {
             />
           </Link>
         </div>
-
+ 
         <nav className="hidden md:flex space-x-5 lg:space-x-7 text-base lg:text-lg">
           <Link to="/" className="hover:text-customLightOrange">Home</Link>
           <Link to="/about" className="hover:text-customLightOrange">About</Link>
@@ -45,7 +45,7 @@ const Header = () => {
             <span>{getTotalItems()}</span>
           </Link>
         </nav>
-
+ 
         <div className="block md:hidden flex items-center space-x-4">
           <button onClick={toggleMenu} className="text-white focus:outline-none">
             <svg
@@ -60,7 +60,7 @@ const Header = () => {
           </button>
         </div>
       </div>
-
+ 
       <div className={`md:hidden ${isMenuOpen ? "block" : "hidden"}`}>
         <nav className="flex flex-col items-center font-serif space-y-4 mt-4 text-base sm:text-lg">
           <Link to="/" className="hover:text-customLightOrange" onClick={closeMenu}>Home</Link>
@@ -78,5 +78,5 @@ const Header = () => {
     </header>
   );
 };
-
+ 
 export default Header;
